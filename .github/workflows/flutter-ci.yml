@@ -13,65 +13,52 @@ jobs:
         working-directory: ./supabase-ws-flutter-mobile
     steps:
       - uses: actions/checkout@v3
-        working-directory: ./supabase-ws-flutter-mobile
       - uses: actions/setup-java@v3
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           distribution: 'zulu'
           java-version: '11'
       - uses: dart-lang/setup-dart@v1.4
-        working-directory: ./supabase-ws-flutter-mobile
       - uses: subosito/flutter-action@v2
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           channel: 'stable'
           cache: true
       - name: Cache FVM & Flutter
         uses: actions/cache@v3
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           path: /home/runner/fvm/versions/
           key: ${{ runner.os }}-${{ hashFiles('**/fvm_config.json') }}
       - name: Cache pub cache
         uses: actions/cache@v3
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           path: /home/runner/.pub-cache/
           key: ${{ runner.os }}-pub-cache
       - name: Install FVM && Flutter
-        working-directory: ./supabase-ws-flutter-mobile
         run: dart pub global activate fvm --verbose && fvm install --verbose && fvm use --force --verbose
       - uses: ruby/setup-ruby@v1
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           bundler-cache: true
+          subdirectory: 'supabase-ws-flutter-mobile'
       - name: Activate arb_utils
-        working-directory: ./supabase-ws-flutter-mobile
         run: |
           dart pub global activate arb_utils
       - name: Get dependencies
         uses: maierj/fastlane-action@v3.0.0
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           lane: 'fetch_dependencies'
       - name: 'Run lints'
         uses: maierj/fastlane-action@v3.0.0
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           lane: 'lints'
       - name: 'Check generated code'
         uses: maierj/fastlane-action@v3.0.0
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           lane: 'ensure_no_change_in_generated_code'
       - name: 'Run tests'
         uses: maierj/fastlane-action@v3.0.0
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           lane: 'tests'
       - name: 'Build android app'
         uses: maierj/fastlane-action@v3.0.0
-        working-directory: ./supabase-ws-flutter-mobile
         with:
           lane: 'android build_dev_debug_apk'
           subdirectory: 'android'
