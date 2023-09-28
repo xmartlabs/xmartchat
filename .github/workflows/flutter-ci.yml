@@ -45,20 +45,25 @@ jobs:
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'fetch_dependencies'
+          working-directory: ./supabase-ws-flutter-mobile
       - name: 'Run lints'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'lints'
+          working-directory: ./supabase-ws-flutter-mobile
       - name: 'Check generated code'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'ensure_no_change_in_generated_code'
+          working-directory: ./supabase-ws-flutter-mobile
       - name: 'Run tests'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'tests'
+          working-directory: ./supabase-ws-flutter-mobile
       - name: 'Build android app'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'android build_dev_debug_apk'
+          working-directory: ./supabase-ws-flutter-mobile
           subdirectory: 'android'
