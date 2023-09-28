@@ -65,5 +65,4 @@ jobs:
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'android build_dev_debug_apk'
-          subdirectory: 'supabase-ws-flutter-mobile'
-          subdirectory: 'android'
+          subdirectory: 'supabase-ws-flutter-mobile/android'
