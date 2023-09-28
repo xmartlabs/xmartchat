@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./supabase-ws-flutter-mobile
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
