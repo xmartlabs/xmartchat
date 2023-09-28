@@ -37,7 +37,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          subdirectory: 'supabase-ws-flutter-mobile'
+          working-directory: ./supabase-ws-flutter-mobile
       - name: Activate arb_utils
         run: |
           dart pub global activate arb_utils
