@@ -1,31 +1,31 @@
 flavors:
   dev:
     app:
-      name: 'Template Dev'
+      name: 'XmartChat Dev'
     android:
-      applicationId: 'com.xmartlabs.template.dev'
+      applicationId: 'com.xmartlabs.xmartchat.dev'
     ios:
-      bundleId: 'com.xmartlabs.template.dev'
+      bundleId: 'com.xmartlabs.xmartchat.dev'
       variables:
         FLUTTER_TARGET:
           value: 'lib/main.dart'
   staging:
     app:
-      name: 'Template Sta'
+      name: 'XmartChat Sta'
     android:
-      applicationId: 'com.xmartlabs.template.sta'
+      applicationId: 'com.xmartlabs.xmartchat.sta'
     ios:
-      bundleId: 'com.xmartlabs.template.sta'
+      bundleId: 'com.xmartlabs.xmartchat.sta'
       variables:
         FLUTTER_TARGET:
           value: 'lib/main.dart'
   prod:
     app:
-      name: 'Template'
+      name: 'XmartChat'
     android:
-      applicationId: 'com.xmartlabs.template'
+      applicationId: 'com.xmartlabs.xmartchat'
     ios:
-      bundleId: 'com.xmartlabs.template'
+      bundleId: 'com.xmartlabs.xmartchat'
       variables:
         FLUTTER_TARGET:
           value: 'lib/main.dart'
