@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./supabase-ws-flutter-mobile
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -34,6 +37,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          working-directory: ./supabase-ws-flutter-mobile
       - name: Activate arb_utils
         run: |
           dart pub global activate arb_utils
@@ -41,20 +45,24 @@ jobs:
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'fetch_dependencies'
+          subdirectory: 'supabase-ws-flutter-mobile'
       - name: 'Run lints'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'lints'
+          subdirectory: 'supabase-ws-flutter-mobile'
       - name: 'Check generated code'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'ensure_no_change_in_generated_code'
+          subdirectory: 'supabase-ws-flutter-mobile'
       - name: 'Run tests'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'tests'
+          subdirectory: 'supabase-ws-flutter-mobile'
       - name: 'Build android app'
         uses: maierj/fastlane-action@v3.0.0
         with:
           lane: 'android build_dev_debug_apk'
-          subdirectory: 'android'
+          subdirectory: 'supabase-ws-flutter-mobile/android'
