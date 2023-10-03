@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 const FontWeight _semiboldWeight = FontWeight.w500;
 
 class AppStyles extends TextTheme {
+  @override
   final TextStyle overline;
   final TextStyle bodyXSmall;
 
@@ -69,20 +70,20 @@ class AppStyles extends TextTheme {
       );
 
   static AppStyles getAppStyles() => AppStyles.fromTextTheme(
-      textTheme: GoogleFonts.figtreeTextTheme().copyWith(
-        headlineLarge: _figtreeTextStyle(56.sp, FontWeight.bold),
-        headlineMedium: _figtreeTextStyle(48.sp, FontWeight.bold),
-        headlineSmall: _figtreeTextStyle(40.sp, FontWeight.bold),
-        titleLarge: _figtreeTextStyle(32.sp, FontWeight.bold),
-        titleMedium: _figtreeTextStyle(24.sp, FontWeight.bold),
-        titleSmall: _figtreeTextStyle(16.sp, FontWeight.bold),
-        bodyLarge: _figtreeTextStyle(20.sp, FontWeight.normal),
-        bodyMedium: _figtreeTextStyle(16.sp, FontWeight.normal),
-        bodySmall: _figtreeTextStyle(14.sp, FontWeight.normal),
-      ),
-      overline: _figtreeTextStyle(12, FontWeight.normal),
-      bodyXSmall: _figtreeTextStyle(12, FontWeight.normal)
-  );
+        textTheme: GoogleFonts.figtreeTextTheme().copyWith(
+          headlineLarge: _figtreeTextStyle(56.sp, FontWeight.bold),
+          headlineMedium: _figtreeTextStyle(48.sp, FontWeight.bold),
+          headlineSmall: _figtreeTextStyle(40.sp, FontWeight.bold),
+          titleLarge: _figtreeTextStyle(32.sp, FontWeight.bold),
+          titleMedium: _figtreeTextStyle(24.sp, FontWeight.bold),
+          titleSmall: _figtreeTextStyle(16.sp, FontWeight.bold),
+          bodyLarge: _figtreeTextStyle(20.sp, FontWeight.normal),
+          bodyMedium: _figtreeTextStyle(16.sp, FontWeight.normal),
+          bodySmall: _figtreeTextStyle(14.sp, FontWeight.normal),
+        ),
+        overline: _figtreeTextStyle(12, FontWeight.normal),
+        bodyXSmall: _figtreeTextStyle(12, FontWeight.normal),
+      );
 
   TextTheme getThemeData() => getAppStyles();
 }
