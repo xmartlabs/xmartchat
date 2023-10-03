@@ -35,18 +35,18 @@ android {
     productFlavors {
         dev {
             dimension "flavor-type"
-            applicationId "com.xmartlabs.template.dev"
-            resValue "string", "app_name", "Template Dev"
-        }
-        prod {
-            dimension "flavor-type"
-            applicationId "com.xmartlabs.template"
-            resValue "string", "app_name", "Template"
+            applicationId "com.xmartlabs.xmartchat.dev"
+            resValue "string", "app_name", "XmartChat Dev"
         }
         staging {
             dimension "flavor-type"
-            applicationId "com.xmartlabs.template.sta"
-            resValue "string", "app_name", "Template Sta"
+            applicationId "com.xmartlabs.xmartchat.sta"
+            resValue "string", "app_name", "XmartChat Sta"
+        }
+        prod {
+            dimension "flavor-type"
+            applicationId "com.xmartlabs.xmartchat"
+            resValue "string", "app_name", "XmartChat"
         }
     }
 
