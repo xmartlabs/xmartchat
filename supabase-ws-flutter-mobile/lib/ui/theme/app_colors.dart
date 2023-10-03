@@ -34,6 +34,7 @@ class AppColors extends ColorScheme {
     required Color onBackground,
     required Color surface,
     required Color onSurface,
+    required ColorScheme colorScheme,
   }) : super(
           brightness: brightness,
           primary: primary,
@@ -49,9 +50,26 @@ class AppColors extends ColorScheme {
         );
 
   // ignore: long-method
-  static AppColors getColorScheme() => const AppColors(
+  static AppColors getColorScheme() => AppColors(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const MaterialColor(
+            0x0E9F6F,
+            <int, Color>{
+              100: Color.fromRGBO(248, 254, 252, 1),
+              200: Color.fromRGBO(225, 247, 240, 1),
+              300: Color.fromRGBO(178, 233, 215, 1),
+              400: Color.fromRGBO(109, 213, 178, 1),
+              500: Color.fromRGBO(16, 185, 129, 1),
+              600: Color.fromRGBO(14, 159, 111, 1),
+              700: Color.fromRGBO(12, 133, 92, 1),
+              800: Color.fromRGBO(9, 106, 74, 1),
+              900: Color.fromRGBO(7, 80, 55, 1),
+              1000: Color.fromRGBO(5, 54, 37, 1),
+            },
+          ),
+        ),
         brightness: Brightness.dark,
-        primary: MaterialColor(
+        primary: const MaterialColor(
           0x0E9F6F,
           <int, Color>{
             100: Color.fromRGBO(248, 254, 252, 1),
@@ -67,7 +85,7 @@ class AppColors extends ColorScheme {
           },
         ),
         onPrimary: Colors.white,
-        secondary: MaterialColor(
+        secondary: const MaterialColor(
           0xE0E0E0,
           <int, Color>{
             100: Color.fromRGBO(255, 255, 255, 1),
@@ -83,7 +101,7 @@ class AppColors extends ColorScheme {
           },
         ),
         onSecondary: Colors.black,
-        background: MaterialColor(
+        background: const MaterialColor(
           0x0B0C0D,
           <int, Color>{
             100: Color.fromRGBO(163, 170, 177, 1),
@@ -96,7 +114,7 @@ class AppColors extends ColorScheme {
         onBackground: Colors.white,
         surface: Colors.black,
         onSurface: Colors.white,
-        textColor: MaterialColor(
+        textColor: const MaterialColor(
           0xFFFFFF,
           <int, Color>{
             100: Color.fromRGBO(255, 255, 255, 1),
@@ -106,7 +124,7 @@ class AppColors extends ColorScheme {
             500: Color.fromRGBO(29, 22, 22, 1),
           },
         ),
-        success: MaterialColor(
+        success: const MaterialColor(
           0x10B981,
           <int, Color>{
             100: Color.fromRGBO(231, 248, 242, 1),
@@ -116,7 +134,7 @@ class AppColors extends ColorScheme {
             500: Color.fromRGBO(10, 111, 77, 1),
           },
         ),
-        info: MaterialColor(
+        info: const MaterialColor(
           0x1169F7,
           <int, Color>{
             100: Color.fromRGBO(207, 232, 254, 1),
@@ -126,7 +144,7 @@ class AppColors extends ColorScheme {
             500: Color.fromRGBO(3, 29, 118, 1),
           },
         ),
-        warning: MaterialColor(
+        warning: const MaterialColor(
           0xF59E0B,
           <int, Color>{
             100: Color.fromRGBO(254, 245, 231, 1),
@@ -136,7 +154,7 @@ class AppColors extends ColorScheme {
             500: Color.fromRGBO(153, 119, 15, 1),
           },
         ),
-        error: MaterialColor(
+        error: const MaterialColor(
           0xF4444,
           <int, Color>{
             100: Color.fromRGBO(253, 236, 236, 1),
