@@ -88,6 +88,7 @@ class AppStyles extends TextTheme {
   TextTheme getThemeData() => getAppStyles();
 }
 
+// ignore: unused-code
 extension TextStyleExtensions on TextStyle {
   TextStyle links() => copyWith(
         fontWeight: FontWeight.normal,

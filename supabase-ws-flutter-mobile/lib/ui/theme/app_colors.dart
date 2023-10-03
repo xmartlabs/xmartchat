@@ -150,6 +150,7 @@ class AppColors extends ColorScheme {
       );
 }
 
+// ignore: unused-code
 extension MaterialExtensions on MaterialColor {
   Color get shade1000 => this[1000]!;
 }
