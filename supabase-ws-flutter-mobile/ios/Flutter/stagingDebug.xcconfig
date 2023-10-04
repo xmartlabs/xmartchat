@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main.dart
 ASSET_PREFIX=staging
-BUNDLE_NAME=Template Sta
-BUNDLE_DISPLAY_NAME=Template Sta
+BUNDLE_NAME=XmartChat Sta
+BUNDLE_DISPLAY_NAME=XmartChat Sta

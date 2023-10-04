@@ -2,7 +2,6 @@ import 'package:flutter_template/core/repository/project_repository.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
 import 'package:flutter_template/core/source/auth_local_source.dart';
 import 'package:flutter_template/core/source/auth_remote_source.dart';
-import 'package:flutter_template/core/source/common/app_database.dart';
 import 'package:flutter_template/core/source/common/auth_interceptor.dart';
 import 'package:flutter_template/core/source/common/http_service.dart';
 import 'package:flutter_template/core/source/project_remote_source.dart';
@@ -30,14 +29,13 @@ extension _GetItDiModuleExtensions on GetIt {
   }
 
   void _setupRepositories() {
-    registerLazySingleton(() => SessionRepository(get(), get(), get()));
+    registerLazySingleton(() => SessionRepository(get(), get()));
     registerLazySingleton(() => ProjectRepository(get(), get()));
   }
 
   void _setupSources() {
     registerLazySingleton(() => AuthLocalSource(get()));
     registerLazySingleton(() => AuthRemoteSource(get()));
-    registerLazySingleton(() => get<AppDatabase>().projectLocalSource);
     registerLazySingleton(() => ProjectRemoteSource(get()));
   }
 }

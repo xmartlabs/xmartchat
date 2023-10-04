@@ -191,7 +191,7 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
@@ -420,7 +420,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -560,7 +560,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -638,7 +638,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -862,7 +862,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.dev;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -957,7 +957,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.sta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.sta;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1045,7 +1045,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.dev;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1136,7 +1136,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.sta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.sta;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1227,7 +1227,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.dev;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1316,7 +1316,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.template.sta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.xmartchat.sta;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
