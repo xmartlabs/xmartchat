@@ -19,5 +19,8 @@
   "mail": "Mail",
   "password": "Password",
   "sign_in": "Sign In",
-  "xmartlabs_projects": "Xmartlabs' projects"
+  "xmartlabs_projects": "Xmartlabs' projects",
+  "home_empty_state": "Be the first\nto send a message!",
+  "home_text_field": "Say something",
+  "home_message_translate": "Translate"  
 }

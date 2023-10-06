@@ -8,6 +8,9 @@ class AppColors extends ColorScheme {
   final MaterialColor primary;
   @override
   // ignore: overridden_fields
+  final MaterialColor secondary;
+  @override
+  // ignore: overridden_fields
   final MaterialColor background;
   @override
   // ignore: overridden_fields
@@ -20,6 +23,7 @@ class AppColors extends ColorScheme {
 
   const AppColors({
     required this.primary,
+    required this.secondary,
     required this.background,
     required this.textColor,
     required this.info,
@@ -28,7 +32,6 @@ class AppColors extends ColorScheme {
     required this.error,
     required Brightness brightness,
     required Color onPrimary,
-    required Color secondary,
     required Color onSecondary,
     required Color onError,
     required Color onBackground,
