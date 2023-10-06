@@ -17,16 +17,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) =>
-            HomeCubit(context.read<GlobalEventHandlerCubit>()),
+        create: (context) => HomeCubit(context.read<GlobalEventHandlerCubit>()),
         child: _WelcomeContentScreen(),
       );
 }
 
 class _WelcomeContentScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<HomeCubit, HomeBaseState>(
+  Widget build(BuildContext context) => BlocBuilder<HomeCubit, HomeBaseState>(
         builder: (context, state) => Scaffold(
           backgroundColor: context.theme.colors.background.shade500,
           appBar: AppBar(
@@ -48,7 +46,8 @@ class _WelcomeContentScreen extends StatelessWidget {
                   ? Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                            color: context.theme.colors.background.shade400),
+                          color: context.theme.colors.background.shade400,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -121,13 +120,11 @@ class _TextFieldSectionState extends State<_TextFieldSection> {
               minLines: 1,
               decoration: InputDecoration(
                 hintText: context.localizations.home_text_field,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
-                    context
-                        .read<HomeCubit>()
-                        .sendMessage(textController.text);
+                    context.read<HomeCubit>().sendMessage(textController.text);
                     textController.clear();
                   },
                 ),

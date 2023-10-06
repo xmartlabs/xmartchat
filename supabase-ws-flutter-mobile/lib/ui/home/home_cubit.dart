@@ -20,8 +20,7 @@ class HomeCubit extends Cubit<HomeBaseState> {
 
   StreamSubscription? _messagesSubscription;
 
-  HomeCubit(this._globalEventHandler)
-      : super(const HomeBaseState.state()) {
+  HomeCubit(this._globalEventHandler) : super(const HomeBaseState.state()) {
     _loadMessages();
   }
 

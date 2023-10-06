@@ -34,28 +34,29 @@ class MessagesRemoteSource {
   }
 
   Stream<List<UserMessage>> getMessagesStream() => Rx.combineLatest2(
-          _supabaseClient.from('messages').stream(
-            primaryKey: ['id'],
-          ).map((messages) => Message.fromJsonList(messages)),
-          _supabaseClient.from('users').stream(
-            primaryKey: ['id'],
-          ).map((users) => UserResponse.fromJsonList(users)),
-          (messages, users) {
-        final userMap = Map<String, UserResponse>.fromIterable(
-          users,
-          key: (user) => user.id,
-        );
-        return messages
-            .map(
-              (message) => UserMessage(
-                alias: userMap[message.sender]!.alias,
-                message: message,
-                isFromCurrentUser:
-                    _supabaseClient.auth.currentUser!.id == message.sender,
-              ),
-            )
-            .toList();
-      });
+        _supabaseClient.from('messages').stream(
+          primaryKey: ['id'],
+        ).map((messages) => Message.fromJsonList(messages)),
+        _supabaseClient.from('users').stream(
+          primaryKey: ['id'],
+        ).map((users) => UserResponse.fromJsonList(users)),
+        (messages, users) {
+          final userMap = Map<String, UserResponse>.fromIterable(
+            users,
+            key: (user) => user.id,
+          );
+          return messages
+              .map(
+                (message) => UserMessage(
+                  alias: userMap[message.sender]!.alias,
+                  message: message,
+                  isFromCurrentUser:
+                      _supabaseClient.auth.currentUser!.id == message.sender,
+                ),
+              )
+              .toList();
+        },
+      );
 
   Future<void> sendMessage(String body) async {
     final currentUserId = _supabaseClient.auth.currentUser!.id;
