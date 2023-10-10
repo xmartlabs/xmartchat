@@ -36,7 +36,7 @@ Map<String, dynamic> _$$_MessageResponseToJson(_$_MessageResponse instance) =>
       'body': instance.body,
       'sender': instance.sender,
       'created_at': instance.createdAt.toIso8601String(),
-      'user': instance.user.toJson(),
+      'user': instance.user?.toJson(),
     };
 
 _$_MessageRequest _$$_MessageRequestFromJson(Map<String, dynamic> json) =>

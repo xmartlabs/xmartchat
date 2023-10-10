@@ -34,6 +34,7 @@ extension _GetItDiModuleExtensions on GetIt {
   }
 }
 
+//TODO: Discuss where we should initialize it
 Future<SupabaseClient> _initSupabase() => Supabase.initialize(
       url: Config.apiBaseUrl,
       anonKey: Config.supabaseApiKey,

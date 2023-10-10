@@ -214,7 +214,7 @@ mixin _$MessageResponse {
   String get sender => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _userResponseSerializer)
-  UserResponse get user => throw _privateConstructorUsedError;
+  UserResponse? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -233,9 +233,9 @@ abstract class $MessageResponseCopyWith<$Res> {
       String body,
       String sender,
       DateTime createdAt,
-      @JsonKey(fromJson: _userResponseSerializer) UserResponse user});
+      @JsonKey(fromJson: _userResponseSerializer) UserResponse? user});
 
-  $UserResponseCopyWith<$Res> get user;
+  $UserResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -255,7 +255,7 @@ class _$MessageResponseCopyWithImpl<$Res, $Val extends MessageResponse>
     Object? body = null,
     Object? sender = null,
     Object? createdAt = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -274,17 +274,21 @@ class _$MessageResponseCopyWithImpl<$Res, $Val extends MessageResponse>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserResponse,
+              as UserResponse?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserResponseCopyWith<$Res> get user {
-    return $UserResponseCopyWith<$Res>(_value.user, (value) {
+  $UserResponseCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserResponseCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -303,10 +307,10 @@ abstract class _$$_MessageResponseCopyWith<$Res>
       String body,
       String sender,
       DateTime createdAt,
-      @JsonKey(fromJson: _userResponseSerializer) UserResponse user});
+      @JsonKey(fromJson: _userResponseSerializer) UserResponse? user});
 
   @override
-  $UserResponseCopyWith<$Res> get user;
+  $UserResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -324,7 +328,7 @@ class __$$_MessageResponseCopyWithImpl<$Res>
     Object? body = null,
     Object? sender = null,
     Object? createdAt = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_$_MessageResponse(
       id: null == id
@@ -343,10 +347,10 @@ class __$$_MessageResponseCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserResponse,
+              as UserResponse?,
     ));
   }
 }
@@ -360,7 +364,7 @@ class _$_MessageResponse implements _MessageResponse {
       required this.body,
       required this.sender,
       required this.createdAt,
-      @JsonKey(fromJson: _userResponseSerializer) required this.user});
+      @JsonKey(fromJson: _userResponseSerializer) this.user});
 
   factory _$_MessageResponse.fromJson(Map<String, dynamic> json) =>
       _$$_MessageResponseFromJson(json);
@@ -375,7 +379,7 @@ class _$_MessageResponse implements _MessageResponse {
   final DateTime createdAt;
   @override
   @JsonKey(fromJson: _userResponseSerializer)
-  final UserResponse user;
+  final UserResponse? user;
 
   @override
   String toString() {
@@ -421,7 +425,7 @@ abstract class _MessageResponse implements MessageResponse {
       required final String sender,
       required final DateTime createdAt,
       @JsonKey(fromJson: _userResponseSerializer)
-      required final UserResponse user}) = _$_MessageResponse;
+      final UserResponse? user}) = _$_MessageResponse;
 
   factory _MessageResponse.fromJson(Map<String, dynamic> json) =
       _$_MessageResponse.fromJson;
@@ -436,7 +440,7 @@ abstract class _MessageResponse implements MessageResponse {
   DateTime get createdAt;
   @override
   @JsonKey(fromJson: _userResponseSerializer)
-  UserResponse get user;
+  UserResponse? get user;
   @override
   @JsonKey(ignore: true)
   _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>

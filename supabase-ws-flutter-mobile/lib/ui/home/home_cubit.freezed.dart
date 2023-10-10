@@ -17,19 +17,21 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeBaseState {
   List<UserMessage> get messages => throw _privateConstructorUsedError;
+  String get currentText => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<UserMessage> messages) state,
+    required TResult Function(List<UserMessage> messages, String currentText)
+        state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<UserMessage> messages)? state,
+    TResult? Function(List<UserMessage> messages, String currentText)? state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<UserMessage> messages)? state,
+    TResult Function(List<UserMessage> messages, String currentText)? state,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +63,7 @@ abstract class $HomeBaseStateCopyWith<$Res> {
           HomeBaseState value, $Res Function(HomeBaseState) then) =
       _$HomeBaseStateCopyWithImpl<$Res, HomeBaseState>;
   @useResult
-  $Res call({List<UserMessage> messages});
+  $Res call({List<UserMessage> messages, String currentText});
 }
 
 /// @nodoc
@@ -78,12 +80,17 @@ class _$HomeBaseStateCopyWithImpl<$Res, $Val extends HomeBaseState>
   @override
   $Res call({
     Object? messages = null,
+    Object? currentText = null,
   }) {
     return _then(_value.copyWith(
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<UserMessage>,
+      currentText: null == currentText
+          ? _value.currentText
+          : currentText // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -96,7 +103,7 @@ abstract class _$$HomeStateCopyWith<$Res>
       __$$HomeStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<UserMessage> messages});
+  $Res call({List<UserMessage> messages, String currentText});
 }
 
 /// @nodoc
@@ -111,12 +118,17 @@ class __$$HomeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? messages = null,
+    Object? currentText = null,
   }) {
     return _then(_$HomeState(
       messages: null == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<UserMessage>,
+      currentText: null == currentText
+          ? _value.currentText
+          : currentText // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -124,7 +136,8 @@ class __$$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeState implements HomeState {
-  const _$HomeState({final List<UserMessage> messages = const []})
+  const _$HomeState(
+      {final List<UserMessage> messages = const [], this.currentText = ""})
       : _messages = messages;
 
   final List<UserMessage> _messages;
@@ -137,8 +150,12 @@ class _$HomeState implements HomeState {
   }
 
   @override
+  @JsonKey()
+  final String currentText;
+
+  @override
   String toString() {
-    return 'HomeBaseState.state(messages: $messages)';
+    return 'HomeBaseState.state(messages: $messages, currentText: $currentText)';
   }
 
   @override
@@ -146,12 +163,14 @@ class _$HomeState implements HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeState &&
-            const DeepCollectionEquality().equals(other._messages, _messages));
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.currentText, currentText) ||
+                other.currentText == currentText));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_messages));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_messages), currentText);
 
   @JsonKey(ignore: true)
   @override
@@ -162,27 +181,28 @@ class _$HomeState implements HomeState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<UserMessage> messages) state,
+    required TResult Function(List<UserMessage> messages, String currentText)
+        state,
   }) {
-    return state(messages);
+    return state(messages, currentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<UserMessage> messages)? state,
+    TResult? Function(List<UserMessage> messages, String currentText)? state,
   }) {
-    return state?.call(messages);
+    return state?.call(messages, currentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<UserMessage> messages)? state,
+    TResult Function(List<UserMessage> messages, String currentText)? state,
     required TResult orElse(),
   }) {
     if (state != null) {
-      return state(messages);
+      return state(messages, currentText);
     }
     return orElse();
   }
@@ -217,10 +237,14 @@ class _$HomeState implements HomeState {
 }
 
 abstract class HomeState implements HomeBaseState {
-  const factory HomeState({final List<UserMessage> messages}) = _$HomeState;
+  const factory HomeState(
+      {final List<UserMessage> messages,
+      final String currentText}) = _$HomeState;
 
   @override
   List<UserMessage> get messages;
+  @override
+  String get currentText;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateCopyWith<_$HomeState> get copyWith =>

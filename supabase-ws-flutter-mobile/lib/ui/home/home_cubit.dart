@@ -37,8 +37,11 @@ class HomeCubit extends Cubit<HomeBaseState> {
     await super.close();
   }
 
-  Future<void> sendMessage(String body) =>
-      _messagesRepository.sendMessage(body);
+  void onCurrentTextChanged(String currentText) =>
+      emit(state.copyWith(currentText: currentText));
+
+  Future<void> sendMessage() =>
+      _messagesRepository.sendMessage(state.currentText);
 
   Future<void> logOut() => _sessionRepository.logOut().mapToResult();
 }

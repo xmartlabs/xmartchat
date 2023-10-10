@@ -2,14 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/core/common/extension/date_time_extensions.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
-import 'package:flutter_template/ui/theme/text_styles.dart';
 import 'package:flutter_template/ui/home/home_cubit.dart';
+import 'package:flutter_template/ui/widgets/message_box.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -22,7 +21,20 @@ class HomeScreen extends StatelessWidget {
       );
 }
 
-class _WelcomeContentScreen extends StatelessWidget {
+class _WelcomeContentScreen extends StatefulWidget {
+  @override
+  State<_WelcomeContentScreen> createState() => _WelcomeContentScreenState();
+}
+
+class _WelcomeContentScreenState extends State<_WelcomeContentScreen> {
+  final _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => BlocBuilder<HomeCubit, HomeBaseState>(
         builder: (context, state) => Scaffold(
@@ -43,48 +55,9 @@ class _WelcomeContentScreen extends StatelessWidget {
           body: Column(
             children: [
               state.messages.isEmpty
-                  ? Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: context.theme.colors.background.shade400,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Assets.sendGreen.image(height: 40.h),
-                                Text(
-                                  context.localizations.home_empty_state,
-                                  textAlign: TextAlign.center,
-                                  style: context.theme.textStyles.titleMedium
-                                      ?.copyWith(
-                                    color:
-                                        context.theme.colors.primary.shade300,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: context.theme.colors.background.shade400,
-                        ),
-                        child: ListView.builder(
-                          itemCount: state.messages.length,
-                          itemBuilder: (context, index) {
-                            final userMessage = state.messages[index];
-                            return _MessageWidget(userMessage: userMessage);
-                          },
-                        ),
-                      ),
-                    ),
-              const _TextFieldSection(),
+                  ? const _EmptyStateSection()
+                  : _MessagesSection(messages: state.messages),
+              _TextFieldSection(textController: _textController),
               SizedBox(height: 24.h),
             ],
           ),
@@ -92,21 +65,65 @@ class _WelcomeContentScreen extends StatelessWidget {
       );
 }
 
-class _TextFieldSection extends StatefulWidget {
-  const _TextFieldSection();
+class _EmptyStateSection extends StatelessWidget {
+  const _EmptyStateSection();
 
   @override
-  State<_TextFieldSection> createState() => _TextFieldSectionState();
+  Widget build(BuildContext context) => Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.theme.colors.background.shade400,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.sendGreen.image(height: 40.h),
+                  Text(
+                    context.localizations.home_empty_state,
+                    textAlign: TextAlign.center,
+                    style: context.theme.textStyles.titleMedium?.copyWith(
+                      color: context.theme.colors.primary.shade300,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
-class _TextFieldSectionState extends State<_TextFieldSection> {
-  final textController = TextEditingController();
+class _MessagesSection extends StatelessWidget {
+  final List<UserMessage> messages;
+
+  const _MessagesSection({
+    required this.messages,
+  });
 
   @override
-  void dispose() {
-    textController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context) => Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.theme.colors.background.shade400,
+          ),
+          child: ListView.builder(
+            itemCount: messages.length,
+            itemBuilder: (context, index) {
+              final userMessage = messages[index];
+              return MessageBox(userMessage: userMessage);
+            },
+          ),
+        ),
+      );
+}
+
+class _TextFieldSection extends StatelessWidget {
+  final TextEditingController textController;
+
+  const _TextFieldSection({required this.textController});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -121,134 +138,25 @@ class _TextFieldSectionState extends State<_TextFieldSection> {
               decoration: InputDecoration(
                 hintText: context.localizations.home_text_field,
                 border: const OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: context.theme.colors.primary.shade300,
+                  ),
+                ),
+                focusColor: context.theme.colors.primary.shade300,
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.send),
+                  color: context.theme.colors.primary.shade300,
                   onPressed: () {
-                    context.read<HomeCubit>().sendMessage(textController.text);
+                    context.read<HomeCubit>().sendMessage();
                     textController.clear();
                   },
                 ),
               ),
+              onChanged: context.read<HomeCubit>().onCurrentTextChanged,
             ),
             SizedBox(height: 20.h),
             Assets.xlLogoSmall.image(height: 16.h),
-          ],
-        ),
-      );
-}
-
-class _MessageWidget extends StatelessWidget {
-  final UserMessage userMessage;
-
-  const _MessageWidget({
-    required this.userMessage,
-  });
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.only(top: 10.w, left: 16.w, right: 16.w),
-        child: Row(
-          mainAxisAlignment: userMessage.isFromCurrentUser
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: userMessage.isFromCurrentUser
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
-                children: [
-                  if (!userMessage.isFromCurrentUser)
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 5.h,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              userMessage.alias,
-                              style: context.theme.textStyles.bodySmall
-                                  ?.copyWith(
-                                    color:
-                                        context.theme.colors.primary.shade200,
-                                  )
-                                  .bold(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      right: 12.w,
-                      left: 12.w,
-                      top: 8.h,
-                      bottom: 12.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: userMessage.isFromCurrentUser
-                          ? context.theme.colors.primary.shade900
-                          : context.theme.colors.secondary.shade900,
-                      borderRadius: BorderRadius.only(
-                        topRight: userMessage.isFromCurrentUser
-                            ? Radius.zero
-                            : Radius.circular(8.r),
-                        bottomLeft: Radius.circular(8.r),
-                        bottomRight: Radius.circular(8.r),
-                        topLeft: userMessage.isFromCurrentUser
-                            ? Radius.circular(8.r)
-                            : Radius.zero,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          userMessage.message.body,
-                          style: context.theme.textStyles.bodyMedium?.copyWith(
-                            color: context.theme.colors.textColor.shade100,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          userMessage.message.createdAt.toAmPmTimeFormat,
-                          style: context.theme.textStyles.overline.copyWith(
-                            color: context.theme.colors.textColor.shade200,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (!userMessage.isFromCurrentUser)
-                    InkWell(
-                      //TODO: add logic
-                      onTap: () => {},
-                      child: SizedBox(
-                        height: 20.h,
-                        width: 60.w,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              context.localizations.home_message_translate,
-                              style: context.theme.textStyles.bodyXSmall
-                                  .copyWith(
-                                    color:
-                                        context.theme.colors.textColor.shade200,
-                                  )
-                                  .links(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
           ],
         ),
       );

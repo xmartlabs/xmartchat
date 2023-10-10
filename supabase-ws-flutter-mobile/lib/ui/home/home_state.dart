@@ -4,5 +4,6 @@ part of 'home_cubit.dart';
 class HomeBaseState with _$HomeBaseState {
   const factory HomeBaseState.state({
     @Default([]) List<UserMessage> messages,
+    @Default("") String currentText,
   }) = HomeState;
 }
