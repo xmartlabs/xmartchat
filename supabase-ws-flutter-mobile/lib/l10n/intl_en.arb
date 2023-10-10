@@ -15,12 +15,12 @@
   "error_no_internet_connection_error_title": "Error",
   "error_unknown_error_description": "Something went wrong!",
   "error_unknown_error_title": "Ops!",
+  "home_empty_state": "Be the first\nto send a message!",
+  "home_message_translate": "Translate",
+  "home_text_field": "Say something",
   "log_out": "Log out",
   "mail": "Mail",
   "password": "Password",
   "sign_in": "Sign In",
-  "xmartlabs_projects": "Xmartlabs' projects",
-  "home_empty_state": "Be the first\nto send a message!",
-  "home_text_field": "Say something",
-  "home_message_translate": "Translate"  
+  "xmartlabs_projects": "Xmartlabs' projects"
 }
