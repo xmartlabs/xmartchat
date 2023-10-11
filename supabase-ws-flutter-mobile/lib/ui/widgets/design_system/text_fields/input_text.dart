@@ -13,6 +13,7 @@ class InputText extends StatelessWidget {
   final Color? backgroundColor;
   final String? error;
   final Function(String)? onChanged;
+  final bool? obscureText;
 
   const InputText({
     Key? key,
@@ -25,6 +26,7 @@ class InputText extends StatelessWidget {
     this.backgroundColor,
     this.error,
     this.onChanged,
+    this.obscureText,
   }) : super(key: key);
 
   @override
@@ -68,5 +70,6 @@ class InputText extends StatelessWidget {
         style: context.theme.textStyles.bodySmall?.copyWith(
           color: context.theme.colors.onSurface,
         ),
+        obscureText: obscureText ?? false,
       );
 }
