@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
-import 'package:flutter_template/ui/theme/app_colors.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/widgets/design_system/buttons/base_button.dart';
 
@@ -21,11 +20,11 @@ class AppPrimaryButton extends StatelessWidget {
   }) : super(key: key);
 
   factory AppPrimaryButton.stroke(
-      String text,
-      VoidCallback? onPressed, {
-        Icon? iconLeft,
-        Icon? iconRight,
-      }) =>
+    String text,
+    VoidCallback? onPressed, {
+    Icon? iconLeft,
+    Icon? iconRight,
+  }) =>
       AppPrimaryButton(
         text: text,
         onPressed: onPressed,
@@ -35,11 +34,11 @@ class AppPrimaryButton extends StatelessWidget {
       );
 
   factory AppPrimaryButton.filled(
-      String text,
-      VoidCallback? onPressed, {
-        Icon? iconLeft,
-        Icon? iconRight,
-      }) =>
+    String text,
+    VoidCallback? onPressed, {
+    Icon? iconLeft,
+    Icon? iconRight,
+  }) =>
       AppPrimaryButton(
         text: text,
         onPressed: onPressed,
@@ -49,11 +48,11 @@ class AppPrimaryButton extends StatelessWidget {
       );
 
   factory AppPrimaryButton.ghost(
-      String text,
-      VoidCallback? onPressed, {
-        Icon? iconLeft,
-        Icon? iconRight,
-      }) =>
+    String text,
+    VoidCallback? onPressed, {
+    Icon? iconLeft,
+    Icon? iconRight,
+  }) =>
       AppPrimaryButton(
         text: text,
         onPressed: onPressed,
@@ -74,46 +73,46 @@ class AppPrimaryButton extends StatelessWidget {
     }
   }
 
+  AppBaseButton _primaryFilledButton(BuildContext context) => AppBaseButton(
+        text: text,
+        onPressed: onPressed,
+        iconLeft: iconLeft,
+        iconRight: iconRight,
+        backgroundColor: context.theme.colors.primary.shade500,
+        textColor: context.theme.colors.textColor.shade100,
+        disabledColor: context.theme.colors.background.shade400,
+        disabledTextColor: context.theme.colors.textColor.shade300,
+        hoveredColor: context.theme.colors.primary.shade400,
+        focusColor: context.theme.colors.primary.shade500,
+        pressedColor: context.theme.colors.primary.shade600,
+      );
+
   AppBaseButton _primaryGhostButton(BuildContext context) => AppBaseButton(
-    text: text,
-    onPressed: onPressed,
-    iconLeft: iconLeft,
-    iconRight: iconRight,
-    backgroundColor: Colors.transparent,
-    textColor: context.theme.colors.primary.shade900,
-    disabledColor: Colors.transparent,
-    focusColor: context.theme.colors.primary.shade100,
-    pressedColor: context.theme.colors.primary.shade300,
-    disabledTextColor: context.theme.colors.textColor,
-    hoveredColor: context.theme.colors.primary.shade100,
-  );
+        text: text,
+        onPressed: onPressed,
+        iconLeft: iconLeft,
+        iconRight: iconRight,
+        backgroundColor: Colors.transparent,
+        textColor: context.theme.colors.primary.shade500,
+        disabledColor: Colors.transparent,
+        disabledTextColor: context.theme.colors.textColor.shade300,
+        focusColor: Colors.transparent,
+        pressedColor: Colors.transparent,
+        hoveredColor: Colors.transparent,
+      );
 
   AppBaseButton _primaryStrokeButton(BuildContext context) => AppBaseButton(
-    text: text,
-    onPressed: onPressed,
-    iconLeft: iconLeft,
-    iconRight: iconRight,
-    backgroundColor: Colors.transparent,
-    textColor: context.theme.colors.textColor.shade100,
-    disabledColor: context.theme.colors.textColor,
-    focusColor: context.theme.colors.primary.shade100,
-    pressedColor: context.theme.colors.primary.shade300,
-    disabledTextColor: context.theme.colors.background.shade500,
-    borderSideColor: context.theme.colors.primary.shade900,
-    hoveredColor: context.theme.colors.primary.shade200,
-  );
-
-  AppBaseButton _primaryFilledButton(BuildContext context) => AppBaseButton(
-    text: text,
-    onPressed: onPressed,
-    iconLeft: iconLeft,
-    iconRight: iconRight,
-    backgroundColor: context.theme.colors.primary.shade900,
-    textColor: Colors.white,
-    disabledColor: context.theme.colors.textColor,
-    focusColor: context.theme.colors.primary.shade900,
-    pressedColor: context.theme.colors.primary.shade900,
-    disabledTextColor: context.theme.colors.background.shade500,
-    hoveredColor: context.theme.colors.primary.shade700,
-  );
+        text: text,
+        onPressed: onPressed,
+        iconLeft: iconLeft,
+        iconRight: iconRight,
+        backgroundColor: Colors.transparent,
+        textColor: context.theme.colors.primary.shade500,
+        disabledColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        pressedColor: Colors.transparent,
+        hoveredColor: Colors.transparent,
+        disabledTextColor: context.theme.colors.textColor.shade300,
+        borderSideColor: context.theme.colors.primary.shade900,
+      );
 }

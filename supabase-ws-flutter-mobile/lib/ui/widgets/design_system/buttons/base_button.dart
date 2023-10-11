@@ -38,48 +38,50 @@ class AppBaseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialButton(
-    minWidth: 100.w,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16.r),
-      side: BorderSide(
-        width: 2,
-        color: borderSideColor ?? Colors.transparent,
-      ),
-    ),
-    elevation: 0.0,
-    color: backgroundColor,
-    disabledColor: disabledColor,
-    disabledTextColor: disabledTextColor,
-    highlightColor: pressedColor,
-    textColor: textColor,
-    onPressed: onPressed,
-    hoverColor: hoveredColor,
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        if (iconLeft != null)
-          Container(
-            margin: EdgeInsets.only(right: 10.w),
-            child: iconLeft,
-          ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: verticalPadding.h,
-          ),
-          child: Text(
-            text,
-            // style: context.theme.textStyles.labelMedium?.semibold(),
+        minWidth: 100.w,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(28.r),
+          side: BorderSide(
+            width: 2,
+            color: borderSideColor ?? Colors.transparent,
           ),
         ),
-        if (iconRight != null)
-          Container(
-            margin: EdgeInsets.only(left: 10.w),
-            child: iconRight,
-          ),
-      ],
-    ),
-  );
+        elevation: 0.0,
+        color: backgroundColor,
+        disabledColor: disabledColor,
+        disabledTextColor: disabledTextColor,
+        highlightColor: pressedColor,
+        textColor: textColor,
+        onPressed: onPressed,
+        hoverColor: hoveredColor,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            if (iconLeft != null)
+              Container(
+                margin: EdgeInsets.only(right: 16.w),
+                child: iconLeft,
+              ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: verticalPadding.h,
+              ),
+              child: Text(
+                text,
+                style: context.theme.textStyles.bodySmall
+                    ?.semibold()
+                    .copyWith(color: textColor),
+              ),
+            ),
+            if (iconRight != null)
+              Container(
+                margin: EdgeInsets.only(left: 16.w),
+                child: iconRight,
+              ),
+          ],
+        ),
+      );
 }
 
 enum StyleButton {
