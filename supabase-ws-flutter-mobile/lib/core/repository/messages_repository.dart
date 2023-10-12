@@ -46,6 +46,10 @@ class MessagesRepository {
       .where((event) => event.isData)
       .map((event) => event.requireData());
 
-  Future<void> sendMessage(String body) =>
-      _messagesRemoteSource.sendMessage(body);
+  Future<void> sendMessage(String body) async {
+    await _messagesRemoteSource.sendMessage(body);
+  }
+
+  Future<void> uppercaseMessage(Message message) =>
+      _messagesRemoteSource.uppercaseMessage(message.id, message.body);
 }

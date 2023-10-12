@@ -113,7 +113,10 @@ class _MessagesSection extends StatelessWidget {
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final userMessage = messages[index];
-              return MessageBox(userMessage: userMessage);
+              return MessageBox(
+                userMessage: userMessage,
+                uppercaseMessage: context.read<HomeCubit>().uppercaseMessage,
+              );
             },
           ),
         ),
