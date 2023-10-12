@@ -16,8 +16,8 @@ class SignInCubit extends Cubit<SignInBaseState> {
   SignInCubit(this._globalEventHandler)
       : super(
           const SignInBaseState.state(
-            email: 'hi@xmartlabs.com',
-            password: 'xmartlabs',
+            email: 'nicolas.lantean@xmartlabs.com',
+            password: 'niconico',
             error: '',
           ),
         );

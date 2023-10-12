@@ -1,20 +1,29 @@
-import 'package:flutter_template/core/model/service/auth_models.dart';
-import 'package:flutter_template/core/model/service/service_response.dart';
-import 'package:flutter_template/core/source/common/http_service.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthRemoteSource {
-  final HttpServiceDio _httpService;
+abstract interface class IAuthRemoteSource {
+  Stream<String?> getUserToken();
+  Future<AuthResponse> signInWithPassword(String email, String password);
+  Future<void> signOut();
+}
 
-  static const _urlLogin = 'auth/v1/token';
+class AuthRemoteSource implements IAuthRemoteSource {
+  final SupabaseClient _supabaseClient;
 
-  AuthRemoteSource(this._httpService);
+  AuthRemoteSource(this._supabaseClient);
 
-  Future<SignInResponse> signIn(String email, String password) async =>
-      (await _httpService.postAndProcessResponse(
-        _urlLogin,
-        queryParameters: {'grant_type': 'password'},
-        data: SignInRequest(email: email, password: password).toJson(),
-        serializer: (data) => SignInResponse.fromJson(data),
-      ))
-          .getDataOrThrow();
+  String get userId => _supabaseClient.auth.currentUser!.id;
+
+  @override
+  Stream<String?> getUserToken() => Rx.merge([
+        Stream.value(_supabaseClient.auth.currentSession),
+        _supabaseClient.auth.onAuthStateChange.map((event) => event.session),
+      ]).map((event) => event?.accessToken).distinct();
+
+  @override
+  Future<AuthResponse> signInWithPassword(String email, String password) =>
+      _supabaseClient.auth.signInWithPassword(email: email, password: password);
+
+  @override
+  Future<void> signOut() => _supabaseClient.auth.signOut();
 }

@@ -11,6 +11,15 @@ import 'package:flutter/widgets.dart';
 
 class Assets {
   Assets._();
+
+  static const AssetGenImage logoAndName =
+      AssetGenImage('assets/logo_and_name.png');
+  static const AssetGenImage sendGreen = AssetGenImage('assets/send_green.png');
+  static const AssetGenImage xlLogoSmall =
+      AssetGenImage('assets/xl-logo-small.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logoAndName, sendGreen, xlLogoSmall];
 }
 
 class AssetGenImage {

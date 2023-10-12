@@ -15,7 +15,7 @@ class SessionRepository {
   );
 
   Stream<AuthenticationStatus> get status =>
-      _authLocalSource.getUserToken().map(
+      _authRemoteSource.getUserToken().map(
             (token) => token == null
                 ? AuthenticationStatus.unauthenticated
                 : AuthenticationStatus.authenticated,
@@ -27,13 +27,12 @@ class SessionRepository {
     required String email,
     required String password,
   }) async {
-    final response = await _authRemoteSource.signIn(email, password);
-    await _authLocalSource.saveUserToken(response.accessToken);
-    await _authLocalSource.saveUserInfo(response.user);
+    await _authRemoteSource.signInWithPassword(email, password);
   }
 
   Future<void> logOut() async {
     await _authLocalSource.saveUserToken(null);
     await _authLocalSource.saveUserInfo(null);
+    await _authRemoteSource.signOut();
   }
 }
