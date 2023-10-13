@@ -9,7 +9,8 @@ abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
   Stream<List<Message>> getMessagesStream();
   Stream<List<UserResponse>> getUsersStream();
-  Future<void> sendMessage(String body);
+  Future<void> sendMessage({required String body});
+  Future<void> uppercaseMessage({required String id, required String body});
 }
 
 class MessagesRemoteSourceImpl implements MessagesRemoteSource {
@@ -21,7 +22,8 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   Future<List<UserMessage>> getMessages() async {
     final response = await _supabaseClient
         .from('messages')
-        .select('id, created_at, body, sender, user:sender(id, alias)');
+        .select('id, created_at, body, sender, user:sender(id, alias)')
+        .order('created_at', ascending: true);
     final messageResponse = MessageResponse.fromJsonList(response);
     return messageResponse.toUserMessageList(
       userId: _supabaseClient.auth.currentUser!.id,
@@ -29,8 +31,11 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   }
 
   @override
-  Stream<List<Message>> getMessagesStream() =>
-      _supabaseClient.from('messages').stream(primaryKey: ['id']).map(
+  Stream<List<Message>> getMessagesStream() => _supabaseClient
+      .from('messages')
+      .stream(primaryKey: ['id'])
+      .order('created_at', ascending: true)
+      .map(
         (response) => Message.fromJsonList(response),
       );
 
@@ -41,10 +46,15 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
       );
 
   @override
-  Future<void> sendMessage(String body) async {
+  Future<void> sendMessage({required String body}) async {
     final currentUserId = _supabaseClient.auth.currentUser!.id;
     return _supabaseClient
         .from('messages')
         .insert(MessageRequest(body: body, sender: currentUserId));
   }
+
+  @override
+  Future<void> uppercaseMessage({required String id, required String body}) =>
+      _supabaseClient.functions
+          .invoke('uppercase_message', body: {"id": id, "message": body});
 }

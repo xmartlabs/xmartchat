@@ -30,5 +30,8 @@ class MessagesRepository {
       );
 
   Future<void> sendMessage(String body) =>
-      _messagesRemoteSource.sendMessage(body);
+      _messagesRemoteSource.sendMessage(body: body);
+
+  Future<void> uppercaseMessage(Message message) => _messagesRemoteSource
+      .uppercaseMessage(id: message.id, body: message.body);
 }
