@@ -56,7 +56,7 @@ class AppColors extends ColorScheme {
   static AppColors getColorScheme() => AppColors(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const MaterialColor(
-            0x0E9F6F,
+            0xFF0E9F6F,
             <int, Color>{
               100: Color.fromRGBO(248, 254, 252, 1),
               200: Color.fromRGBO(225, 247, 240, 1),
@@ -73,7 +73,7 @@ class AppColors extends ColorScheme {
         ),
         brightness: Brightness.dark,
         primary: const MaterialColor(
-          0x0E9F6F,
+          0xFF0E9F6F,
           <int, Color>{
             100: Color.fromRGBO(248, 254, 252, 1),
             200: Color.fromRGBO(225, 247, 240, 1),
@@ -89,7 +89,7 @@ class AppColors extends ColorScheme {
         ),
         onPrimary: Colors.white,
         secondary: const MaterialColor(
-          0xE0E0E0,
+          0xFFE0E0E0,
           <int, Color>{
             100: Color.fromRGBO(255, 255, 255, 1),
             200: Color.fromRGBO(249, 249, 249, 1),
@@ -105,7 +105,7 @@ class AppColors extends ColorScheme {
         ),
         onSecondary: Colors.black,
         background: const MaterialColor(
-          0x0B0C0D,
+          0xFF0B0C0D,
           <int, Color>{
             100: Color.fromRGBO(163, 170, 177, 1),
             200: Color.fromRGBO(138, 145, 153, 1),
@@ -118,7 +118,7 @@ class AppColors extends ColorScheme {
         surface: Colors.black,
         onSurface: Colors.white,
         textColor: const MaterialColor(
-          0xFFFFFF,
+          0xFFFFFFFF,
           <int, Color>{
             100: Color.fromRGBO(255, 255, 255, 1),
             200: Color.fromRGBO(194, 194, 204, 1),
@@ -128,7 +128,7 @@ class AppColors extends ColorScheme {
           },
         ),
         success: const MaterialColor(
-          0x10B981,
+          0xFF10B981,
           <int, Color>{
             100: Color.fromRGBO(231, 248, 242, 1),
             200: Color.fromRGBO(159, 227, 205, 1),
@@ -138,7 +138,7 @@ class AppColors extends ColorScheme {
           },
         ),
         info: const MaterialColor(
-          0x1169F7,
+          0xFF1169F7,
           <int, Color>{
             100: Color.fromRGBO(207, 232, 254, 1),
             200: Color.fromRGBO(111, 176, 252, 1),
@@ -148,7 +148,7 @@ class AppColors extends ColorScheme {
           },
         ),
         warning: const MaterialColor(
-          0xF59E0B,
+          0xFFF59E0B,
           <int, Color>{
             100: Color.fromRGBO(254, 245, 231, 1),
             200: Color.fromRGBO(251, 216, 157, 1),
@@ -158,7 +158,7 @@ class AppColors extends ColorScheme {
           },
         ),
         error: const MaterialColor(
-          0xF4444,
+          0xFF0E9F6F,
           <int, Color>{
             100: Color.fromRGBO(253, 236, 236, 1),
             200: Color.fromRGBO(249, 180, 180, 1),
