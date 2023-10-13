@@ -9,8 +9,8 @@ abstract interface class IMessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
   Stream<List<Message>> getMessagesStream();
   Stream<List<UserResponse>> getUsersStream();
-  Future<void> sendMessage(String body);
-  Future<void> uppercaseMessage(String id, String body);
+  Future<void> sendMessage({required String body});
+  Future<void> uppercaseMessage({required String id, required String body});
 }
 
 class MessagesRemoteSource implements IMessagesRemoteSource {
@@ -46,7 +46,7 @@ class MessagesRemoteSource implements IMessagesRemoteSource {
       );
 
   @override
-  Future<void> sendMessage(String body) async {
+  Future<void> sendMessage({required String body}) async {
     final currentUserId = _supabaseClient.auth.currentUser!.id;
     return _supabaseClient
         .from('messages')
@@ -54,7 +54,7 @@ class MessagesRemoteSource implements IMessagesRemoteSource {
   }
 
   @override
-  Future<void> uppercaseMessage(String id, String body) =>
+  Future<void> uppercaseMessage({required String id, required String body}) =>
       _supabaseClient.functions
           .invoke('uppercase_message', body: {"id": id, "message": body});
 }

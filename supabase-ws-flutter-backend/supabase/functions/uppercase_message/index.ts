@@ -22,9 +22,9 @@ serve(async (req) => {
 
   const capitalizedMessage = message.toUpperCase()
 
-  const { error: update_message_error } = await supabaseClient.from("messages").update({ body: capitalizedMessage }).eq("id", id)
+  const { error } = await supabaseClient.from("messages").update({ body: capitalizedMessage }).eq("id", id)
 
-  if (update_message_error != null) {
+  if (error != null) {
     return new Response(JSON.stringify({ "message": "Error updating message" }), { headers: { "Content-Type": "application/json" } },)
   }
 
