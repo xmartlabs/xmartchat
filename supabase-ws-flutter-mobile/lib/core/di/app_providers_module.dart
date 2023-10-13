@@ -1,9 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_template/core/common/config.dart';
+import 'package:flutter_template/core/source/common/local_shared_preferences_storage.dart';
+import 'package:flutter_template/main.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_template/core/source/common/local_shared_preferences_storage.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppProvidersModule {
   AppProvidersModule._privateConstructor();
@@ -21,7 +20,7 @@ class AppProvidersModule {
 
 extension _GetItDiModuleExtensions on GetIt {
   void _setupModule() {
-    registerSingletonAsync(_initSupabase);
+    registerSingletonAsync(initSupabase);
     registerLazySingleton(FlutterSecureStorage.new);
     registerSingletonAsync(() => SharedPreferences.getInstance());
 
@@ -33,9 +32,3 @@ extension _GetItDiModuleExtensions on GetIt {
     );
   }
 }
-
-//TODO: Discuss where we should initialize it
-Future<SupabaseClient> _initSupabase() => Supabase.initialize(
-      url: Config.apiBaseUrl,
-      anonKey: Config.supabaseApiKey,
-    ).then((supabase) => supabase.client);

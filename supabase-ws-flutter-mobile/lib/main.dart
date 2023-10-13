@@ -7,6 +7,14 @@ import 'package:flutter_template/core/common/config.dart';
 import 'package:flutter_template/core/common/logger.dart';
 import 'package:flutter_template/core/di/di_provider.dart';
 import 'package:flutter_template/ui/main/main_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+// This should be initialized in `AppProvidersModule` but it's here just for
+// the example.
+Future<SupabaseClient> initSupabase() => Supabase.initialize(
+      url: Config.apiBaseUrl,
+      anonKey: Config.supabaseApiKey,
+    ).then((supabase) => supabase.client);
 
 Future main() async {
   await runZonedGuarded(
