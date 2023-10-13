@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -40,7 +39,8 @@ class _CatalogAppContentScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<_CatalogAppContentScreen> createState() => _CatalogAppContentScreenState();
+  State<_CatalogAppContentScreen> createState() =>
+      _CatalogAppContentScreenState();
 }
 
 class _CatalogAppContentScreenState extends State<_CatalogAppContentScreen> {
@@ -61,7 +61,10 @@ class _CatalogAppContentScreenState extends State<_CatalogAppContentScreen> {
                       text: 'Filled Button',
                       onPressed: () {
                         _messengerKey.currentState?.showSnackBar(
-                            const SnackBar(content: Text('Filled button pressed!')));
+                          const SnackBar(
+                            content: Text('Filled button pressed!'),
+                          ),
+                        );
                       },
                       style: StyleButton.filled,
                     ),
@@ -72,7 +75,10 @@ class _CatalogAppContentScreenState extends State<_CatalogAppContentScreen> {
                       text: 'Stroke Button',
                       onPressed: () {
                         _messengerKey.currentState?.showSnackBar(
-                            const SnackBar(content: Text('Stroke button pressed!')));
+                          const SnackBar(
+                            content: Text('Stroke button pressed!'),
+                          ),
+                        );
                       },
                       style: StyleButton.stroke,
                     ),
@@ -83,7 +89,10 @@ class _CatalogAppContentScreenState extends State<_CatalogAppContentScreen> {
                       text: 'Ghost Button',
                       onPressed: () {
                         _messengerKey.currentState?.showSnackBar(
-                            const SnackBar(content: Text('Ghost button pressed!')));
+                          const SnackBar(
+                            content: Text('Ghost button pressed!'),
+                          ),
+                        );
                       },
                       style: StyleButton.ghost,
                     ),
