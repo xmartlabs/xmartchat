@@ -34,13 +34,21 @@ class MyCatalogApp extends StatelessWidget {
       );
 }
 
-class _CatalogAppContentScreen extends StatelessWidget {
+class _CatalogAppContentScreen extends StatefulWidget {
   const _CatalogAppContentScreen({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<_CatalogAppContentScreen> createState() => _CatalogAppContentScreenState();
+}
+
+class _CatalogAppContentScreenState extends State<_CatalogAppContentScreen> {
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+
+  @override
   Widget build(BuildContext context) => MaterialApp(
+        scaffoldMessengerKey: _messengerKey,
         home: SafeArea(
           child: Scaffold(
             body: Padding(
@@ -50,11 +58,10 @@ class _CatalogAppContentScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: AppPrimaryButton(
-                      text: "Filled Button",
+                      text: 'Filled Button',
                       onPressed: () {
-                        if (kDebugMode) {
-                          print("Filled button pressed!");
-                        }
+                        _messengerKey.currentState?.showSnackBar(
+                            const SnackBar(content: Text('Filled button pressed!')));
                       },
                       style: StyleButton.filled,
                     ),
@@ -62,11 +69,10 @@ class _CatalogAppContentScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: AppPrimaryButton(
-                      text: "Stroke Button",
+                      text: 'Stroke Button',
                       onPressed: () {
-                        if (kDebugMode) {
-                          print("Stroke button pressed!");
-                        }
+                        _messengerKey.currentState?.showSnackBar(
+                            const SnackBar(content: Text('Stroke button pressed!')));
                       },
                       style: StyleButton.stroke,
                     ),
@@ -74,28 +80,27 @@ class _CatalogAppContentScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: AppPrimaryButton(
-                      text: "Ghost Button",
+                      text: 'Ghost Button',
                       onPressed: () {
-                        if (kDebugMode) {
-                          print("Ghost button pressed!");
-                        }
+                        _messengerKey.currentState?.showSnackBar(
+                            const SnackBar(content: Text('Ghost button pressed!')));
                       },
                       style: StyleButton.ghost,
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: InputText(
-                      hintText: "Write your text...",
-                      labelText: "Label",
+                    child: AppTextInputField(
+                      hintText: 'Write your text...',
+                      labelText: 'Label',
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: InputText(
-                      hintText: "Write your text...",
-                      labelText: "Label",
-                      error: "Error text",
+                    child: AppTextInputField(
+                      hintText: 'Write your text...',
+                      labelText: 'Label',
+                      error: 'Error text',
                     ),
                   ),
                 ],

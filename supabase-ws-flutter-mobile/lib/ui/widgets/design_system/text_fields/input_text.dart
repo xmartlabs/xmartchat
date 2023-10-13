@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 
-class InputText extends StatelessWidget {
+class AppTextInputField extends StatelessWidget {
   final TextEditingController? controller;
   final IconData? leadingIcon;
   final IconData? trailingIcon;
@@ -15,7 +15,7 @@ class InputText extends StatelessWidget {
   final Function(String)? onChanged;
   final bool? obscureText;
 
-  const InputText({
+  const AppTextInputField({
     Key? key,
     this.controller,
     this.leadingIcon,
