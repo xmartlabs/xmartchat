@@ -57,7 +57,7 @@ class AppTextInputField extends StatelessWidget {
           prefixIcon: leadingIcon != null ? Icon(leadingIcon) : null,
           labelText: labelText,
           labelStyle: context.theme.textStyles.bodySmall?.copyWith(
-            color: context.theme.colors.onSurface,
+            color: context.theme.colors.textColor.shade100,
           ),
           hintText: hintText,
           hintStyle: context.theme.textStyles.bodySmall?.copyWith(
@@ -68,7 +68,7 @@ class AppTextInputField extends StatelessWidget {
           ),
         ),
         style: context.theme.textStyles.bodySmall?.copyWith(
-          color: context.theme.colors.onSurface,
+          color: context.theme.colors.textColor.shade200,
         ),
         obscureText: obscureText ?? false,
       );
