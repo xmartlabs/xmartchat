@@ -34,7 +34,6 @@ class AppTextInputField extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          errorText: error,
           focusedBorder: OutlineInputBorder(
             borderSide: error == null
                 ? BorderSide(color: context.theme.colors.primary.shade900)
@@ -60,14 +59,15 @@ class AppTextInputField extends StatelessWidget {
             color: context.theme.colors.textColor.shade100,
           ),
           hintText: hintText,
-          hintStyle: context.theme.textStyles.bodySmall?.copyWith(
+          hintStyle: context.theme.textStyles.bodyMedium?.copyWith(
             color: context.theme.colors.textColor.shade300,
           ),
+          errorText: error,
           errorStyle: context.theme.textStyles.bodySmall?.copyWith(
             color: context.theme.colors.error.shade300,
           ),
         ),
-        style: context.theme.textStyles.bodySmall?.copyWith(
+        style: context.theme.textStyles.bodyMedium?.copyWith(
           color: context.theme.colors.textColor.shade200,
         ),
         obscureText: obscureText ?? false,
