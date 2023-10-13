@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
 abstract interface class AuthRemoteSource {
-  Stream<String?> getUserToken();
+  Stream<String?> getUserId();
 
   Future<User> signIn({
     required String email,
@@ -27,10 +27,10 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   String get userId => _supabaseClient.auth.currentUser!.id;
 
   @override
-  Stream<String?> getUserToken() => _supabaseClient.auth.onAuthStateChange
+  Stream<String?> getUserId() => _supabaseClient.auth.onAuthStateChange
       .map((event) => event.session)
       .startWith(_supabaseClient.auth.currentSession)
-      .map((event) => event?.accessToken)
+      .map((event) => event?.user.id)
       .distinct();
 
   @override

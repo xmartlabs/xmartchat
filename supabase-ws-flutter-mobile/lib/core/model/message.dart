@@ -74,7 +74,7 @@ extension MessageResponseListExtension on List<MessageResponse> {
 extension MessageListExtension on List<Message> {
   List<UserMessage> toUserMessageList({
     required List<UserResponse> users,
-    required String userId,
+    required String? userId,
   }) {
     final userMap = Map<String, UserResponse>.fromIterable(
       users,
