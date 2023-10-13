@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/core/common/extension/stream_future_extensions.dart';
 import 'package:flutter_template/core/di/di_provider.dart';
+import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/core/repository/messages_repository.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
@@ -42,6 +43,11 @@ class HomeCubit extends Cubit<HomeBaseState> {
 
   Future<void> sendMessage() =>
       _messagesRepository.sendMessage(state.currentText);
+
+  Future<void> uppercaseMessage(Message message) => _messagesRepository
+      .uppercaseMessage(message)
+      .mapToResult()
+      .filterSuccess(_globalEventHandler.handleError);
 
   Future<void> logOut() => _sessionRepository.logOut().mapToResult();
 }

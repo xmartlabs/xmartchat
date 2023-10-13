@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/common/extension/date_time_extensions.dart';
+import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
@@ -8,9 +9,11 @@ import 'package:flutter_template/ui/theme/text_styles.dart';
 
 class MessageBox extends StatelessWidget {
   final UserMessage userMessage;
+  final Future<void> Function(Message) uppercaseMessage;
 
   const MessageBox({
     required this.userMessage,
+    required this.uppercaseMessage,
     super.key,
   });
 
@@ -72,7 +75,11 @@ class MessageBox extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (!userMessage.isFromCurrentUser) const _TranslateButton(),
+                  if (!userMessage.isFromCurrentUser)
+                    _UppercaseButton(
+                      message: userMessage.message,
+                      onTap: uppercaseMessage,
+                    ),
                 ],
               ),
             ),
@@ -81,13 +88,15 @@ class MessageBox extends StatelessWidget {
       );
 }
 
-class _TranslateButton extends StatelessWidget {
-  const _TranslateButton();
+class _UppercaseButton extends StatelessWidget {
+  final Message message;
+  final Future<void> Function(Message) onTap;
+  const _UppercaseButton({required this.message, required this.onTap});
 
   @override
   Widget build(BuildContext context) => InkWell(
         //TODO: add logic
-        onTap: () => {},
+        onTap: () => onTap(message),
         child: SizedBox(
           height: 20.h,
           width: 60.w,
@@ -96,7 +105,7 @@ class _TranslateButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.localizations.home_message_translate,
+                context.localizations.home_message_uppercase,
                 style: context.theme.textStyles.bodyXSmall
                     .copyWith(
                       color: context.theme.colors.textColor.shade200,
