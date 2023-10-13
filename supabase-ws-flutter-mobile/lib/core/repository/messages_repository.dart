@@ -13,8 +13,8 @@ class MessagesRepository {
   MessagesRepository(this._messagesRemoteSource, this._authRemoteSource);
 
   Stream<List<UserMessage>> getMessages() => _useMessageStream
-      ? Stream.fromFuture(_getMessages())
-      : _getMessagesStream();
+      ? _getMessagesStream()
+      : Stream.fromFuture(_getMessages());
 
   Future<List<UserMessage>> _getMessages() =>
       _messagesRemoteSource.getMessages();
