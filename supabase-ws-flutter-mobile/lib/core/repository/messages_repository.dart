@@ -7,9 +7,9 @@ import 'package:stock/stock.dart';
 
 class MessagesRepository {
   // ignore: unused_field
-  final MessagesRemoteSource _messagesRemoteSource;
+  final MessagesRemoteSourceImpl _messagesRemoteSource;
   // ignore: unused_field
-  final AuthRemoteSource _authRemoteSource;
+  final AuthRemoteSourceImpl _authRemoteSource;
 
   //TODO: discuss if we should use stock
   final Stock<dynamic, List<UserMessage>> _messagesStock;

@@ -28,7 +28,9 @@ extension _GetItDiModuleExtensions on GetIt {
 
   void _setupSources() {
     registerLazySingleton(() => AuthLocalSource(get()));
-    registerLazySingleton(() => AuthRemoteSource(get()));
-    registerLazySingleton(() => MessagesRemoteSource(get()));
+    registerLazySingleton<AuthRemoteSource>(() => AuthRemoteSourceImpl(get()));
+    registerLazySingleton<MessagesRemoteSource>(
+      () => MessagesRemoteSourceImpl(get()),
+    );
   }
 }

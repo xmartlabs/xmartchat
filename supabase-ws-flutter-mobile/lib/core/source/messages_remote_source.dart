@@ -5,17 +5,17 @@ import 'package:flutter_template/core/model/user.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide UserResponse;
 
-abstract interface class IMessagesRemoteSource {
+abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
   Stream<List<Message>> getMessagesStream();
   Stream<List<UserResponse>> getUsersStream();
   Future<void> sendMessage(String body);
 }
 
-class MessagesRemoteSource implements IMessagesRemoteSource {
+class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   final SupabaseClient _supabaseClient;
 
-  MessagesRemoteSource(this._supabaseClient);
+  MessagesRemoteSourceImpl(this._supabaseClient);
 
   @override
   Future<List<UserMessage>> getMessages() async {

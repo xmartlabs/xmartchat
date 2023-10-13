@@ -27,7 +27,7 @@ class SessionRepository {
     required String email,
     required String password,
   }) async {
-    await _authRemoteSource.signInWithPassword(email, password);
+    await _authRemoteSource.signIn(email: email, password: password);
   }
 
   Future<void> logOut() async {
