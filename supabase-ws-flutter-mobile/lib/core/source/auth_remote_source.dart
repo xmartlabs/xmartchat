@@ -1,29 +1,60 @@
+import 'package:flutter_template/core/model/user.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
-abstract interface class IAuthRemoteSource {
-  Stream<String?> getUserToken();
-  Future<AuthResponse> signInWithPassword(String email, String password);
+abstract interface class AuthRemoteSource {
+  Stream<String?> getUserId();
+
+  Future<User> signIn({
+    required String email,
+    required String password,
+  });
+
+  Future<User> signUp({
+    required String alias,
+    required String email,
+    required String password,
+  });
+
   Future<void> signOut();
 }
 
-class AuthRemoteSource implements IAuthRemoteSource {
+class AuthRemoteSourceImpl implements AuthRemoteSource {
   final SupabaseClient _supabaseClient;
 
-  AuthRemoteSource(this._supabaseClient);
+  AuthRemoteSourceImpl(this._supabaseClient);
 
   String get userId => _supabaseClient.auth.currentUser!.id;
 
   @override
-  Stream<String?> getUserToken() => Rx.merge([
-        Stream.value(_supabaseClient.auth.currentSession),
-        _supabaseClient.auth.onAuthStateChange.map((event) => event.session),
-      ]).map((event) => event?.accessToken).distinct();
+  Stream<String?> getUserId() => _supabaseClient.auth.onAuthStateChange
+      .map((event) => event.session)
+      .startWith(_supabaseClient.auth.currentSession)
+      .map((event) => event?.user.id)
+      .distinct();
 
   @override
-  Future<AuthResponse> signInWithPassword(String email, String password) =>
-      _supabaseClient.auth.signInWithPassword(email: email, password: password);
+  Future<User> signIn({
+    required String email,
+    required String password,
+  }) =>
+      _supabaseClient.auth
+          .signInWithPassword(email: email, password: password)
+          .then(
+            (authResponse) =>
+                User(email: authResponse.user!.email!, name: "TODO"),
+          );
 
   @override
   Future<void> signOut() => _supabaseClient.auth.signOut();
+
+  @override
+  Future<User> signUp({
+    required String alias,
+    required String email,
+    required String password,
+  }) {
+    // TODO: implement signUp
+    throw UnimplementedError();
+  }
 }

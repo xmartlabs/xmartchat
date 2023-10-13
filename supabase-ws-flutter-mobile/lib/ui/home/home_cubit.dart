@@ -27,7 +27,7 @@ class HomeCubit extends Cubit<HomeBaseState> {
 
   void _loadMessages() {
     _messagesSubscription = _messagesRepository
-        .getMessagesStream()
+        .getMessages()
         .filterSuccess(_globalEventHandler.handleError)
         .listen((messages) => emit(state.copyWith(messages: messages)));
   }

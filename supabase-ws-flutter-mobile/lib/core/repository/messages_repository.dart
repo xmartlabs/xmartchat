@@ -3,48 +3,31 @@ import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/core/source/auth_remote_source.dart';
 import 'package:flutter_template/core/source/messages_remote_source.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:stock/stock.dart';
 
 class MessagesRepository {
-  // ignore: unused_field
+  static const _useMessageStream = true;
+
   final MessagesRemoteSource _messagesRemoteSource;
-  // ignore: unused_field
   final AuthRemoteSource _authRemoteSource;
 
-  //TODO: discuss if we should use stock
-  final Stock<dynamic, List<UserMessage>> _messagesStock;
-  final Stock<dynamic, List<UserMessage>> _messagesStreamStock;
+  MessagesRepository(this._messagesRemoteSource, this._authRemoteSource);
 
-  MessagesRepository(this._messagesRemoteSource, this._authRemoteSource)
-      : _messagesStock = Stock(
-          fetcher: Fetcher.ofFuture(
-            (_) => _messagesRemoteSource.getMessages(),
-          ),
-          sourceOfTruth: CachedSourceOfTruth(),
+  Stream<List<UserMessage>> getMessages() => _useMessageStream
+      ? _getMessagesStream()
+      : Stream.fromFuture(_getMessages());
+
+  Future<List<UserMessage>> _getMessages() =>
+      _messagesRemoteSource.getMessages();
+
+  Stream<List<UserMessage>> _getMessagesStream() => Rx.combineLatest3(
+        _messagesRemoteSource.getMessagesStream(),
+        _messagesRemoteSource.getUsersStream(),
+        _authRemoteSource.getUserId(),
+        (messages, users, currentUserId) => messages.toUserMessageList(
+          users: users,
+          userId: currentUserId,
         ),
-        _messagesStreamStock = Stock(
-          fetcher: Fetcher.ofStream(
-            (_) => Rx.combineLatest2(
-              _messagesRemoteSource.getMessagesStream(),
-              _messagesRemoteSource.getUsersStream(),
-              (messages, users) => messages.toUserMessageList(
-                users: users,
-                userId: _authRemoteSource.userId,
-              ),
-            ),
-          ),
-          sourceOfTruth: CachedSourceOfTruth(),
-        );
-
-  Stream<List<UserMessage>> getMessages() => _messagesStock
-      .stream(null)
-      .where((event) => event.isData)
-      .map((event) => event.requireData());
-
-  Stream<List<UserMessage>> getMessagesStream() => _messagesStreamStock
-      .stream(null)
-      .where((event) => event.isData)
-      .map((event) => event.requireData());
+      );
 
   Future<void> sendMessage(String body) =>
       _messagesRemoteSource.sendMessage(body: body);
