@@ -7,6 +7,9 @@ import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/sign_up/sign_up_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
+import 'package:flutter_template/ui/widgets/design_system/buttons/base_button.dart';
+import 'package:flutter_template/ui/widgets/design_system/buttons/primary_button.dart';
+import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 
 @RoutePage()
 class SignUpScreen extends StatelessWidget {
@@ -41,29 +44,32 @@ class _SignUpContentScreen extends StatelessWidget {
                         .error(context.read<SignUpCubit>().state.error ?? ''),
                   ),
                 Padding(
-                  padding: EdgeInsets.only(top: 32.h, bottom: 4.h),
-                  child: TextButton(
-                    onPressed: () => context.read<SignUpCubit>().signUp(),
-                    child: Text(
-                      context.localizations.sign_up,
-                      style: context.theme.textStyles.bodySmall?.copyWith(
-                        color: context.theme.colors.textColor.shade100,
+                  padding: EdgeInsets.only(
+                    top: 32.h,
+                    bottom: 4.h,
+                    right: 16.w,
+                    left: 16.w,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AppPrimaryButton(
+                          onPressed: () => context.read<SignUpCubit>().signUp(),
+                          text: context.localizations.sign_up,
+                          style: StyleButton.filled,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30.0),
-                  child: TextButton(
+                  child: AppPrimaryButton(
+                    text: context.localizations.sign_up_already_have_an_account,
                     onPressed: () => context
                         .read<SignUpCubit>()
                         .onAlreadyHaveAnAccountPressed(),
-                    child: Text(
-                      context.localizations.sign_up_already_have_an_account,
-                      style: context.theme.textStyles.bodySmall?.copyWith(
-                        color: context.theme.colors.textColor.shade100,
-                      ),
-                    ),
+                    style: StyleButton.ghost,
                   ),
                 ),
               ],
@@ -107,38 +113,32 @@ class _SignUpFormState extends State<_SignUpForm> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: AppTextInputField(
               controller: _emailTextController,
               onChanged: (String text) => _signUpCubit.changeEmail(text),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.sign_up_email_label,
-              ),
+              hintText: context.localizations.sign_up_email_label,
+              labelText: context.localizations.sign_up_email_label,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: AppTextInputField(
               obscureText: true,
               controller: _passwordTextController,
               onChanged: (String password) =>
                   _signUpCubit.changePassword(password),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.sign_up_password_label,
-              ),
+              hintText: context.localizations.sign_up_password_label,
+              labelText: context.localizations.sign_up_password_label,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: AppTextInputField(
               controller: _usernameTextController,
               onChanged: (String username) =>
                   _signUpCubit.changeUsername(username),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.sign_up_username_label,
-              ),
+              hintText: context.localizations.sign_up_username_label,
+              labelText: context.localizations.sign_up_username_label,
             ),
           ),
         ],
