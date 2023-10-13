@@ -54,7 +54,7 @@ class InputText extends StatelessWidget {
             borderSide: BorderSide(color: context.theme.colors.error.shade400),
             borderRadius: BorderRadius.circular(4.r),
           ),
-          prefixIcon: Icon(leadingIcon),
+          prefixIcon: leadingIcon != null ? Icon(leadingIcon) : null,
           labelText: labelText,
           labelStyle: context.theme.textStyles.bodySmall?.copyWith(
             color: context.theme.colors.onSurface,
