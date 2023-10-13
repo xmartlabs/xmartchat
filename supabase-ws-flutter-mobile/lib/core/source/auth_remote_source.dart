@@ -41,20 +41,29 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
       _supabaseClient.auth
           .signInWithPassword(email: email, password: password)
           .then(
-            (authResponse) =>
-                User(email: authResponse.user!.email!, name: "TODO"),
+            (authResponse) => User(
+              email: authResponse.user!.email!,
+              name: authResponse.user?.userMetadata!['alias'] as String,
+            ),
           );
-
-  @override
-  Future<void> signOut() => _supabaseClient.auth.signOut();
 
   @override
   Future<User> signUp({
     required String alias,
     required String email,
     required String password,
-  }) {
-    // TODO: implement signUp
-    throw UnimplementedError();
-  }
+  }) =>
+      _supabaseClient.auth.signUp(
+        email: email,
+        password: password,
+        data: {'alias': alias},
+      ).then(
+        (authResponse) => User(
+          email: authResponse.user!.email!,
+          name: authResponse.user?.userMetadata!['alias'] as String,
+        ),
+      );
+
+  @override
+  Future<void> signOut() => _supabaseClient.auth.signOut();
 }

@@ -3,6 +3,7 @@ import 'package:flutter_template/core/repository/session_repository.dart';
 import 'package:flutter_template/core/source/auth_local_source.dart';
 import 'package:flutter_template/core/source/auth_remote_source.dart';
 import 'package:flutter_template/core/source/messages_remote_source.dart';
+import 'package:flutter_template/core/source/users_remote_source.dart';
 import 'package:get_it/get_it.dart';
 
 class RepositoryDiModule {
@@ -22,7 +23,7 @@ class RepositoryDiModule {
 
 extension _GetItDiModuleExtensions on GetIt {
   void _setupRepositories() {
-    registerLazySingleton(() => MessagesRepository(get(), get()));
+    registerLazySingleton(() => MessagesRepository(get(), get(), get()));
     registerLazySingleton(() => SessionRepository(get(), get()));
   }
 
@@ -31,6 +32,9 @@ extension _GetItDiModuleExtensions on GetIt {
     registerLazySingleton<AuthRemoteSource>(() => AuthRemoteSourceImpl(get()));
     registerLazySingleton<MessagesRemoteSource>(
       () => MessagesRemoteSourceImpl(get()),
+    );
+    registerLazySingleton<UsersRemoteSource>(
+      () => UsersRemoteSourceImpl(get()),
     );
   }
 }

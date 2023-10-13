@@ -18,9 +18,17 @@ const supabaseClient = createClient(
 );
 
 serve(async (req) => {
-  const { id, message } = await req.json()
+  const { id } = await req.json()
 
-  const capitalizedMessage = message.toUpperCase()
+  const { data, error: get_body_error } = await supabaseClient.from("messages").select("body").eq("id", id)
+
+  if (get_body_error != null) {
+    return new Response(JSON.stringify({ "message": "Error getting message body" }), { headers: { "Content-Type": "application/json" } },)
+  }
+
+  const body = data[0].body
+
+  const capitalizedMessage = body.toUpperCase()
 
   const { error } = await supabaseClient.from("messages").update({ body: capitalizedMessage }).eq("id", id)
 

@@ -5,9 +5,9 @@ import 'package:flutter_template/core/repository/session_repository.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'signin_cubit.freezed.dart';
+part 'sign_in_cubit.freezed.dart';
 
-part 'signin_state.dart';
+part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInBaseState> {
   final GlobalEventHandler _globalEventHandler;
@@ -24,7 +24,8 @@ class SignInCubit extends Cubit<SignInBaseState> {
 
   void changeEmail(String email) => emit(state.copyWith(email: email));
 
-  void changePassword(String email) => emit(state.copyWith(email: email));
+  void changePassword(String password) =>
+      emit(state.copyWith(password: password));
 
   Future<void> signIn() => _sessionRepository
       .signInUser(email: state.email!, password: state.password!)
