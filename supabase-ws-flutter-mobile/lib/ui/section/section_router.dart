@@ -41,10 +41,11 @@ class SectionRouter extends StatelessWidget {
     BuildContext context,
   ) =>
       switch (errorType) {
-        UnknownError(retry: final retry) => _showDialog(
+        UnknownError(error: final error, retry: final retry) => _showDialog(
             context,
             context.localizations.error_unknown_error_title,
-            context.localizations.error_unknown_error_description,
+            error?.toString() ??
+                context.localizations.error_unknown_error_description,
             retry,
           ),
         InternetError(retry: final retry) => _showDialog(

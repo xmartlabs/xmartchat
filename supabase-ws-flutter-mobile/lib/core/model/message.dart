@@ -41,8 +41,8 @@ class MessageResponse with _$MessageResponse {
       json.map((e) => MessageResponse.fromJson(e)).toList();
 }
 
-UserResponse _userResponseSerializer(dynamic data) =>
-    UserResponse.fromJson(data);
+UserResponse? _userResponseSerializer(dynamic data) =>
+    data == data ? null : UserResponse.fromJson(data);
 
 @freezed
 class MessageRequest with _$MessageRequest {
