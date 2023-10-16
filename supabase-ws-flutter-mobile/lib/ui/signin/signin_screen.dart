@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 
@@ -25,48 +26,50 @@ class _SignInContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SignInCubit, SignInBaseState>(
-        builder: (context, state) => Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 180,
-                  ),
-                  _SignInForm(),
-                  if (context.read<SignInCubit>().state.error.isNotEmpty)
-                    Text(
-                      context.localizations
-                          .error(context.read<SignInCubit>().state.error),
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 180,
                     ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: AppPrimaryButton(
-                          text: context.localizations.sign_in,
-                          onPressed: () => context.read<SignInCubit>().signIn(),
-                          style: StyleButton.filled,
-                        ),
+                    _SignInForm(),
+                    if (context.read<SignInCubit>().state.error.isNotEmpty)
+                      Text(
+                        context.localizations
+                            .error(context.read<SignInCubit>().state.error),
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: AppPrimaryButton(
-                          text: context.localizations.dont_have_an_account,
-                          onPressed: () => context.read<SignInCubit>().signIn(),
-                          style: StyleButton.ghost,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton(
+                            text: context.localizations.sign_in,
+                            onPressed: () => context.read<SignInCubit>().signIn(),
+                            style: StyleButton.filled,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton(
+                            text: context.localizations.dont_have_an_account,
+                            onPressed: () => context.read<SignInCubit>().signIn(),
+                            style: StyleButton.ghost,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
