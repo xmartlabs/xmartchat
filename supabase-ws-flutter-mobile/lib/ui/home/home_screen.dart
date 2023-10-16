@@ -47,8 +47,9 @@ class _WelcomeContentScreenState extends State<_WelcomeContentScreen> {
               IconButton(
                 icon: const Icon(Icons.more_vert),
                 color: context.theme.colors.textColor.shade100,
-                //TODO: add logic
-                onPressed: () => {},
+                onPressed: () => {
+                  context.read<HomeCubit>().logOut(),
+                },
               ),
             ],
           ),

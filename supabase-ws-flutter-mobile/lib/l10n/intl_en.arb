@@ -19,8 +19,9 @@
   "home_message_uppercase": "Uppercase",
   "home_text_field": "Say something",
   "log_out": "Log out",
-  "mail": "Mail",
+  "mail": "Email address",
   "password": "Password",
   "sign_in": "Sign In",
-  "xmartlabs_projects": "Xmartlabs' projects"
+  "xmartlabs_projects": "Xmartlabs' projects",
+  "dont_have_an_account": "Don't have an account?"
 }

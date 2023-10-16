@@ -32,35 +32,36 @@ class _SignInContentScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const SizedBox(
+                    height: 180,
+                  ),
                   _SignInForm(),
-                  // if (context.read<SignInCubit>().state.error.isNotEmpty)
-                  //   Text(
-                  //     context.localizations
-                  //         .error(context.read<SignInCubit>().state.error),
-                  //   ),
+                  if (context.read<SignInCubit>().state.error.isNotEmpty)
+                    Text(
+                      context.localizations
+                          .error(context.read<SignInCubit>().state.error),
+                    ),
                   Row(
                     children: [
                       Expanded(
                         child: AppPrimaryButton(
-                            text: context.localizations.sign_in,
-                            onPressed: () =>
-                                context.read<SignInCubit>().signIn(),
-                            style: StyleButton.filled),
+                          text: context.localizations.sign_in,
+                          onPressed: () => context.read<SignInCubit>().signIn(),
+                          style: StyleButton.filled,
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 120,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Row(
                     children: [
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: AppPrimaryButton(
-                            text: "Don't have an account?",
-                            onPressed: () =>
-                                context.read<SignInCubit>().signIn(),
-                            style: StyleButton.ghost,
-                          ),
+                        child: AppPrimaryButton(
+                          text: context.localizations.dont_have_an_account,
+                          onPressed: () => context.read<SignInCubit>().signIn(),
+                          style: StyleButton.ghost,
                         ),
                       ),
                     ],
@@ -105,7 +106,7 @@ class _SignInFormState extends State<_SignInForm> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: InputText(
+            child: AppTextInputField(
               controller: _emailTextController,
               labelText: context.localizations.mail,
               onChanged: (String text) => _signInCubit.changeEmail(text),
@@ -113,7 +114,7 @@ class _SignInFormState extends State<_SignInForm> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: InputText(
+            child: AppTextInputField(
               obscureText: true,
               controller: _passwordTextController,
               onChanged: (String password) =>
