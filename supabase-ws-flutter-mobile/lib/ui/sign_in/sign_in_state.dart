@@ -1,4 +1,4 @@
-part of 'signin_cubit.dart';
+part of 'sign_in_cubit.dart';
 
 @freezed
 class SignInBaseState with _$SignInBaseState {

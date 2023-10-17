@@ -17,16 +17,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (context) => HomeCubit(context.read<GlobalEventHandlerCubit>()),
-        child: _WelcomeContentScreen(),
+        child: _HomeContentScreen(),
       );
 }
 
-class _WelcomeContentScreen extends StatefulWidget {
+class _HomeContentScreen extends StatefulWidget {
   @override
-  State<_WelcomeContentScreen> createState() => _WelcomeContentScreenState();
+  State<_HomeContentScreen> createState() => _HomeContentScreenState();
 }
 
-class _WelcomeContentScreenState extends State<_WelcomeContentScreen> {
+class _HomeContentScreenState extends State<_HomeContentScreen> {
   final _textController = TextEditingController();
 
   @override
@@ -47,8 +47,8 @@ class _WelcomeContentScreenState extends State<_WelcomeContentScreen> {
               IconButton(
                 icon: const Icon(Icons.more_vert),
                 color: context.theme.colors.textColor.shade100,
-                //TODO: add logic
-                onPressed: () => {},
+                //TODO: change it later to show a menu
+                onPressed: () => context.read<HomeCubit>().logOut(),
               ),
             ],
           ),

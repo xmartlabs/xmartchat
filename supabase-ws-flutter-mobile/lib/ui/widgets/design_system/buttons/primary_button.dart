@@ -19,9 +19,9 @@ class AppPrimaryButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  factory AppPrimaryButton.stroke(
-    String text,
-    VoidCallback? onPressed, {
+  factory AppPrimaryButton.stroke({
+    required String text,
+    required VoidCallback? onPressed,
     Icon? iconLeft,
     Icon? iconRight,
   }) =>
@@ -33,9 +33,9 @@ class AppPrimaryButton extends StatelessWidget {
         iconLeft: iconLeft,
       );
 
-  factory AppPrimaryButton.filled(
-    String text,
-    VoidCallback? onPressed, {
+  factory AppPrimaryButton.filled({
+    required String text,
+    required VoidCallback? onPressed,
     Icon? iconLeft,
     Icon? iconRight,
   }) =>
@@ -47,9 +47,9 @@ class AppPrimaryButton extends StatelessWidget {
         iconLeft: iconLeft,
       );
 
-  factory AppPrimaryButton.ghost(
-    String text,
-    VoidCallback? onPressed, {
+  factory AppPrimaryButton.ghost({
+    required String text,
+    required VoidCallback? onPressed,
     Icon? iconLeft,
     Icon? iconRight,
   }) =>
