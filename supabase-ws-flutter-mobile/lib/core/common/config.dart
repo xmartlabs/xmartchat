@@ -10,7 +10,9 @@ import 'package:flutter_template/core/common/helper/env_helper.dart';
 
 interface class Config {
   static const String environmentFolder = 'environments';
-
+  static const String gitHubUri =
+      'https://github.com/xmartlabs/supabase-ws-flutter';
+  static const String xmartLabsUri = 'https://xmartlabs.com/';
   static const debugMode = kDebugMode;
 
   static late String apiBaseUrl;
