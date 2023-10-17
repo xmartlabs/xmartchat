@@ -70,7 +70,7 @@ class AppBaseButton extends StatelessWidget {
               child: Text(
                 text,
                 style: context.theme.textStyles.bodySmall
-                    ?.semibold()
+                    ?.bold()
                     .copyWith(color: textColor),
               ),
             ),

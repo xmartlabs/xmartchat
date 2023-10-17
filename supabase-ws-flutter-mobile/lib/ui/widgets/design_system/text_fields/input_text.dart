@@ -42,7 +42,7 @@ class AppTextInputField extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: context.theme.colors.primary.shade900),
+                BorderSide(color: context.theme.colors.textColor.shade400),
             borderRadius: BorderRadius.circular(4.r),
           ),
           errorBorder: OutlineInputBorder(
@@ -55,7 +55,10 @@ class AppTextInputField extends StatelessWidget {
           ),
           prefixIcon: leadingIcon != null ? Icon(leadingIcon) : null,
           labelText: labelText,
-          labelStyle: context.theme.textStyles.bodySmall?.copyWith(
+          labelStyle: context.theme.textStyles.bodyMedium?.copyWith(
+            color: context.theme.colors.textColor.shade300,
+          ),
+          floatingLabelStyle: context.theme.textStyles.bodySmall?.copyWith(
             color: context.theme.colors.textColor.shade100,
           ),
           hintText: hintText,

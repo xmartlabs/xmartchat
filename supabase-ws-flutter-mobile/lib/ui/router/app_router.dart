@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
 import 'package:flutter_template/ui/router/app_router_guards.dart';
 import 'package:flutter_template/ui/section/section_router.dart';
-import 'package:flutter_template/ui/signin/signin_screen.dart';
+import 'package:flutter_template/ui/sign_in/sign_in_screen.dart';
+import 'package:flutter_template/ui/sign_up/sign_up_screen.dart';
 import 'package:flutter_template/ui/home/home_screen.dart';
 
 part 'app_router.gr.dart';
@@ -26,7 +27,8 @@ class AppRouter extends _$AppRouter {
             path: '/',
             guards: [UnauthenticatedGuard(sessionRepository)],
             children: [
-              RedirectRoute(path: '', redirectTo: 'login'),
+              RedirectRoute(path: '', redirectTo: 'sign_up'),
+              AutoRoute(path: 'sign_up', page: SignUpRoute.page),
               AutoRoute(path: 'login', page: SignInRoute.page),
             ],
           ),

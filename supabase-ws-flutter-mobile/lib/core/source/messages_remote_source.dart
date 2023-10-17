@@ -1,16 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_template/core/model/message.dart';
-import 'package:flutter_template/core/model/user.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide UserResponse;
 
 abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
   Stream<List<Message>> getMessagesStream();
-  Stream<List<UserResponse>> getUsersStream();
   Future<void> sendMessage({required String body});
-  Future<void> uppercaseMessage({required String id, required String body});
+  Future<void> uppercaseMessage({required String id});
 }
 
 class MessagesRemoteSourceImpl implements MessagesRemoteSource {
@@ -40,21 +38,14 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
       );
 
   @override
-  Stream<List<UserResponse>> getUsersStream() =>
-      _supabaseClient.from('users').stream(primaryKey: ['id']).map(
-        (response) => UserResponse.fromJsonList(response),
-      );
-
-  @override
   Future<void> sendMessage({required String body}) async {
     final currentUserId = _supabaseClient.auth.currentUser!.id;
     return _supabaseClient
         .from('messages')
-        .insert(MessageRequest(body: body, sender: currentUserId));
+        .insert(MessageRequest(body: body, sender: currentUserId).toJson());
   }
 
   @override
-  Future<void> uppercaseMessage({required String id, required String body}) =>
-      _supabaseClient.functions
-          .invoke('uppercase_message', body: {"id": id, "message": body});
+  Future<void> uppercaseMessage({required String id}) =>
+      _supabaseClient.functions.invoke('uppercase_message', body: {"id": id});
 }

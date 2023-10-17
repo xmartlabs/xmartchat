@@ -23,5 +23,10 @@
   "mail": "Email address",
   "password": "Password",
   "sign_in": "Sign In",
+  "sign_up": "Sign Up",
+  "sign_up_already_have_an_account": "Already have an account?",
+  "sign_up_email_label": "Email address",
+  "sign_up_password_label": "Password",
+  "sign_up_username_label": "Username",
   "xmartlabs_projects": "Xmartlabs' projects"
 }
