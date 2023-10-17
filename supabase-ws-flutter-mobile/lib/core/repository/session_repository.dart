@@ -33,13 +33,12 @@ class SessionRepository {
     required String email,
     required String password,
     required String alias,
-  }) async {
-    await _authRemoteSource.signUp(
-      alias: alias,
-      email: email,
-      password: password,
-    );
-  }
+  }) =>
+      _authRemoteSource.signUp(
+        alias: alias,
+        email: email,
+        password: password,
+      );
 
   Future<void> logOut() async {
     await _authLocalSource.saveUserToken(null);

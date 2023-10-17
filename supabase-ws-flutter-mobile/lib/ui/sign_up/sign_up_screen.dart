@@ -7,7 +7,6 @@ import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/sign_up/sign_up_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
-import 'package:flutter_template/ui/widgets/design_system/buttons/base_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/buttons/primary_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 
@@ -29,50 +28,52 @@ class _SignUpContentScreen extends StatelessWidget {
         builder: (context, state) => SafeArea(
           child: Scaffold(
             backgroundColor: context.theme.colors.background.shade500,
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
-                  child: Assets.logoAndNameLarge.image(height: 52.h),
-                ),
-                Expanded(child: _SignUpForm()),
-                if (context.read<SignUpCubit>().state.error?.isNotEmpty ??
-                    false)
-                  Text(
-                    context.localizations
-                        .error(context.read<SignUpCubit>().state.error ?? ''),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
+                    child: Assets.logoAndNameLarge.image(height: 52.h),
                   ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 32.h,
-                    bottom: 4.h,
-                    right: 16.w,
-                    left: 16.w,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: AppPrimaryButton(
-                          onPressed: () => context.read<SignUpCubit>().signUp(),
-                          text: context.localizations.sign_up,
-                          style: StyleButton.filled,
-                        ),
+                  _SignUpForm(),
+                  if (context.read<SignUpCubit>().state.error?.isNotEmpty ??
+                      false)
+                    Text(
+                      context.localizations.error(
+                        context.read<SignUpCubit>().state.error ?? '',
                       ),
-                    ],
+                    ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 32.h,
+                      bottom: 4.h,
+                      right: 16.w,
+                      left: 16.w,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton.filled(
+                            onPressed: () =>
+                                context.read<SignUpCubit>().signUp(),
+                            text: context.localizations.sign_up,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30.0),
-                  child: AppPrimaryButton(
-                    text: context.localizations.sign_up_already_have_an_account,
-                    onPressed: () => context
-                        .read<SignUpCubit>()
-                        .onAlreadyHaveAnAccountPressed(),
-                    style: StyleButton.ghost,
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 30.h),
+                    child: AppPrimaryButton.ghost(
+                      text:
+                          context.localizations.sign_up_already_have_an_account,
+                      onPressed: () => context
+                          .read<SignUpCubit>()
+                          .onAlreadyHaveAnAccountPressed(),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -116,7 +117,6 @@ class _SignUpFormState extends State<_SignUpForm> {
             child: AppTextInputField(
               controller: _emailTextController,
               onChanged: (String text) => _signUpCubit.changeEmail(text),
-              hintText: context.localizations.sign_up_email_label,
               labelText: context.localizations.sign_up_email_label,
             ),
           ),
@@ -127,7 +127,6 @@ class _SignUpFormState extends State<_SignUpForm> {
               controller: _passwordTextController,
               onChanged: (String password) =>
                   _signUpCubit.changePassword(password),
-              hintText: context.localizations.sign_up_password_label,
               labelText: context.localizations.sign_up_password_label,
             ),
           ),
@@ -137,7 +136,6 @@ class _SignUpFormState extends State<_SignUpForm> {
               controller: _usernameTextController,
               onChanged: (String username) =>
                   _signUpCubit.changeUsername(username),
-              hintText: context.localizations.sign_up_username_label,
               labelText: context.localizations.sign_up_username_label,
             ),
           ),
