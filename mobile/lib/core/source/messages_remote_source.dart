@@ -20,7 +20,7 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   Future<List<UserMessage>> getMessages() async {
     final response = await _supabaseClient
         .from('messages')
-        .select('id, created_at, body, sender, user:sender(id, alias)')
+        .select('id, created_at, body, sender, users:sender(id, alias)')
         .order('created_at', ascending: true);
     final messageResponse = MessageResponse.fromJsonList(response);
     return messageResponse.toUserMessageList(

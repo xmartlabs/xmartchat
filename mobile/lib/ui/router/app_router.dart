@@ -27,8 +27,7 @@ class AppRouter extends _$AppRouter {
             path: '/',
             guards: [UnauthenticatedGuard(sessionRepository)],
             children: [
-              RedirectRoute(path: '', redirectTo: 'sign_up'),
-              AutoRoute(path: 'sign_up', page: SignUpRoute.page),
+              AutoRoute(path: '', page: SignUpRoute.page),
               AutoRoute(path: 'login', page: SignInRoute.page),
             ],
           ),
@@ -37,8 +36,7 @@ class AppRouter extends _$AppRouter {
             guards: [AuthenticatedGuard(sessionRepository)],
             path: '/',
             children: [
-              RedirectRoute(path: '', redirectTo: 'home'),
-              AutoRoute(path: 'home', page: HomeRoute.page),
+              AutoRoute(path: '', page: HomeRoute.page),
             ],
           ),
         ];

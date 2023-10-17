@@ -88,7 +88,7 @@ flutter_launcher_icons:
   adaptive_icon_background: '#ee1a64'
   remove_alpha_ios: true
   web:
-    generate: false
+    generate: true
   windows:
     generate: false
 
