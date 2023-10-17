@@ -13,8 +13,8 @@ interface class Config {
 
   static const debugMode = kDebugMode;
 
-  static late String apiBaseUrl;
-  static late String supabaseApiKey;
+  static late String supabaseUrl;
+  static late String supabaseAnnonKey;
 
   static final _environment = enumFromString(
         Environments.values,
@@ -28,19 +28,20 @@ interface class Config {
   }
 
   static void _initializeEnvVariables() {
-    apiBaseUrl = _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_API_BASE_URL)!;
-    supabaseApiKey =
-        _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_API_KEY)!;
+    supabaseUrl = _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_URL)!;
+    supabaseAnnonKey =
+        _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_ANNON_KEY)!;
   }
 }
 
 abstract class _EnvConfig {
-  static const ENV_KEY_API_BASE_URL = 'API_BASE_URL';
-  static const ENV_KEY_SUPABASE_API_KEY = 'SUPABASE_API_KEY';
+  static const ENV_KEY_SUPABASE_URL = 'SUPABASE_URL';
+  static const ENV_KEY_SUPABASE_ANNON_KEY = 'SUPABASE_ANNON_KEY';
 
   static const systemEnv = {
-    ENV_KEY_API_BASE_URL: String.fromEnvironment(ENV_KEY_API_BASE_URL),
-    ENV_KEY_SUPABASE_API_KEY: String.fromEnvironment(ENV_KEY_SUPABASE_API_KEY),
+    ENV_KEY_SUPABASE_URL: String.fromEnvironment(ENV_KEY_SUPABASE_URL),
+    ENV_KEY_SUPABASE_ANNON_KEY:
+        String.fromEnvironment(ENV_KEY_SUPABASE_ANNON_KEY),
   };
 
   static final Map<String, String> _envFileEnv = {};

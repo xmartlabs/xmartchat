@@ -71,18 +71,18 @@ class AppStyles extends TextTheme {
 
   static AppStyles getAppStyles() => AppStyles.fromTextTheme(
         textTheme: GoogleFonts.figtreeTextTheme().copyWith(
-          headlineLarge: _figtreeTextStyle(56.sp, FontWeight.bold),
-          headlineMedium: _figtreeTextStyle(48.sp, FontWeight.bold),
-          headlineSmall: _figtreeTextStyle(40.sp, FontWeight.bold),
-          titleLarge: _figtreeTextStyle(32.sp, FontWeight.bold),
-          titleMedium: _figtreeTextStyle(24.sp, FontWeight.bold),
-          titleSmall: _figtreeTextStyle(16.sp, FontWeight.bold),
-          bodyLarge: _figtreeTextStyle(20.sp, FontWeight.normal),
-          bodyMedium: _figtreeTextStyle(16.sp, FontWeight.normal),
-          bodySmall: _figtreeTextStyle(14.sp, FontWeight.normal),
+          headlineLarge: _figtreeTextStyle(56.spMin, FontWeight.bold),
+          headlineMedium: _figtreeTextStyle(48.spMin, FontWeight.bold),
+          headlineSmall: _figtreeTextStyle(40.spMin, FontWeight.bold),
+          titleLarge: _figtreeTextStyle(32.spMin, FontWeight.bold),
+          titleMedium: _figtreeTextStyle(24.spMin, FontWeight.bold),
+          titleSmall: _figtreeTextStyle(16.spMin, FontWeight.bold),
+          bodyLarge: _figtreeTextStyle(20.spMin, FontWeight.normal),
+          bodyMedium: _figtreeTextStyle(16.spMin, FontWeight.normal),
+          bodySmall: _figtreeTextStyle(14.spMin, FontWeight.normal),
         ),
-        overline: _figtreeTextStyle(12, FontWeight.normal),
-        bodyXSmall: _figtreeTextStyle(12, FontWeight.normal),
+        overline: _figtreeTextStyle(12.spMin, FontWeight.normal),
+        bodyXSmall: _figtreeTextStyle(12.spMin, FontWeight.normal),
       );
 
   TextTheme getThemeData() => getAppStyles();

@@ -12,8 +12,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 // This should be initialized in `AppProvidersModule` but it's here just for
 // the example.
 Future<SupabaseClient> initSupabase() => Supabase.initialize(
-      url: Config.apiBaseUrl,
-      anonKey: Config.supabaseApiKey,
+      url: Config.supabaseUrl,
+      anonKey: Config.supabaseAnnonKey,
     ).then((supabase) => supabase.client);
 
 Future main() async {
