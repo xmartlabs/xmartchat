@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
+import 'package:flutter_template/ui/home/menu_options.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/home/home_cubit.dart';
@@ -28,6 +30,7 @@ class _HomeContentScreen extends StatefulWidget {
 
 class _HomeContentScreenState extends State<_HomeContentScreen> {
   final _textController = TextEditingController();
+  OptionsMenu? selectedMenu;
 
   @override
   void dispose() {
@@ -43,14 +46,7 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
             leading: Assets.logoAndName.image(width: 143.w),
             leadingWidth: 160.w,
             backgroundColor: context.theme.colors.background.shade500,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                color: context.theme.colors.textColor.shade100,
-                //TODO: change it later to show a menu
-                onPressed: () => context.read<HomeCubit>().logOut(),
-              ),
-            ],
+            actions: [_buildOptionsMenu()],
           ),
           body: Column(
             children: [
@@ -62,6 +58,57 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
             ],
           ),
         ),
+      );
+
+  PopupMenuButton<OptionsMenu> _buildOptionsMenu() =>
+      PopupMenuButton<OptionsMenu>(
+        padding: const EdgeInsets.all(0),
+        icon: const Icon(Icons.more_vert),
+        position: PopupMenuPosition.under,
+        initialValue: selectedMenu,
+        onSelected: (OptionsMenu item) {
+          setState(() {
+            selectedMenu = item;
+          });
+        },
+        itemBuilder: (BuildContext context) => OptionsMenu.values
+            .mapIndexed(
+              (index, optionMenu) => PopupMenuItem<OptionsMenu>(
+                padding: const EdgeInsets.all(0),
+                value: optionMenu,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                  height: 48.sp,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: optionMenu.onPressed(context),
+                              child: Text(
+                                optionMenu.name,
+                                style: context.theme.textStyles.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (index != OptionsMenu.values.lastIndex)
+                        Container(
+                          height: 1.sp,
+                          color: Colors.white,
+                          width: double.infinity,
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+            .toList(),
       );
 }
 

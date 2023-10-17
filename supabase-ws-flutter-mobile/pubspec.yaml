@@ -45,6 +45,7 @@ dependencies:
   stack_trace: 1.11.0
   stock: 1.0.1
   supabase_flutter: 1.10.19
+  url_launcher: 6.1.2
 
 # Remove when dart_code_metrics updates its dependencies
 dependency_overrides:
