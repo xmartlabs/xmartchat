@@ -45,10 +45,9 @@ class _SignInContentScreen extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: AppPrimaryButton(
+                          child: AppPrimaryButton.filled(
                             text: context.localizations.sign_in,
                             onPressed: () => context.read<SignInCubit>().signIn(),
-                            style: StyleButton.filled,
                           ),
                         ),
                       ],
@@ -59,10 +58,9 @@ class _SignInContentScreen extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: AppPrimaryButton(
+                          child: AppPrimaryButton.ghost(
                             text: context.localizations.dont_have_an_account,
                             onPressed: () => context.read<SignInCubit>().signIn(),
-                            style: StyleButton.ghost,
                           ),
                         ),
                       ],
