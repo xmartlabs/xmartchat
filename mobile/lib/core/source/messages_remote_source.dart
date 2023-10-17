@@ -6,8 +6,11 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide UserResponse;
 
 abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
+
   Stream<List<Message>> getMessagesStream();
+
   Future<void> sendMessage({required String body});
+
   Future<void> uppercaseMessage({required String id});
 }
 
@@ -47,5 +50,8 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
 
   @override
   Future<void> uppercaseMessage({required String id}) =>
-      _supabaseClient.functions.invoke('uppercase_message', body: {"id": id});
+      _supabaseClient.functions.invoke(
+        'uppercase_message',
+        body: {'id': id},
+      );
 }
