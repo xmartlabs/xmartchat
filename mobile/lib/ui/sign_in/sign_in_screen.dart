@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
+import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/widgets/design_system/buttons/base_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/buttons/primary_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 import 'package:flutter_template/ui/sign_in/sign_in_cubit.dart';
+
+import '../../gen/assets.gen.dart';
 
 @RoutePage()
 class SignInScreen extends StatelessWidget {
@@ -27,14 +30,16 @@ class _SignInContentScreen extends StatelessWidget {
       BlocBuilder<SignInCubit, SignInBaseState>(
         builder: (context, state) => SafeArea(
           child: Scaffold(
+            backgroundColor: context.theme.colors.background.shade500,
             body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 180,
+                    Padding(
+                      padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
+                      child: Assets.logoAndNameLarge.image(height: 52.h),
                     ),
                     _SignInForm(),
                     if (context.read<SignInCubit>().state.error.isNotEmpty)
@@ -47,7 +52,8 @@ class _SignInContentScreen extends StatelessWidget {
                         Expanded(
                           child: AppPrimaryButton.filled(
                             text: context.localizations.sign_in,
-                            onPressed: () => context.read<SignInCubit>().signIn(),
+                            onPressed: () =>
+                                context.read<SignInCubit>().signIn(),
                           ),
                         ),
                       ],
@@ -60,7 +66,9 @@ class _SignInContentScreen extends StatelessWidget {
                         Expanded(
                           child: AppPrimaryButton.ghost(
                             text: context.localizations.dont_have_an_account,
-                            onPressed: () => context.read<SignInCubit>().signIn(),
+                            onPressed: () => context
+                                .read<SignInCubit>()
+                                .onDontHaveAccountPressed(),
                           ),
                         ),
                       ],
