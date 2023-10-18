@@ -66,37 +66,38 @@ class _EmptyStateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-      builder: (context, constraints) => RefreshIndicator(
-            onRefresh: () => context.read<HomeCubit>().refreshMessages(),
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Container(
-                height: constraints.maxHeight,
-                decoration: BoxDecoration(
-                  color: context.theme.colors.background.shade400,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Assets.sendGreen.image(height: 40.h),
-                        Text(
-                          context.localizations.home_empty_state,
-                          textAlign: TextAlign.center,
-                          style: context.theme.textStyles.titleMedium?.copyWith(
-                            color: context.theme.colors.primary.shade300,
-                          ),
+        builder: (context, constraints) => RefreshIndicator(
+          onRefresh: () => context.read<HomeCubit>().refreshMessages(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              height: constraints.maxHeight,
+              decoration: BoxDecoration(
+                color: context.theme.colors.background.shade400,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Assets.sendGreen.image(height: 40.h),
+                      Text(
+                        context.localizations.home_empty_state,
+                        textAlign: TextAlign.center,
+                        style: context.theme.textStyles.titleMedium?.copyWith(
+                          color: context.theme.colors.primary.shade300,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ));
+          ),
+        ),
+      );
 }
 
 class _MessagesSection extends StatelessWidget {
