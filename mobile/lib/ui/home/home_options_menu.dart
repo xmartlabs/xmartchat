@@ -15,12 +15,8 @@ class HomeOptionsMenu extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         icon: const Icon(Icons.more_vert),
         position: PopupMenuPosition.under,
-        onSelected: (_OptionsMenu optionMenu) => switch (optionMenu) {
-          _OptionsMenu.github => context.read<HomeCubit>().onPressedGitHub(),
-          _OptionsMenu.logout => context.read<HomeCubit>().logOut(),
-          _OptionsMenu.xmartlabs =>
-            context.read<HomeCubit>().onPressedXmartlabs(),
-        },
+        onSelected: (_OptionsMenu optionMenu) =>
+            _onSelectedOption(optionMenu, context),
         itemBuilder: (BuildContext context) => _OptionsMenu.values
             .mapIndexed(
               (index, optionMenu) => PopupMenuItem<_OptionsMenu>(
@@ -57,6 +53,17 @@ class HomeOptionsMenu extends StatelessWidget {
             )
             .toList(),
       );
+
+  Future<void> _onSelectedOption(
+    _OptionsMenu optionMenu,
+    BuildContext context,
+  ) =>
+      switch (optionMenu) {
+        _OptionsMenu.github => context.read<HomeCubit>().onPressedGitHub(),
+        _OptionsMenu.logout => context.read<HomeCubit>().logOut(),
+        _OptionsMenu.xmartlabs =>
+          context.read<HomeCubit>().onPressedXmartlabs(),
+      };
 }
 
 enum _OptionsMenu {
