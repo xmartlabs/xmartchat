@@ -41,11 +41,11 @@ class HomeCubit extends Cubit<HomeBaseState> {
   void onCurrentTextChanged(String currentText) =>
       emit(state.copyWith(currentText: currentText));
 
-  Future<void> sendMessage() =>
-      _messagesRepository.sendMessage(state.currentText)
-          .filterSuccess(_globalEventHandler.handleError);
+  Future<void> sendMessage() => _messagesRepository
+      .sendMessage(state.currentText)
+      .filterSuccess(_globalEventHandler.handleError);
 
-  Future<void> uppercaseMessage(Message message) => _messagesRepository
+  void uppercaseMessage(Message message) => _messagesRepository
       .uppercaseMessage(message)
       .filterSuccess(_globalEventHandler.handleError);
 
