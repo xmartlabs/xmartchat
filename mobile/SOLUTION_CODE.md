@@ -216,3 +216,13 @@ serve(async (req) => {
 })
 
 ```
+
+Invoke function:
+```dart
+  @override
+  Future<void> uppercaseMessage({required String id}) =>
+      _supabaseClient.functions.invoke(
+        'uppercase_message',
+        body: {'id': id},
+      );
+```
