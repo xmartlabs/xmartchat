@@ -36,7 +36,6 @@ mason-lock.json
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -63,3 +62,6 @@ app.*.map.json
 **/fastlane/test_output
 .bundle/
 vendor/bundle/
+
+# Web related
+.firebase

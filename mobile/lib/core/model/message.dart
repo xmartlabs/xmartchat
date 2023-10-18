@@ -42,7 +42,7 @@ class MessageResponse with _$MessageResponse {
 }
 
 UserResponse? _userResponseSerializer(dynamic data) =>
-    data == data ? null : UserResponse.fromJson(data);
+    data == null ? null : UserResponse.fromJson(data);
 
 @freezed
 class MessageRequest with _$MessageRequest {

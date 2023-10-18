@@ -23,7 +23,7 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   Future<List<UserMessage>> getMessages() async {
     final response = await _supabaseClient
         .from('messages')
-        .select('id, created_at, body, sender, users:sender(id, alias)')
+        .select('*, user:sender(id, alias)')
         .order('created_at', ascending: true);
     final messageResponse = MessageResponse.fromJsonList(response);
     return messageResponse.toUserMessageList(
@@ -36,9 +36,7 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
       .from('messages')
       .stream(primaryKey: ['id'])
       .order('created_at', ascending: true)
-      .map(
-        (response) => Message.fromJsonList(response),
-      );
+      .map(Message.fromJsonList);
 
   @override
   Future<void> sendMessage({required String body}) async {

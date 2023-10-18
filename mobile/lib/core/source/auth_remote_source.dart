@@ -1,16 +1,15 @@
-import 'package:flutter_template/core/model/user.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide User;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteSource {
   Stream<String?> getUserId();
 
-  Future<User> signIn({
+  Future<void> signIn({
     required String email,
     required String password,
   });
 
-  Future<User> signUp({
+  Future<void> signUp({
     required String alias,
     required String email,
     required String password,
@@ -24,8 +23,6 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
 
   AuthRemoteSourceImpl(this._supabaseClient);
 
-  String get userId => _supabaseClient.auth.currentUser!.id;
-
   @override
   Stream<String?> getUserId() => _supabaseClient.auth.onAuthStateChange
       .map((event) => event.session)
@@ -34,21 +31,14 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
       .distinct();
 
   @override
-  Future<User> signIn({
+  Future<void> signIn({
     required String email,
     required String password,
   }) =>
-      _supabaseClient.auth
-          .signInWithPassword(email: email, password: password)
-          .then(
-            (authResponse) => User(
-              email: authResponse.user!.email!,
-              name: authResponse.user?.userMetadata!['alias'] as String,
-            ),
-          );
+      _supabaseClient.auth.signInWithPassword(email: email, password: password);
 
   @override
-  Future<User> signUp({
+  Future<void> signUp({
     required String alias,
     required String email,
     required String password,
@@ -57,11 +47,6 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
         email: email,
         password: password,
         data: {'alias': alias},
-      ).then(
-        (authResponse) => User(
-          email: authResponse.user!.email!,
-          name: authResponse.user?.userMetadata!['alias'] as String,
-        ),
       );
 
   @override
