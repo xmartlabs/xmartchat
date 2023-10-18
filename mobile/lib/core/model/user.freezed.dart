@@ -158,34 +158,35 @@ abstract class _User implements User {
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
 }
 
-UserResponse _$UserResponseFromJson(Map<String, dynamic> json) {
-  return _UserResponse.fromJson(json);
+SupabaseUserResponse _$SupabaseUserResponseFromJson(Map<String, dynamic> json) {
+  return _SupabaseUserResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserResponse {
+mixin _$SupabaseUserResponse {
   String get id => throw _privateConstructorUsedError;
   String get alias => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserResponseCopyWith<UserResponse> get copyWith =>
+  $SupabaseUserResponseCopyWith<SupabaseUserResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserResponseCopyWith<$Res> {
-  factory $UserResponseCopyWith(
-          UserResponse value, $Res Function(UserResponse) then) =
-      _$UserResponseCopyWithImpl<$Res, UserResponse>;
+abstract class $SupabaseUserResponseCopyWith<$Res> {
+  factory $SupabaseUserResponseCopyWith(SupabaseUserResponse value,
+          $Res Function(SupabaseUserResponse) then) =
+      _$SupabaseUserResponseCopyWithImpl<$Res, SupabaseUserResponse>;
   @useResult
   $Res call({String id, String alias});
 }
 
 /// @nodoc
-class _$UserResponseCopyWithImpl<$Res, $Val extends UserResponse>
-    implements $UserResponseCopyWith<$Res> {
-  _$UserResponseCopyWithImpl(this._value, this._then);
+class _$SupabaseUserResponseCopyWithImpl<$Res,
+        $Val extends SupabaseUserResponse>
+    implements $SupabaseUserResponseCopyWith<$Res> {
+  _$SupabaseUserResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -212,22 +213,22 @@ class _$UserResponseCopyWithImpl<$Res, $Val extends UserResponse>
 }
 
 /// @nodoc
-abstract class _$$_UserResponseCopyWith<$Res>
-    implements $UserResponseCopyWith<$Res> {
-  factory _$$_UserResponseCopyWith(
-          _$_UserResponse value, $Res Function(_$_UserResponse) then) =
-      __$$_UserResponseCopyWithImpl<$Res>;
+abstract class _$$_SupabaseUserResponseCopyWith<$Res>
+    implements $SupabaseUserResponseCopyWith<$Res> {
+  factory _$$_SupabaseUserResponseCopyWith(_$_SupabaseUserResponse value,
+          $Res Function(_$_SupabaseUserResponse) then) =
+      __$$_SupabaseUserResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String alias});
 }
 
 /// @nodoc
-class __$$_UserResponseCopyWithImpl<$Res>
-    extends _$UserResponseCopyWithImpl<$Res, _$_UserResponse>
-    implements _$$_UserResponseCopyWith<$Res> {
-  __$$_UserResponseCopyWithImpl(
-      _$_UserResponse _value, $Res Function(_$_UserResponse) _then)
+class __$$_SupabaseUserResponseCopyWithImpl<$Res>
+    extends _$SupabaseUserResponseCopyWithImpl<$Res, _$_SupabaseUserResponse>
+    implements _$$_SupabaseUserResponseCopyWith<$Res> {
+  __$$_SupabaseUserResponseCopyWithImpl(_$_SupabaseUserResponse _value,
+      $Res Function(_$_SupabaseUserResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -236,7 +237,7 @@ class __$$_UserResponseCopyWithImpl<$Res>
     Object? id = null,
     Object? alias = null,
   }) {
-    return _then(_$_UserResponse(
+    return _then(_$_SupabaseUserResponse(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -252,11 +253,11 @@ class __$$_UserResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable()
-class _$_UserResponse implements _UserResponse {
-  _$_UserResponse({required this.id, required this.alias});
+class _$_SupabaseUserResponse implements _SupabaseUserResponse {
+  _$_SupabaseUserResponse({required this.id, required this.alias});
 
-  factory _$_UserResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_UserResponseFromJson(json);
+  factory _$_SupabaseUserResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_SupabaseUserResponseFromJson(json);
 
   @override
   final String id;
@@ -265,14 +266,14 @@ class _$_UserResponse implements _UserResponse {
 
   @override
   String toString() {
-    return 'UserResponse(id: $id, alias: $alias)';
+    return 'SupabaseUserResponse(id: $id, alias: $alias)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserResponse &&
+            other is _$_SupabaseUserResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.alias, alias) || other.alias == alias));
   }
@@ -284,24 +285,25 @@ class _$_UserResponse implements _UserResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserResponseCopyWith<_$_UserResponse> get copyWith =>
-      __$$_UserResponseCopyWithImpl<_$_UserResponse>(this, _$identity);
+  _$$_SupabaseUserResponseCopyWith<_$_SupabaseUserResponse> get copyWith =>
+      __$$_SupabaseUserResponseCopyWithImpl<_$_SupabaseUserResponse>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserResponseToJson(
+    return _$$_SupabaseUserResponseToJson(
       this,
     );
   }
 }
 
-abstract class _UserResponse implements UserResponse {
-  factory _UserResponse(
+abstract class _SupabaseUserResponse implements SupabaseUserResponse {
+  factory _SupabaseUserResponse(
       {required final String id,
-      required final String alias}) = _$_UserResponse;
+      required final String alias}) = _$_SupabaseUserResponse;
 
-  factory _UserResponse.fromJson(Map<String, dynamic> json) =
-      _$_UserResponse.fromJson;
+  factory _SupabaseUserResponse.fromJson(Map<String, dynamic> json) =
+      _$_SupabaseUserResponse.fromJson;
 
   @override
   String get id;
@@ -309,6 +311,6 @@ abstract class _UserResponse implements UserResponse {
   String get alias;
   @override
   @JsonKey(ignore: true)
-  _$$_UserResponseCopyWith<_$_UserResponse> get copyWith =>
+  _$$_SupabaseUserResponseCopyWith<_$_SupabaseUserResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
