@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/home/home_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
-import 'package:flutter_template/ui/resources.dart';
 
 class HomeOptionsMenu extends StatelessWidget {
   const HomeOptionsMenu({super.key});
@@ -34,7 +33,7 @@ class HomeOptionsMenu extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              optionMenu.name,
+                              optionMenu.name(context),
                               style: context.theme.textStyles.bodyMedium,
                             ),
                           ],
@@ -73,10 +72,10 @@ enum _OptionsMenu {
 }
 
 extension _OptionsMenuExtension on _OptionsMenu {
-  String get name => switch (this) {
-        _OptionsMenu.github => Resources.localizations.menu_option_github,
-        _OptionsMenu.logout => Resources.localizations.menu_option_log_out,
+  String name(BuildContext context) => switch (this) {
+        _OptionsMenu.github => context.localizations.menu_option_github,
+        _OptionsMenu.logout => context.localizations.menu_option_log_out,
         _OptionsMenu.xmartlabs =>
-          Resources.localizations.menu_option_about_xmartlabs,
+          context.localizations.menu_option_about_xmartlabs,
       };
 }
