@@ -9,8 +9,11 @@ import 'package:flutter_template/core/repository/messages_repository.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_template/core/common/config.dart';
 
 part 'home_cubit.freezed.dart';
+
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeBaseState> {
@@ -50,4 +53,9 @@ class HomeCubit extends Cubit<HomeBaseState> {
       .filterSuccess(_globalEventHandler.handleError);
 
   Future<void> logOut() => _sessionRepository.logOut().mapToResult();
+
+  Future<void> onPressedGitHub() => launchUrl(Uri.parse(Config.gitHubUrl));
+
+  Future<void> onPressedXmartlabs() =>
+      launchUrl(Uri.parse(Config.xmartLabsUrl));
 }

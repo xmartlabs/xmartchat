@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
+import 'package:flutter_template/ui/home/home_options_menu.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/home/home_cubit.dart';
@@ -43,14 +44,7 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
             leading: Assets.logoAndName.image(width: 143.w),
             leadingWidth: 160.w,
             backgroundColor: context.theme.colors.background.shade500,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                color: context.theme.colors.textColor.shade100,
-                //TODO: change it later to show a menu
-                onPressed: () => context.read<HomeCubit>().logOut(),
-              ),
-            ],
+            actions: const [HomeOptionsMenu()],
           ),
           body: Column(
             children: [
