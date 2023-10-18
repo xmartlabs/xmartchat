@@ -5,12 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
-import 'package:flutter_template/ui/widgets/design_system/buttons/base_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/buttons/primary_button.dart';
 import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 import 'package:flutter_template/ui/sign_in/sign_in_cubit.dart';
 
-import '../../gen/assets.gen.dart';
+import 'package:flutter_template/gen/assets.gen.dart';
 
 @RoutePage()
 class SignInScreen extends StatelessWidget {
