@@ -9,7 +9,7 @@ import 'package:flutter_template/ui/theme/text_styles.dart';
 
 class MessageBox extends StatelessWidget {
   final UserMessage userMessage;
-  final Future<void> Function(Message) uppercaseMessage;
+  final void Function(Message) uppercaseMessage;
 
   const MessageBox({
     required this.userMessage,
@@ -75,11 +75,10 @@ class MessageBox extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (!userMessage.isFromCurrentUser)
-                    _UppercaseButton(
-                      message: userMessage.message,
-                      onTap: uppercaseMessage,
-                    ),
+                  _UppercaseButton(
+                    message: userMessage.message,
+                    onTap: uppercaseMessage,
+                  ),
                 ],
               ),
             ),
@@ -90,12 +89,12 @@ class MessageBox extends StatelessWidget {
 
 class _UppercaseButton extends StatelessWidget {
   final Message message;
-  final Future<void> Function(Message) onTap;
+  final void Function(Message) onTap;
+
   const _UppercaseButton({required this.message, required this.onTap});
 
   @override
   Widget build(BuildContext context) => InkWell(
-        //TODO: add logic
         onTap: () => onTap(message),
         child: SizedBox(
           height: 20.h,

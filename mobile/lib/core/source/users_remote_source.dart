@@ -13,8 +13,7 @@ class UsersRemoteSourceImpl implements UsersRemoteSource {
   UsersRemoteSourceImpl(this._supabaseClient);
 
   @override
-  Stream<List<UserResponse>> getUsersStream() =>
-      _supabaseClient.from('users').stream(primaryKey: ['id']).map(
-        (response) => UserResponse.fromJsonList(response),
-      );
+  Stream<List<UserResponse>> getUsersStream() => _supabaseClient
+      .from('users')
+      .stream(primaryKey: ['id']).map(UserResponse.fromJsonList);
 }

@@ -6,7 +6,7 @@ import 'package:flutter_template/core/source/users_remote_source.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MessagesRepository {
-  static const _useMessageStream = true;
+  static const _useMessageStream = false;
 
   final MessagesRemoteSource _messagesRemoteSource;
   final UsersRemoteSource _usersRemoteSource;
