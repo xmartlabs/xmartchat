@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_template/main.dart';
 
 abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
@@ -15,25 +15,22 @@ abstract interface class MessagesRemoteSource {
 }
 
 class MessagesRemoteSourceImpl implements MessagesRemoteSource {
-  final SupabaseClient _supabaseClient;
-
-  MessagesRemoteSourceImpl(this._supabaseClient);
-
   @override
   Future<List<UserMessage>> getMessages() async {
-    final response = await _supabaseClient
+    final currentUserId = supabaseClient.auth.currentUser!.id;
+    final response = await supabaseClient
         .from('messages')
         .select('*, user:sender(id, alias)')
         .order('created_at', ascending: true);
-    final supabaseMessageResponse =
-        SupabaseMessageResponse.fromJsonList(response);
-    return supabaseMessageResponse.toUserMessageList(
-      userId: _supabaseClient.auth.currentUser!.id,
+    // Json to UserMessages
+    final messageResponse = SupabaseMessageResponse.fromJsonList(response);
+    return messageResponse.toUserMessageList(
+      userId: currentUserId,
     );
   }
 
   @override
-  Stream<List<Message>> getMessagesStream() => _supabaseClient
+  Stream<List<Message>> getMessagesStream() => supabaseClient
       .from('messages')
       .stream(primaryKey: ['id'])
       .order('created_at', ascending: true)
@@ -41,15 +38,15 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
 
   @override
   Future<void> sendMessage({required String body}) async {
-    final currentUserId = _supabaseClient.auth.currentUser!.id;
-    return _supabaseClient
+    final currentUserId = supabaseClient.auth.currentUser!.id;
+    return supabaseClient
         .from('messages')
-        .insert(MessageRequest(body: body, sender: currentUserId).toJson());
+        .insert({'body': body, 'sender': currentUserId});
   }
 
   @override
   Future<void> uppercaseMessage({required String id}) =>
-      _supabaseClient.functions.invoke(
+      supabaseClient.functions.invoke(
         'uppercase_message',
         body: {'id': id},
       );

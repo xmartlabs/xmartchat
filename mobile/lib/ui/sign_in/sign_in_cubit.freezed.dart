@@ -18,21 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SignInBaseState {
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
-  String get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? email, String? password, String error)
-        state,
+    required TResult Function(String? email, String? password) state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? email, String? password, String error)? state,
+    TResult? Function(String? email, String? password)? state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? email, String? password, String error)? state,
+    TResult Function(String? email, String? password)? state,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +62,7 @@ abstract class $SignInBaseStateCopyWith<$Res> {
           SignInBaseState value, $Res Function(SignInBaseState) then) =
       _$SignInBaseStateCopyWithImpl<$Res, SignInBaseState>;
   @useResult
-  $Res call({String? email, String? password, String error});
+  $Res call({String? email, String? password});
 }
 
 /// @nodoc
@@ -82,7 +80,6 @@ class _$SignInBaseStateCopyWithImpl<$Res, $Val extends SignInBaseState>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
-    Object? error = null,
   }) {
     return _then(_value.copyWith(
       email: freezed == email
@@ -93,10 +90,6 @@ class _$SignInBaseStateCopyWithImpl<$Res, $Val extends SignInBaseState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -109,7 +102,7 @@ abstract class _$$SignInStateCopyWith<$Res>
       __$$SignInStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? email, String? password, String error});
+  $Res call({String? email, String? password});
 }
 
 /// @nodoc
@@ -125,7 +118,6 @@ class __$$SignInStateCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
-    Object? error = null,
   }) {
     return _then(_$SignInState(
       email: freezed == email
@@ -136,10 +128,6 @@ class __$$SignInStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -147,19 +135,16 @@ class __$$SignInStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignInState implements SignInState {
-  const _$SignInState(
-      {required this.email, required this.password, required this.error});
+  const _$SignInState({this.email, this.password});
 
   @override
   final String? email;
   @override
   final String? password;
-  @override
-  final String error;
 
   @override
   String toString() {
-    return 'SignInBaseState.state(email: $email, password: $password, error: $error)';
+    return 'SignInBaseState.state(email: $email, password: $password)';
   }
 
   @override
@@ -169,12 +154,11 @@ class _$SignInState implements SignInState {
             other is _$SignInState &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.error, error) || other.error == error));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, error);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
@@ -185,28 +169,27 @@ class _$SignInState implements SignInState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? email, String? password, String error)
-        state,
+    required TResult Function(String? email, String? password) state,
   }) {
-    return state(email, password, error);
+    return state(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? email, String? password, String error)? state,
+    TResult? Function(String? email, String? password)? state,
   }) {
-    return state?.call(email, password, error);
+    return state?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? email, String? password, String error)? state,
+    TResult Function(String? email, String? password)? state,
     required TResult orElse(),
   }) {
     if (state != null) {
-      return state(email, password, error);
+      return state(email, password);
     }
     return orElse();
   }
@@ -241,17 +224,13 @@ class _$SignInState implements SignInState {
 }
 
 abstract class SignInState implements SignInBaseState {
-  const factory SignInState(
-      {required final String? email,
-      required final String? password,
-      required final String error}) = _$SignInState;
+  const factory SignInState({final String? email, final String? password}) =
+      _$SignInState;
 
   @override
   String? get email;
   @override
   String? get password;
-  @override
-  String get error;
   @override
   @JsonKey(ignore: true)
   _$$SignInStateCopyWith<_$SignInState> get copyWith =>
