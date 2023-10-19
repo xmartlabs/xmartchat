@@ -7,11 +7,16 @@
 2. Initialize Supabase in your app
 
 ```dart
-Future<SupabaseClient> initSupabase() =>
-    Supabase.initialize(
-      url: 'YOUR_SUPABASE_URL',
-      anonKey: 'YOUR_SUPABASE_ANON_KEY',
-    ).then((supabase) => supabase.client);
+late SupabaseClient supabaseClient;
+
+Future<void> _initSupabase() async {
+  await Supabase.initialize(
+    url: 'YOUR_SUPABASE_URL',
+    anonKey: 'YOUR_SUPABASE_ANON_KEY',
+  );
+  supabaseClient = Supabase.instance.client;
+}
+
 ```
 
 ## Authentication
@@ -20,24 +25,19 @@ Future<SupabaseClient> initSupabase() =>
 
 ```dart
 class AuthRemoteSourceImpl implements AuthRemoteSource {
-  final SupabaseClient _supabaseClient;
-
-  AuthRemoteSourceImpl(this._supabaseClient);
-
   @override
-  Stream<String?> getUserId() =>
-      _supabaseClient.auth.onAuthStateChange
-          .map((event) => event.session)
-          .startWith(_supabaseClient.auth.currentSession)
-          .map((event) => event?.user.id)
-          .distinct();
+  Stream<String?> getUserId() => supabaseClient.auth.onAuthStateChange
+      .map((event) => event.session)
+      .startWith(supabaseClient.auth.currentSession)
+      .map((event) => event?.user.id)
+      .distinct();
 
   @override
   Future<void> signIn({
     required String email,
     required String password,
   }) =>
-      _supabaseClient.auth.signInWithPassword(email: email, password: password);
+      supabaseClient.auth.signInWithPassword(email: email, password: password);
 
   @override
   Future<void> signUp({
@@ -45,14 +45,14 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
     required String email,
     required String password,
   }) =>
-      _supabaseClient.auth.signUp(
+      supabaseClient.auth.signUp(
         email: email,
         password: password,
         data: {'alias': alias},
       );
 
   @override
-  Future<void> signOut() => _supabaseClient.auth.signOut();
+  Future<void> signOut() => supabaseClient.auth.signOut();
 }
 ```
 
@@ -60,19 +60,14 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
 
 ```dart
 class MessagesRemoteSourceImpl implements MessagesRemoteSource {
-  final SupabaseClient _supabaseClient;
-
-  MessagesRemoteSourceImpl(this._supabaseClient);
-
   @override
   Future<void> sendMessage({required String body}) async {
-    final currentUserId = _supabaseClient.auth.currentUser!.id;
-    return _supabaseClient
+    final currentUserId = supabaseClient.auth.currentUser!.id;
+    return supabaseClient
         .from('messages')
-        .insert(MessageRequest(body: body, sender: currentUserId).toJson());
+        .insert({'body': body, 'sender': currentUserId});
   }
 }
-
 ```
 
 ## Read messages
@@ -80,25 +75,37 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
 ```dart
   @override
 Future<List<UserMessage>> getMessages() async {
-  final response = await _supabaseClient
+  final currentUserId = supabaseClient.auth.currentUser!.id;
+  final response = await supabaseClient
       .from('messages')
       .select('*')
       .order('created_at', ascending: true);
-  final messageResponse = MessageResponse.fromJsonList(response);
+  // Json to UserMessages
+  final messageResponse = SupabaseMessageResponse.fromJsonList(response);
   return messageResponse.toUserMessageList(
-    userId: _supabaseClient.auth.currentUser!.id,
+    userId: currentUserId,
   );
 }
 ```
 
 ### Read messages with alias
 
-
-
 #### Create users table and insert data
 
 Migrate data:
 ```sql
+-- Create User Table
+CREATE TABLE
+  public.users (
+    id uuid not null,
+    created_at timestamp with time zone not null default now(),
+    alias text null,
+    constraint users_pkey primary key (id),
+    constraint users_id_fkey foreign key (id) references auth.users (id)
+  ) tablespace pg_default;
+
+
+-- Insert alias into the new table
 INSERT INTO
   public.users (id, alias)
 SELECT
@@ -108,11 +115,9 @@ FROM
   auth.users 
 ON CONFLICT (id) DO UPDATE
 	SET alias = excluded.alias;
-```
 
-Add Trigger to update table when a user is registered:
 
-```sql
+-- Create trigger to insert alias automatically when a new user is created
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -127,7 +132,7 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER on_auth_user_created
+CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 ```

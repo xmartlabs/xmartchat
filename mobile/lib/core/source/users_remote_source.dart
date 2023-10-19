@@ -8,8 +8,6 @@ abstract interface class UsersRemoteSource {
 }
 
 class UsersRemoteSourceImpl implements UsersRemoteSource {
-  UsersRemoteSourceImpl();
-
   @override
   Stream<List<SupabaseUserResponse>> getUsersStream() => supabaseClient
       .from('users')

@@ -15,8 +15,6 @@ abstract interface class MessagesRemoteSource {
 }
 
 class MessagesRemoteSourceImpl implements MessagesRemoteSource {
-  MessagesRemoteSourceImpl();
-
   @override
   Future<List<UserMessage>> getMessages() async {
     final currentUserId = supabaseClient.auth.currentUser!.id;

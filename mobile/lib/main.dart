@@ -11,7 +11,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 // This should be initialized using GetIt but it's here just for
 // the example.
-
 late SupabaseClient supabaseClient;
 
 Future<void> _initSupabase() async {

@@ -19,8 +19,6 @@ abstract interface class AuthRemoteSource {
 }
 
 class AuthRemoteSourceImpl implements AuthRemoteSource {
-  AuthRemoteSourceImpl();
-
   @override
   Stream<String?> getUserId() => supabaseClient.auth.onAuthStateChange
       .map((event) => event.session)
