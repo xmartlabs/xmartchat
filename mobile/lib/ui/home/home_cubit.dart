@@ -58,4 +58,9 @@ class HomeCubit extends Cubit<HomeBaseState> {
 
   Future<void> onPressedXmartlabs() =>
       launchUrl(Uri.parse(Config.xmartLabsUrl));
+
+  Future<void> refreshMessages() async {
+    await _messagesSubscription?.cancel();
+    _loadMessages();
+  }
 }

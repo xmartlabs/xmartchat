@@ -16,16 +16,16 @@ class User with _$User {
 }
 
 @freezed
-class UserResponse with _$UserResponse {
+class SupabaseUserResponse with _$SupabaseUserResponse {
   @JsonSerializable()
-  factory UserResponse({
+  factory SupabaseUserResponse({
     required String id,
     required String alias,
-  }) = _UserResponse;
+  }) = _SupabaseUserResponse;
 
-  factory UserResponse.fromJson(Map<String, dynamic> json) =>
-      _$UserResponseFromJson(json);
+  factory SupabaseUserResponse.fromJson(Map<String, dynamic> json) =>
+      _$SupabaseUserResponseFromJson(json);
 
-  static List<UserResponse> fromJsonList(List<dynamic> json) =>
-      json.map((e) => UserResponse.fromJson(e)).toList();
+  static List<SupabaseUserResponse> fromJsonList(List<dynamic> json) =>
+      json.map((e) => SupabaseUserResponse.fromJson(e)).toList();
 }

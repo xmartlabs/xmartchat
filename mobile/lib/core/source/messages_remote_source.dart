@@ -25,7 +25,7 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
         .select('*, user:sender(id, alias)')
         .order('created_at', ascending: true);
     // Json to UserMessages
-    final messageResponse = MessageResponse.fromJsonList(response);
+    final messageResponse = SupabaseMessageResponse.fromJsonList(response);
     return messageResponse.toUserMessageList(
       userId: currentUserId,
     );
