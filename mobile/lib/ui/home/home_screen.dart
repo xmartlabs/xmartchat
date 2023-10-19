@@ -144,19 +144,21 @@ class _TextFieldSection extends StatelessWidget {
               controller: textController,
               maxLines: 3,
               minLines: 1,
-              trailingIcon: (textController.text != "") ? IconButton(
-                disabledColor: Colors.grey,
-                icon:  Icon(
-                  Icons.send,
-                  color: context.theme.colors.textColor.shade100,
-                ),
-                color: context.theme.colors.primary.shade300,
-                onPressed: () {
-                    context.read<HomeCubit>().sendMessage();
-                    textController.clear();
-                    context.read<HomeCubit>().onCurrentTextChanged("");
-                },
-              ) : null ,
+              trailingIcon: (textController.text != "")
+                  ? IconButton(
+                      disabledColor: Colors.grey,
+                      icon: Icon(
+                        Icons.send,
+                        color: context.theme.colors.textColor.shade100,
+                      ),
+                      color: context.theme.colors.primary.shade300,
+                      onPressed: () {
+                        context.read<HomeCubit>().sendMessage();
+                        textController.clear();
+                        context.read<HomeCubit>().onCurrentTextChanged("");
+                      },
+                    )
+                  : null,
               onChanged: context.read<HomeCubit>().onCurrentTextChanged,
               labelText: context.localizations.home_text_field,
             ),
