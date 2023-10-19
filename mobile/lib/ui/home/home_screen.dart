@@ -9,6 +9,7 @@ import 'package:flutter_template/ui/home/home_options_menu.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/home/home_cubit.dart';
+import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 import 'package:flutter_template/ui/widgets/message_box.dart';
 
 @RoutePage()
@@ -139,30 +140,22 @@ class _TextFieldSection extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
         child: Column(
           children: [
-            TextField(
+            AppTextInputField(
               controller: textController,
-              textInputAction: TextInputAction.newline,
               maxLines: 3,
               minLines: 1,
-              decoration: InputDecoration(
-                hintText: context.localizations.home_text_field,
-                border: const OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: context.theme.colors.primary.shade300,
-                  ),
+              trailingIcon: IconButton(
+                icon: Icon(Icons.send,
+                  color: context.theme.colors.textColor.shade100,
                 ),
-                focusColor: context.theme.colors.primary.shade300,
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.send),
-                  color: context.theme.colors.primary.shade300,
-                  onPressed: () {
-                    context.read<HomeCubit>().sendMessage();
-                    textController.clear();
-                  },
-                ),
+                color: context.theme.colors.primary.shade300,
+                onPressed: () {
+                  context.read<HomeCubit>().sendMessage();
+                  textController.clear();
+                },
               ),
               onChanged: context.read<HomeCubit>().onCurrentTextChanged,
+              labelText: context.localizations.home_text_field,
             ),
             SizedBox(height: 20.h),
             Assets.xlLogoSmall.image(height: 16.h),

@@ -59,7 +59,7 @@ class MessageBox extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        SelectableText(
                           userMessage.message.body,
                           style: context.theme.textStyles.bodyMedium?.copyWith(
                             color: context.theme.colors.textColor.shade100,

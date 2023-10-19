@@ -116,6 +116,10 @@ class _SignUpFormState extends State<_SignUpForm> {
             padding: const EdgeInsets.all(8.0),
             child: AppTextInputField(
               controller: _emailTextController,
+              leadingIcon: Icon(
+                Icons.mail_outline,
+                color: context.theme.colors.textColor.shade100,
+              ),
               onChanged: (String text) => _signUpCubit.changeEmail(text),
               labelText: context.localizations.sign_up_email_label,
             ),
@@ -124,6 +128,9 @@ class _SignUpFormState extends State<_SignUpForm> {
             padding: const EdgeInsets.all(8.0),
             child: AppTextInputField(
               obscureText: true,
+              leadingIcon: Icon(Icons.key,
+                color: context.theme.colors.textColor.shade100,
+              ),
               controller: _passwordTextController,
               onChanged: (String password) =>
                   _signUpCubit.changePassword(password),
@@ -134,6 +141,9 @@ class _SignUpFormState extends State<_SignUpForm> {
             padding: const EdgeInsets.all(8.0),
             child: AppTextInputField(
               controller: _usernameTextController,
+              leadingIcon: Icon(Icons.person_2_outlined,
+                color: context.theme.colors.textColor.shade100,
+              ),
               onChanged: (String username) =>
                   _signUpCubit.changeUsername(username),
               labelText: context.localizations.sign_up_username_label,
