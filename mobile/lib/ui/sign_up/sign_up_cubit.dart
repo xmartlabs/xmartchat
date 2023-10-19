@@ -6,9 +6,9 @@ import 'package:flutter_template/ui/router/app_router.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sign_up_state.dart';
-
 part 'sign_up_cubit.freezed.dart';
+
+part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   final SessionRepository _sessionRepository = DiProvider.get();
@@ -26,15 +26,14 @@ class SignUpCubit extends Cubit<SignUpState> {
   void changeUsername(String username) =>
       emit(state.copyWith(username: username));
 
-  Future<void> signUp() => _globalEventHandler
-      .showLoading(
+  Future<void> signUp() => _globalEventHandler.showLoading(
         _sessionRepository
             .signUpUser(
               alias: state.username!,
               email: state.email!,
               password: state.password!,
             )
-            .filterSuccess(_globalEventHandler.handleError)
+            .filterSuccess(_globalEventHandler.handleError),
       );
 
   void onAlreadyHaveAnAccountPressed() => _appRouter.push(const SignInRoute());
