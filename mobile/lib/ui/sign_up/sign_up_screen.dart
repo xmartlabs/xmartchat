@@ -54,8 +54,9 @@ class _SignUpContentScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: AppPrimaryButton.filled(
-                            onPressed: () =>
-                                context.read<SignUpCubit>().signUp(),
+                            onPressed: state.isSignUpEnabled
+                                ? () => context.read<SignUpCubit>().signUp()
+                                : null,
                             text: context.localizations.sign_up,
                           ),
                         ),

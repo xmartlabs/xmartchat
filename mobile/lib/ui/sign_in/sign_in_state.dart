@@ -8,3 +8,11 @@ class SignInBaseState with _$SignInBaseState {
     required String error,
   }) = SignInState;
 }
+
+extension SignInBaseStateExtension on SignInBaseState {
+  bool get isSignInEnabled =>
+      email != null &&
+      email!.isNotEmpty &&
+      password != null &&
+      password!.isNotEmpty;
+}

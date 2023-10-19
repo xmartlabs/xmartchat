@@ -51,8 +51,9 @@ class _SignInContentScreen extends StatelessWidget {
                         Expanded(
                           child: AppPrimaryButton.filled(
                             text: context.localizations.sign_in,
-                            onPressed: () =>
-                                context.read<SignInCubit>().signIn(),
+                            onPressed: state.isSignInEnabled
+                                ? () => context.read<SignInCubit>().signIn()
+                                : null,
                           ),
                         ),
                       ],
