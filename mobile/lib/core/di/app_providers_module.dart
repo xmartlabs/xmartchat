@@ -20,7 +20,6 @@ class AppProvidersModule {
 
 extension _GetItDiModuleExtensions on GetIt {
   void _setupModule() {
-    registerSingletonAsync(initSupabase);
     registerLazySingleton(FlutterSecureStorage.new);
     registerSingletonAsync(() => SharedPreferences.getInstance());
 

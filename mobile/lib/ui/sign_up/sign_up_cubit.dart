@@ -34,9 +34,8 @@ class SignUpCubit extends Cubit<SignUpState> {
               email: state.email!,
               password: state.password!,
             )
-            .mapToResult(),
-      )
-      .filterSuccess(_globalEventHandler.handleError);
+            .filterSuccess(_globalEventHandler.handleError)
+      );
 
   void onAlreadyHaveAnAccountPressed() => _appRouter.push(const SignInRoute());
 }

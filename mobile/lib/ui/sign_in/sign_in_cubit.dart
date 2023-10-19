@@ -15,14 +15,7 @@ class SignInCubit extends Cubit<SignInBaseState> {
   final AppRouter _appRouter = DiProvider.get();
   final GlobalEventHandler _globalEventHandler;
 
-  SignInCubit(this._globalEventHandler)
-      : super(
-          const SignInBaseState.state(
-            email: 'nicolas.lantean@xmartlabs.com',
-            password: 'niconico',
-            error: '',
-          ),
-        );
+  SignInCubit(this._globalEventHandler) : super(const SignInBaseState.state());
 
   void changeEmail(String email) => emit(state.copyWith(email: email));
 

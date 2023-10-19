@@ -41,11 +41,6 @@ class _SignInContentScreen extends StatelessWidget {
                       child: Assets.logoAndNameLarge.image(height: 52.h),
                     ),
                     _SignInForm(),
-                    if (context.read<SignInCubit>().state.error.isNotEmpty)
-                      Text(
-                        context.localizations
-                            .error(context.read<SignInCubit>().state.error),
-                      ),
                     Row(
                       children: [
                         Expanded(

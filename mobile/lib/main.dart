@@ -9,12 +9,18 @@ import 'package:flutter_template/core/di/di_provider.dart';
 import 'package:flutter_template/ui/main/main_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-// This should be initialized in `AppProvidersModule` but it's here just for
+// This should be initialized using GetIt but it's here just for
 // the example.
-Future<SupabaseClient> initSupabase() => Supabase.initialize(
-      url: Config.supabaseUrl,
-      anonKey: Config.supabaseAnnonKey,
-    ).then((supabase) => supabase.client);
+
+late SupabaseClient supabaseClient;
+
+Future<void> _initSupabase() async {
+  await Supabase.initialize(
+    url: Config.supabaseUrl ?? 'YOUR_SUPABASE_URL',
+    anonKey: Config.supabaseAnnonKey ?? 'YOUR_SUPABASE_ANON_KEY',
+  );
+  supabaseClient = Supabase.instance.client;
+}
 
 Future main() async {
   await runZonedGuarded(
@@ -34,6 +40,7 @@ Future _initSdks() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Logger.init();
   await Config.initialize();
+  await _initSupabase();
 
   await Future.wait([
     DiProvider.init(),

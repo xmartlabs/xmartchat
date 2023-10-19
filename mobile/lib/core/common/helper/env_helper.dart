@@ -7,6 +7,6 @@ Future<Map<String, String>> loadEnvs(
   bool ignoreErrors = true,
 ]) async {
   final dotEnv = DotEnv();
-  await dotEnv.load(fileName: path, isOptional: true);
+  await dotEnv.load(fileName: path, isOptional: ignoreErrors);
   return dotEnv.env;
 }
