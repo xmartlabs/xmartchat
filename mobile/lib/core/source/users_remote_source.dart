@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_template/core/model/user.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide UserResponse;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class UsersRemoteSource {
-  Stream<List<UserResponse>> getUsersStream();
+  Stream<List<SupabaseUserResponse>> getUsersStream();
 }
 
 class UsersRemoteSourceImpl implements UsersRemoteSource {
@@ -13,7 +13,7 @@ class UsersRemoteSourceImpl implements UsersRemoteSource {
   UsersRemoteSourceImpl(this._supabaseClient);
 
   @override
-  Stream<List<UserResponse>> getUsersStream() => _supabaseClient
+  Stream<List<SupabaseUserResponse>> getUsersStream() => _supabaseClient
       .from('users')
-      .stream(primaryKey: ['id']).map(UserResponse.fromJsonList);
+      .stream(primaryKey: ['id']).map(SupabaseUserResponse.fromJsonList);
 }

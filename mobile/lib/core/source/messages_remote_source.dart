@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide UserResponse;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class MessagesRemoteSource {
   Future<List<UserMessage>> getMessages();
@@ -25,8 +25,9 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
         .from('messages')
         .select('*, user:sender(id, alias)')
         .order('created_at', ascending: true);
-    final messageResponse = MessageResponse.fromJsonList(response);
-    return messageResponse.toUserMessageList(
+    final supabaseMessageResponse =
+        SupabaseMessageResponse.fromJsonList(response);
+    return supabaseMessageResponse.toUserMessageList(
       userId: _supabaseClient.auth.currentUser!.id,
     );
   }

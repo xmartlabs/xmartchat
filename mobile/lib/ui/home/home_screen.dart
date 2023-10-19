@@ -48,9 +48,11 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
           ),
           body: Column(
             children: [
-              state.messages.isEmpty
-                  ? const _EmptyStateSection()
-                  : _MessagesSection(messages: state.messages),
+              Expanded(
+                child: state.messages.isEmpty
+                    ? const _EmptyStateSection()
+                    : _MessagesSection(messages: state.messages),
+              ),
               _TextFieldSection(textController: _textController),
               SizedBox(height: 24.h),
             ],
@@ -63,28 +65,36 @@ class _EmptyStateSection extends StatelessWidget {
   const _EmptyStateSection();
 
   @override
-  Widget build(BuildContext context) => Expanded(
-        child: Container(
-          decoration: BoxDecoration(
-            color: context.theme.colors.background.shade400,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constraints) => RefreshIndicator(
+          onRefresh: () => context.read<HomeCubit>().refreshMessages(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              height: constraints.maxHeight,
+              decoration: BoxDecoration(
+                color: context.theme.colors.background.shade400,
+              ),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Assets.sendGreen.image(height: 40.h),
-                  Text(
-                    context.localizations.home_empty_state,
-                    textAlign: TextAlign.center,
-                    style: context.theme.textStyles.titleMedium?.copyWith(
-                      color: context.theme.colors.primary.shade300,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Assets.sendGreen.image(height: 40.h),
+                      Text(
+                        context.localizations.home_empty_state,
+                        textAlign: TextAlign.center,
+                        style: context.theme.textStyles.titleMedium?.copyWith(
+                          color: context.theme.colors.primary.shade300,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       );
@@ -98,12 +108,14 @@ class _MessagesSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Expanded(
+  Widget build(BuildContext context) => RefreshIndicator(
+        onRefresh: () => context.read<HomeCubit>().refreshMessages(),
         child: Container(
           decoration: BoxDecoration(
             color: context.theme.colors.background.shade400,
           ),
           child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final userMessage = messages[index];
