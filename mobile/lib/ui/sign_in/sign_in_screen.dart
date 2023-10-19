@@ -115,7 +115,8 @@ class _SignInFormState extends State<_SignInForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: AppTextInputField(
               controller: _emailTextController,
-              leadingIcon: Icon(Icons.mail_outline,
+              leadingIcon: Icon(
+                Icons.mail_outline,
                 color: context.theme.colors.textColor.shade100,
               ),
               labelText: context.localizations.mail,
@@ -126,7 +127,8 @@ class _SignInFormState extends State<_SignInForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: AppTextInputField(
               controller: _passwordTextController,
-              leadingIcon: Icon(Icons.key,
+              leadingIcon: Icon(
+                Icons.key,
                 color: context.theme.colors.textColor.shade100,
               ),
               obscureText: true,

@@ -128,7 +128,8 @@ class _SignUpFormState extends State<_SignUpForm> {
             padding: const EdgeInsets.all(8.0),
             child: AppTextInputField(
               obscureText: true,
-              leadingIcon: Icon(Icons.key,
+              leadingIcon: Icon(
+                Icons.key,
                 color: context.theme.colors.textColor.shade100,
               ),
               controller: _passwordTextController,
@@ -141,7 +142,8 @@ class _SignUpFormState extends State<_SignUpForm> {
             padding: const EdgeInsets.all(8.0),
             child: AppTextInputField(
               controller: _usernameTextController,
-              leadingIcon: Icon(Icons.person_2_outlined,
+              leadingIcon: Icon(
+                Icons.person_2_outlined,
                 color: context.theme.colors.textColor.shade100,
               ),
               onChanged: (String username) =>

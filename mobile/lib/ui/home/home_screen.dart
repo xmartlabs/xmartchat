@@ -145,7 +145,8 @@ class _TextFieldSection extends StatelessWidget {
               maxLines: 3,
               minLines: 1,
               trailingIcon: IconButton(
-                icon: Icon(Icons.send,
+                icon: Icon(
+                  Icons.send,
                   color: context.theme.colors.textColor.shade100,
                 ),
                 color: context.theme.colors.primary.shade300,
