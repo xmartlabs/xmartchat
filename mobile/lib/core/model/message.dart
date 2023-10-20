@@ -56,22 +56,6 @@ class MessageRequest with _$MessageRequest {
       _$MessageRequestFromJson(json);
 }
 
-extension SupabaseMessageResponseListExtension
-    on List<SupabaseMessageResponse> {
-  List<UserMessage> toUserMessageList({required String userId}) => map(
-        (message) => UserMessage(
-          alias: message.user?.alias ?? message.sender,
-          message: Message(
-            id: message.id,
-            body: message.body,
-            sender: message.sender,
-            createdAt: message.createdAt,
-          ),
-          isFromCurrentUser: userId == message.sender,
-        ),
-      ).toList();
-}
-
 extension MessageListExtension on List<Message> {
   List<UserMessage> toUserMessageList({
     required List<SupabaseUserResponse> users,
