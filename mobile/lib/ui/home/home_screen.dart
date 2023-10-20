@@ -144,7 +144,7 @@ class _TextFieldSection extends StatelessWidget {
               controller: textController,
               maxLines: 3,
               minLines: 1,
-              trailingIcon: (textController.text != "")
+              trailingIcon: (textController.text.isNotEmpty)
                   ? IconButton(
                       disabledColor: Colors.grey,
                       icon: Icon(
