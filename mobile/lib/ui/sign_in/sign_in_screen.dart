@@ -46,8 +46,9 @@ class _SignInContentScreen extends StatelessWidget {
                         Expanded(
                           child: AppPrimaryButton.filled(
                             text: context.localizations.sign_in,
-                            onPressed: () =>
-                                context.read<SignInCubit>().signIn(),
+                            onPressed: state.isSignInEnabled
+                                ? () => context.read<SignInCubit>().signIn()
+                                : null,
                           ),
                         ),
                       ],
@@ -110,6 +111,10 @@ class _SignInFormState extends State<_SignInForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: AppTextInputField(
               controller: _emailTextController,
+              leadingIcon: Icon(
+                Icons.mail_outline,
+                color: context.theme.colors.textColor.shade100,
+              ),
               labelText: context.localizations.mail,
               onChanged: (String text) => _signInCubit.changeEmail(text),
             ),
@@ -117,8 +122,12 @@ class _SignInFormState extends State<_SignInForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: AppTextInputField(
-              obscureText: true,
               controller: _passwordTextController,
+              leadingIcon: Icon(
+                Icons.key,
+                color: context.theme.colors.textColor.shade100,
+              ),
+              obscureText: true,
               onChanged: (String password) =>
                   _signInCubit.changePassword(password),
               labelText: context.localizations.password,
