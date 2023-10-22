@@ -12,33 +12,40 @@ const supabaseClient = createClient(
     global: {
       headers: {
         Authorization: "Bearer " + Deno.env.get("SUPABASE_SERVICE_ROLE_KEY"),
+        'Access-Control-Allow-Origin': '*',
       },
     },
   },
 );
+export const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+const createApiResponse = (statusCode, body) => {
+  const headers = { ...corsHeaders, 'Content-Type': 'application/json' };
+  return new Response(JSON.stringify(body), { headers, status: statusCode });
+};
 
 serve(async (req) => {
+  // Only for web browsers
+  if (req.method === 'OPTIONS') {
+    return createApiResponse(200, 'ok');
+  }
+
   const { id } = await req.json()
+  const { data: messages, error: getBodyError } = await supabaseClient.from("messages").select("body").eq("id", id)
 
-  const { data, error: getBodyError } = await supabaseClient.from("messages").select("body").eq("id", id)
-
-  if (getBodyError != null) {
-    return new Response(JSON.stringify({ "message": "Error getting message body" }), { headers: { "Content-Type": "application/json" } },)
+  if (getBodyError != null || !messages || messages.length !== 1) {
+    return createApiResponse(400, { message: "Error getting message" })
   }
 
-  const body = data[0].body
-
-  const capitalizedMessage = body.toUpperCase()
-
-  const { error: updateMessageError } = await supabaseClient.from("messages").update({ body: capitalizedMessage }).eq("id", id)
-
+  const capitalizedBody = messages[0].body.toUpperCase()
+  const { error: updateMessageError } = await supabaseClient.from("messages").update({ body: capitalizedBody }).eq("id", id)
+  
   if (updateMessageError != null) {
-    return new Response(JSON.stringify({ "message": "Error updating message" }), { headers: { "Content-Type": "application/json" } },)
+    return createApiResponse(500, { message: "Error updating message" })
   }
-
-
-  return new Response(
-    JSON.stringify({ "message": "Success" }),
-    { headers: { "Content-Type": "application/json" } },
-  )
+  
+  return createApiResponse(200, { "message": "Success" })  
 })
