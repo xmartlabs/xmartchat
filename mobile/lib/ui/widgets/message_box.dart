@@ -99,9 +99,11 @@ class _UppercaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: () => onTap(message),
-        child: SizedBox(
-          height: 20.h,
-          width: 60.w,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 7.h,
+            horizontal: 5,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
