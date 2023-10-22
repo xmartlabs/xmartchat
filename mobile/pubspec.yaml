@@ -87,7 +87,7 @@ flutter_launcher_icons:
   image_path: 'icons/ic_launcher.png'
   image_path_ios: 'icons/ic_launcher_ios.png' # Transparency not supported on IOS
   adaptive_icon_foreground: 'icons/ic_launcher_foreground.png'
-  adaptive_icon_background: '#ee1a64'
+  adaptive_icon_background: '#10B981'
   remove_alpha_ios: true
   web:
     generate: true
@@ -95,8 +95,9 @@ flutter_launcher_icons:
     generate: false
 
 flutter_native_splash:
-  color: '#ffffff'
+  color: '#0B0C0D'
   image: 'icons/splash_logo.png'
+  branding: 'icons/splash_branding.png'
   android_12:
     image: 'icons/splash_logo_android_12.png'
     branding: 'icons/splash_branding.png'
