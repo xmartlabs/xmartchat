@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/common/extension/date_time_extensions.dart';
 import 'package:flutter_template/core/model/message.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/theme/text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MessageBox extends StatelessWidget {
   final UserMessage userMessage;
@@ -36,8 +38,8 @@ class MessageBox extends StatelessWidget {
                     _UserAliasSection(userMessage: userMessage),
                   Container(
                     padding: EdgeInsets.only(
-                      right: 12.w,
-                      left: 12.w,
+                      right: 12.h,
+                      left: 12.h,
                       top: 8.h,
                       bottom: 12.h,
                     ),
@@ -59,11 +61,12 @@ class MessageBox extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SelectableText(
-                          userMessage.message.body,
+                        SelectableLinkify(
+                          text: userMessage.message.body,
                           style: context.theme.textStyles.bodyMedium?.copyWith(
                             color: context.theme.colors.textColor.shade100,
                           ),
+                          onOpen: (link) => launchUrl(Uri.parse(link.url)),
                         ),
                         SizedBox(height: 2.h),
                         Text(
