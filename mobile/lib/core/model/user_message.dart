@@ -19,6 +19,27 @@ class UserMessage with _$UserMessage {
 
   static List<UserMessage> fromJsonList(List<dynamic> json) =>
       json.map((e) => UserMessage.fromJson(e)).toList();
+
+  static List<UserMessage> fromResponses({
+    required List<dynamic> json,
+    required String userId,
+  }) {
+    final messageResponse = SupabaseMessageResponse.fromJsonList(json);
+    return messageResponse
+        .map(
+          (message) => UserMessage(
+            alias: message.user?.alias ?? message.sender,
+            message: Message(
+              id: message.id,
+              body: message.body,
+              sender: message.sender,
+              createdAt: message.createdAt,
+            ),
+            isFromCurrentUser: userId == message.sender,
+          ),
+        )
+        .toList();
+  }
 }
 
 Message _messageSerializer(dynamic data) => Message.fromJson(data);
