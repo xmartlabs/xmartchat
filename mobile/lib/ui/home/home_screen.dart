@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/model/user_message.dart';
@@ -30,10 +31,12 @@ class _HomeContentScreen extends StatefulWidget {
 
 class _HomeContentScreenState extends State<_HomeContentScreen> {
   final _textController = TextEditingController();
+  final _scrollController = ScrollController();
 
   @override
   void dispose() {
     _textController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -52,7 +55,10 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
               Expanded(
                 child: state.messages.isEmpty
                     ? const _EmptyStateSection()
-                    : _MessagesSection(messages: state.messages),
+                    : _MessagesSection(
+                        messages: state.messages,
+                        scrollController: _scrollController,
+                      ),
               ),
               _TextFieldSection(textController: _textController),
               SizedBox(height: 24.h),
@@ -101,12 +107,49 @@ class _EmptyStateSection extends StatelessWidget {
       );
 }
 
-class _MessagesSection extends StatelessWidget {
+class _MessagesSection extends StatefulWidget {
   final List<UserMessage> messages;
+  final ScrollController scrollController;
 
   const _MessagesSection({
     required this.messages,
+    required this.scrollController,
   });
+
+  @override
+  State<_MessagesSection> createState() => _MessagesSectionState();
+}
+
+class _MessagesSectionState extends State<_MessagesSection> {
+  void _scrollDown() {
+    widget.scrollController.animateTo(
+      widget.scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _scrollDown();
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant _MessagesSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.messages.length < widget.messages.length &&
+        oldWidget.scrollController.offset >=
+            oldWidget.scrollController.position.maxScrollExtent) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _scrollDown();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) => RefreshIndicator(
@@ -117,9 +160,10 @@ class _MessagesSection extends StatelessWidget {
           ),
           child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: messages.length,
+            controller: widget.scrollController,
+            itemCount: widget.messages.length,
             itemBuilder: (context, index) {
-              final userMessage = messages[index];
+              final userMessage = widget.messages[index];
               return MessageBox(
                 userMessage: userMessage,
                 uppercaseMessage: context.read<HomeCubit>().uppercaseMessage,
