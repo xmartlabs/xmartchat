@@ -10,11 +10,13 @@ import 'package:flutter_template/core/common/helper/env_helper.dart';
 
 interface class Config {
   static const String environmentFolder = 'environments';
-
+  static const String gitHubUrl =
+      'https://github.com/xmartlabs/supabase-ws-flutter';
+  static const String xmartLabsUrl = 'https://xmartlabs.com/';
   static const debugMode = kDebugMode;
 
-  static late String supabaseUrl;
-  static late String supabaseAnnonKey;
+  static late String? supabaseUrl;
+  static late String? supabaseAnnonKey;
 
   static final _environment = enumFromString(
         Environments.values,
@@ -28,9 +30,9 @@ interface class Config {
   }
 
   static void _initializeEnvVariables() {
-    supabaseUrl = _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_URL)!;
+    supabaseUrl = _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_URL);
     supabaseAnnonKey =
-        _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_ANNON_KEY)!;
+        _EnvConfig.getEnvVariable(_EnvConfig.ENV_KEY_SUPABASE_ANNON_KEY);
   }
 }
 

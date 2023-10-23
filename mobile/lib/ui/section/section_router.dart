@@ -74,8 +74,12 @@ class SectionRouter extends StatelessWidget {
         builder: (context) => AlertDialog(
           title: Text(
             title ?? context.localizations.error_unknown_error_title,
+            style: context.theme.textTheme.titleMedium,
           ),
-          content: Text(description),
+          content: Text(
+            description,
+            style: context.theme.textTheme.bodyMedium,
+          ),
           actions: <Widget>[
             if (retry != null)
               TextButton(

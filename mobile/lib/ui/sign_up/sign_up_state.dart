@@ -9,3 +9,13 @@ class SignUpState with _$SignUpState {
     String? error,
   }) = _SignUpState;
 }
+
+extension SignUpStateExtension on SignUpState {
+  bool get isSignUpEnabled =>
+      email != null &&
+      email!.isNotEmpty &&
+      password != null &&
+      password!.isNotEmpty &&
+      username != null &&
+      username!.isNotEmpty;
+}

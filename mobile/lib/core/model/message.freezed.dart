@@ -203,45 +203,47 @@ abstract class _Message implements Message {
       throw _privateConstructorUsedError;
 }
 
-MessageResponse _$MessageResponseFromJson(Map<String, dynamic> json) {
-  return _MessageResponse.fromJson(json);
+SupabaseMessageResponse _$SupabaseMessageResponseFromJson(
+    Map<String, dynamic> json) {
+  return _SupabaseMessageResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MessageResponse {
+mixin _$SupabaseMessageResponse {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   String get sender => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _userResponseSerializer)
-  UserResponse? get user => throw _privateConstructorUsedError;
+  SupabaseUserResponse? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MessageResponseCopyWith<MessageResponse> get copyWith =>
+  $SupabaseMessageResponseCopyWith<SupabaseMessageResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MessageResponseCopyWith<$Res> {
-  factory $MessageResponseCopyWith(
-          MessageResponse value, $Res Function(MessageResponse) then) =
-      _$MessageResponseCopyWithImpl<$Res, MessageResponse>;
+abstract class $SupabaseMessageResponseCopyWith<$Res> {
+  factory $SupabaseMessageResponseCopyWith(SupabaseMessageResponse value,
+          $Res Function(SupabaseMessageResponse) then) =
+      _$SupabaseMessageResponseCopyWithImpl<$Res, SupabaseMessageResponse>;
   @useResult
   $Res call(
       {String id,
       String body,
       String sender,
       DateTime createdAt,
-      @JsonKey(fromJson: _userResponseSerializer) UserResponse? user});
+      @JsonKey(fromJson: _userResponseSerializer) SupabaseUserResponse? user});
 
-  $UserResponseCopyWith<$Res>? get user;
+  $SupabaseUserResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class _$MessageResponseCopyWithImpl<$Res, $Val extends MessageResponse>
-    implements $MessageResponseCopyWith<$Res> {
-  _$MessageResponseCopyWithImpl(this._value, this._then);
+class _$SupabaseMessageResponseCopyWithImpl<$Res,
+        $Val extends SupabaseMessageResponse>
+    implements $SupabaseMessageResponseCopyWith<$Res> {
+  _$SupabaseMessageResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -277,29 +279,29 @@ class _$MessageResponseCopyWithImpl<$Res, $Val extends MessageResponse>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserResponse?,
+              as SupabaseUserResponse?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserResponseCopyWith<$Res>? get user {
+  $SupabaseUserResponseCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $UserResponseCopyWith<$Res>(_value.user!, (value) {
+    return $SupabaseUserResponseCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_MessageResponseCopyWith<$Res>
-    implements $MessageResponseCopyWith<$Res> {
-  factory _$$_MessageResponseCopyWith(
-          _$_MessageResponse value, $Res Function(_$_MessageResponse) then) =
-      __$$_MessageResponseCopyWithImpl<$Res>;
+abstract class _$$_SupabaseMessageResponseCopyWith<$Res>
+    implements $SupabaseMessageResponseCopyWith<$Res> {
+  factory _$$_SupabaseMessageResponseCopyWith(_$_SupabaseMessageResponse value,
+          $Res Function(_$_SupabaseMessageResponse) then) =
+      __$$_SupabaseMessageResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -307,18 +309,19 @@ abstract class _$$_MessageResponseCopyWith<$Res>
       String body,
       String sender,
       DateTime createdAt,
-      @JsonKey(fromJson: _userResponseSerializer) UserResponse? user});
+      @JsonKey(fromJson: _userResponseSerializer) SupabaseUserResponse? user});
 
   @override
-  $UserResponseCopyWith<$Res>? get user;
+  $SupabaseUserResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class __$$_MessageResponseCopyWithImpl<$Res>
-    extends _$MessageResponseCopyWithImpl<$Res, _$_MessageResponse>
-    implements _$$_MessageResponseCopyWith<$Res> {
-  __$$_MessageResponseCopyWithImpl(
-      _$_MessageResponse _value, $Res Function(_$_MessageResponse) _then)
+class __$$_SupabaseMessageResponseCopyWithImpl<$Res>
+    extends _$SupabaseMessageResponseCopyWithImpl<$Res,
+        _$_SupabaseMessageResponse>
+    implements _$$_SupabaseMessageResponseCopyWith<$Res> {
+  __$$_SupabaseMessageResponseCopyWithImpl(_$_SupabaseMessageResponse _value,
+      $Res Function(_$_SupabaseMessageResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -330,7 +333,7 @@ class __$$_MessageResponseCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? user = freezed,
   }) {
-    return _then(_$_MessageResponse(
+    return _then(_$_SupabaseMessageResponse(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -350,7 +353,7 @@ class __$$_MessageResponseCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserResponse?,
+              as SupabaseUserResponse?,
     ));
   }
 }
@@ -358,16 +361,16 @@ class __$$_MessageResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable()
-class _$_MessageResponse implements _MessageResponse {
-  _$_MessageResponse(
+class _$_SupabaseMessageResponse implements _SupabaseMessageResponse {
+  _$_SupabaseMessageResponse(
       {required this.id,
       required this.body,
       required this.sender,
       required this.createdAt,
       @JsonKey(fromJson: _userResponseSerializer) this.user});
 
-  factory _$_MessageResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_MessageResponseFromJson(json);
+  factory _$_SupabaseMessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_SupabaseMessageResponseFromJson(json);
 
   @override
   final String id;
@@ -379,18 +382,18 @@ class _$_MessageResponse implements _MessageResponse {
   final DateTime createdAt;
   @override
   @JsonKey(fromJson: _userResponseSerializer)
-  final UserResponse? user;
+  final SupabaseUserResponse? user;
 
   @override
   String toString() {
-    return 'MessageResponse(id: $id, body: $body, sender: $sender, createdAt: $createdAt, user: $user)';
+    return 'SupabaseMessageResponse(id: $id, body: $body, sender: $sender, createdAt: $createdAt, user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageResponse &&
+            other is _$_SupabaseMessageResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.sender, sender) || other.sender == sender) &&
@@ -407,28 +410,30 @@ class _$_MessageResponse implements _MessageResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>
-      __$$_MessageResponseCopyWithImpl<_$_MessageResponse>(this, _$identity);
+  _$$_SupabaseMessageResponseCopyWith<_$_SupabaseMessageResponse>
+      get copyWith =>
+          __$$_SupabaseMessageResponseCopyWithImpl<_$_SupabaseMessageResponse>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageResponseToJson(
+    return _$$_SupabaseMessageResponseToJson(
       this,
     );
   }
 }
 
-abstract class _MessageResponse implements MessageResponse {
-  factory _MessageResponse(
+abstract class _SupabaseMessageResponse implements SupabaseMessageResponse {
+  factory _SupabaseMessageResponse(
       {required final String id,
       required final String body,
       required final String sender,
       required final DateTime createdAt,
       @JsonKey(fromJson: _userResponseSerializer)
-      final UserResponse? user}) = _$_MessageResponse;
+      final SupabaseUserResponse? user}) = _$_SupabaseMessageResponse;
 
-  factory _MessageResponse.fromJson(Map<String, dynamic> json) =
-      _$_MessageResponse.fromJson;
+  factory _SupabaseMessageResponse.fromJson(Map<String, dynamic> json) =
+      _$_SupabaseMessageResponse.fromJson;
 
   @override
   String get id;
@@ -440,11 +445,11 @@ abstract class _MessageResponse implements MessageResponse {
   DateTime get createdAt;
   @override
   @JsonKey(fromJson: _userResponseSerializer)
-  UserResponse? get user;
+  SupabaseUserResponse? get user;
   @override
   @JsonKey(ignore: true)
-  _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SupabaseMessageResponseCopyWith<_$_SupabaseMessageResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 MessageRequest _$MessageRequestFromJson(Map<String, dynamic> json) {

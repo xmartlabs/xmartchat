@@ -16,13 +16,15 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'name': instance.name,
     };
 
-_$_UserResponse _$$_UserResponseFromJson(Map<String, dynamic> json) =>
-    _$_UserResponse(
+_$_SupabaseUserResponse _$$_SupabaseUserResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_SupabaseUserResponse(
       id: json['id'] as String,
       alias: json['alias'] as String,
     );
 
-Map<String, dynamic> _$$_UserResponseToJson(_$_UserResponse instance) =>
+Map<String, dynamic> _$$_SupabaseUserResponseToJson(
+        _$_SupabaseUserResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'alias': instance.alias,

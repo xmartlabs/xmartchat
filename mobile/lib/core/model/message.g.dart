@@ -21,8 +21,9 @@ Map<String, dynamic> _$$_MessageToJson(_$_Message instance) =>
       'created_at': instance.createdAt.toIso8601String(),
     };
 
-_$_MessageResponse _$$_MessageResponseFromJson(Map<String, dynamic> json) =>
-    _$_MessageResponse(
+_$_SupabaseMessageResponse _$$_SupabaseMessageResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_SupabaseMessageResponse(
       id: json['id'] as String,
       body: json['body'] as String,
       sender: json['sender'] as String,
@@ -30,7 +31,8 @@ _$_MessageResponse _$$_MessageResponseFromJson(Map<String, dynamic> json) =>
       user: _userResponseSerializer(json['user']),
     );
 
-Map<String, dynamic> _$$_MessageResponseToJson(_$_MessageResponse instance) =>
+Map<String, dynamic> _$$_SupabaseMessageResponseToJson(
+        _$_SupabaseMessageResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'body': instance.body,

@@ -1,10 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
-
+import 'package:flutter_template/ui/theme/app_theme.dart';
+import 'package:flutter_template/ui/widgets/design_system/buttons/primary_button.dart';
+import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 import 'package:flutter_template/ui/sign_in/sign_in_cubit.dart';
+
+import 'package:flutter_template/gen/assets.gen.dart';
 
 @RoutePage()
 class SignInScreen extends StatelessWidget {
@@ -22,27 +27,51 @@ class _SignInContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SignInCubit, SignInBaseState>(
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.localizations.sign_in),
-          ),
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(child: _SignInForm()),
-              if (context.read<SignInCubit>().state.error.isNotEmpty)
-                Text(
-                  context.localizations
-                      .error(context.read<SignInCubit>().state.error),
-                ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30.0),
-                child: TextButton(
-                  onPressed: () => context.read<SignInCubit>().signIn(),
-                  child: Text(context.localizations.sign_in),
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            backgroundColor: context.theme.colors.background.shade500,
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
+                      child: Assets.logoAndNameLarge.image(height: 52.h),
+                    ),
+                    _SignInForm(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton.filled(
+                            text: context.localizations.sign_in,
+                            onPressed: state.isSignInEnabled
+                                ? () => context.read<SignInCubit>().signIn()
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton.ghost(
+                            text: context.localizations.dont_have_an_account,
+                            onPressed: () => context
+                                .read<SignInCubit>()
+                                .onDontHaveAccountPressed(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       );
@@ -79,27 +108,29 @@ class _SignInFormState extends State<_SignInForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: AppTextInputField(
               controller: _emailTextController,
-              onChanged: (String text) => _signInCubit.changeEmail(text),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.mail,
+              leadingIcon: Icon(
+                Icons.mail_outline,
+                color: context.theme.colors.textColor.shade100,
               ),
+              labelText: context.localizations.mail,
+              onChanged: (String text) => _signInCubit.changeEmail(text),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              obscureText: true,
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: AppTextInputField(
               controller: _passwordTextController,
+              leadingIcon: Icon(
+                Icons.key,
+                color: context.theme.colors.textColor.shade100,
+              ),
+              obscureText: true,
               onChanged: (String password) =>
                   _signInCubit.changePassword(password),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.password,
-              ),
+              labelText: context.localizations.password,
             ),
           ),
         ],

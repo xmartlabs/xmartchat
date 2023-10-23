@@ -5,8 +5,10 @@ import 'package:flutter_template/ui/theme/app_theme.dart';
 
 class AppTextInputField extends StatelessWidget {
   final TextEditingController? controller;
-  final IconData? leadingIcon;
-  final IconData? trailingIcon;
+  final int? maxLines;
+  final int? minLines;
+  final Widget? leadingIcon;
+  final Widget? trailingIcon;
   final String? hintText;
   final String? labelText;
   final void Function()? actionSecondIcon;
@@ -18,6 +20,8 @@ class AppTextInputField extends StatelessWidget {
   const AppTextInputField({
     Key? key,
     this.controller,
+    this.maxLines,
+    this.minLines,
     this.leadingIcon,
     this.trailingIcon,
     this.hintText,
@@ -33,10 +37,12 @@ class AppTextInputField extends StatelessWidget {
   Widget build(BuildContext context) => TextField(
         onChanged: onChanged,
         controller: controller,
+        maxLines: maxLines ?? 1,
+        minLines: minLines,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: error == null
-                ? BorderSide(color: context.theme.colors.primary.shade900)
+                ? BorderSide(color: context.theme.colors.textColor.shade100)
                 : BorderSide(color: context.theme.colors.error.shade400),
             borderRadius: BorderRadius.circular(4.r),
           ),
@@ -53,7 +59,8 @@ class AppTextInputField extends StatelessWidget {
             borderSide: BorderSide(color: context.theme.colors.error.shade400),
             borderRadius: BorderRadius.circular(4.r),
           ),
-          prefixIcon: leadingIcon != null ? Icon(leadingIcon) : null,
+          prefixIcon: leadingIcon,
+          suffixIcon: trailingIcon,
           labelText: labelText,
           labelStyle: context.theme.textStyles.bodyMedium?.copyWith(
             color: context.theme.colors.textColor.shade300,

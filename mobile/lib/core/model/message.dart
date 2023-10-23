@@ -24,25 +24,25 @@ class Message with _$Message {
 }
 
 @freezed
-class MessageResponse with _$MessageResponse {
+class SupabaseMessageResponse with _$SupabaseMessageResponse {
   @JsonSerializable()
-  factory MessageResponse({
+  factory SupabaseMessageResponse({
     required String id,
     required String body,
     required String sender,
     required DateTime createdAt,
-    @JsonKey(fromJson: _userResponseSerializer) UserResponse? user,
-  }) = _MessageResponse;
+    @JsonKey(fromJson: _userResponseSerializer) SupabaseUserResponse? user,
+  }) = _SupabaseMessageResponse;
 
-  factory MessageResponse.fromJson(Map<String, dynamic> json) =>
-      _$MessageResponseFromJson(json);
+  factory SupabaseMessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$SupabaseMessageResponseFromJson(json);
 
-  static List<MessageResponse> fromJsonList(List<dynamic> json) =>
-      json.map((e) => MessageResponse.fromJson(e)).toList();
+  static List<SupabaseMessageResponse> fromJsonList(List<dynamic> json) =>
+      json.map((e) => SupabaseMessageResponse.fromJson(e)).toList();
 }
 
-UserResponse? _userResponseSerializer(dynamic data) =>
-    data == data ? null : UserResponse.fromJson(data);
+SupabaseUserResponse? _userResponseSerializer(dynamic data) =>
+    data == null ? null : SupabaseUserResponse.fromJson(data);
 
 @freezed
 class MessageRequest with _$MessageRequest {
@@ -56,7 +56,8 @@ class MessageRequest with _$MessageRequest {
       _$MessageRequestFromJson(json);
 }
 
-extension MessageResponseListExtension on List<MessageResponse> {
+extension SupabaseMessageResponseListExtension
+    on List<SupabaseMessageResponse> {
   List<UserMessage> toUserMessageList({required String userId}) => map(
         (message) => UserMessage(
           alias: message.user?.alias ?? message.sender,
@@ -73,10 +74,10 @@ extension MessageResponseListExtension on List<MessageResponse> {
 
 extension MessageListExtension on List<Message> {
   List<UserMessage> toUserMessageList({
-    required List<UserResponse> users,
+    required List<SupabaseUserResponse> users,
     required String? userId,
   }) {
-    final userMap = Map<String, UserResponse>.fromIterable(
+    final userMap = Map<String, SupabaseUserResponse>.fromIterable(
       users,
       key: (user) => user.id,
     );
