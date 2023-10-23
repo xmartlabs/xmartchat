@@ -30,10 +30,13 @@ To effectively engage with the Xmartchat demo app and our Supabase workshop, ple
 - *Dart & Flutter Knowledge:* Familiarity with Dart programming language and Flutter framework is essential. If you are new to Dart and Flutter, consider going through the official documentation and tutorials to strengthen your skills.
 - *Integrated Development Environment (IDE):* You'll need an IDE for Flutter development. We recommend using either Visual Studio Code (VS Code) or Android Studio. Choose the one you are most comfortable with and ensure it's properly set up for Flutter development.
 
-## Solution Structure
+## Repo Structure
 
-In the 'Mobile' folder, you'll find all the code for the application developed in Flutter, while in the 'Backend' folder, you'll discover the edge functions using Supabase. 
-Within the 'Solution' folder, you'll discover three files that outline the step-by-step process of the workshop, each dedicated to a specific area: one for Supabase setup, another for authentication, and the last one related to messaging. You can also find more details about each of them in the [README file](../solution/README.md).
+- ['mobile'](./mobile/): This folder contains all the Flutter code for the mobile application, including the user interface and frontend functionality.
+
+- ['backend'](./backend/): In this directory, you'll discover the edge functions developed using Supabase, which power the backend operations of the Xmartchat application.
+
+- ['solution'](./solution/): Within this folder, you'll find the solution of the workshop!
 
 ## Join the Xmartlabs Community!
 At Xmartlabs we love to share our knowledge through our open source work. Feel free to check out our [GitHub profile](https://github.com/xmartlabs) and contribute in any way you see fit. You can also explore our [blog](https://blog.xmartlabs.com/), where we regularly post new insights and discoveries. See you there!
