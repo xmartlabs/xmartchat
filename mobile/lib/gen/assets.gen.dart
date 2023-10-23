@@ -17,14 +17,12 @@ class Assets {
   static const AssetGenImage logoAndNameLarge =
       AssetGenImage('assets/logo_and_name_large.png');
   static const AssetGenImage sendGreen = AssetGenImage('assets/send_green.png');
-  static const AssetGenImage videoReadme =
-      AssetGenImage('assets/video_readme.gif');
   static const AssetGenImage xlLogoSmall =
       AssetGenImage('assets/xl-logo-small.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [logoAndName, logoAndNameLarge, sendGreen, videoReadme, xlLogoSmall];
+      [logoAndName, logoAndNameLarge, sendGreen, xlLogoSmall];
 }
 
 class AssetGenImage {
