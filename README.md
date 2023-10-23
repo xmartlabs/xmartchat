@@ -1,8 +1,7 @@
 <img src="assets/splash_logo.png" width=50%/>
 
-Serverless Messaging App Demo for Supabase Workshop
-
-_Exploring the Serverless World: An Introduction with Supabase._
+**Serverless Messaging App Demo for Supabase Workshop.**
+*Exploring the Serverless World: An Introduction with Supabase.*
 
 ## Workshop Details:
 
