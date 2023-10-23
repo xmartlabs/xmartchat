@@ -22,7 +22,7 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
         .from('messages')
         .select('*, user:sender(id, alias)')
         .order('created_at', ascending: true);
-    return UserMessage.fromResponses(json: response, userId: currentUserId);
+    return UserMessage.fromResponse(json: response, userId: currentUserId);
   }
 
   @override
