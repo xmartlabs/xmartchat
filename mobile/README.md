@@ -1,39 +1,56 @@
-<img src="icons/splash_logo.png" width=50%/>
+# Xmartchat
 
-# Xmartchat: Serverless Messaging App Demo for Supabase Workshop
+## Arch Overview 
 
-_Exploring the Serverless World: An Introduction with Supabase._
+The project is divided into two main folders:
+- The UI contains all app screens.
+- The Core contains the models and the data layer.
 
-## Workshop Details:
+### UI section
 
-Welcome to Xmartchat, a dynamic messaging application developed with Flutter and powered by Supabase, designed specifically as a demonstration for our Supabase workshop.
-This app serves as an exemplar of the potential of serverless architecture, showcasing how serverless technologies, particularly Supabase, can revolutionize the way we build real-time communication applications.
+[Flutter Bloc][bloc] is used for state management, specifically, we use Cubit to manage the screen state.
+Each app section is added in a project folder which contains three components, the Screen (a `StatelessWidget`, the UI), the Cubit and the state.
 
-<table align="center" style="width: 40%; text-align: center;"> 
-    <th>
-        <img width="60%" margin="10px" src="assets/video_readme.gif">
-    </th>
-</table>
+The `MainScreen` is the Widget that contains all screens. It defines the `MaterialApp` and provides the app router.
+The router has two subgraphs, the `UnauthenticatedRouter` used for unauthenticated users and the `AuthenticatedRouter` used for authenticated users.
 
-## Purpose
-Xmartchat acts as a hands-on, interactive showcase during our workshop, highlighting the power and flexibility of serverless computing.
-Through this demo app, participants will:
-- *Learn Serverless Principles:* Understand the fundamental concepts behind serverless architecture and its advantages in modern app development.
-- *Explore Supabase Features:* Discover how Supabase simplifies database management, authentication, and real-time data synchronization.
-- *Experience Real-Time Communication:* Interact with Xmartchat's real-time messaging capabilities to witness serverless technology in action.
-- *Inspire Innovation:* Use Xmartchat as a foundation for experimenting with serverless concepts, encouraging innovative thinking and development.
+The [app router][app_router] is provided by [auto_route][auto_route], and contains the previous sections with some nested screens.
 
-## Workshop requirements
+The [theme folder][theme] contains the theme definitions, for example colors, styles and dimensions. 
+Another important plugin related to the UI is [flutter_screenutil][flutter_screenutil], used for adapting screen and font size.
 
-To effectively engage with the Xmartchat demo app and our Supabase workshop, please ensure you have the following:
-- *Flutter Installation:* Make sure you have Flutter installed on your system. If not, you can follow the official Flutter installation guide: [Flutter Installation Guide](https://flutter.dev/docs/get-started/install)
-- *Dart & Flutter Knowledge:* Familiarity with Dart programming language and Flutter framework is essential. If you are new to Dart and Flutter, consider going through the official documentation and tutorials to strengthen your skills.
-- *Integrated Development Environment (IDE):* You'll need an IDE for Flutter development. We recommend using either Visual Studio Code (VS Code) or Android Studio. Choose the one you are most comfortable with and ensure it's properly set up for Flutter development.
+### Core section
 
-## Solution Structure
+The models are defined in the [models folder][models]. If you need to use different models for networking, you can create them in `service` folder.
 
-In the 'Mobile' folder, you'll find all the code for the application developed in Flutter, while in the 'Backend' folder, you'll discover the edge functions using Supabase. Additionally, you can locate the 'SolutionCode' file, which provides a step-by-step guide for the workshop.
-Within the 'Solution' folder, you'll discover three files that outline the step-by-step process of the workshop, each dedicated to a specific area: one for Supabase setup, another for authentication, and the last one related to messaging. You can also find more details about each of them in the [README file](../solution/README.md).
+The repository pattern is used to manage the data layer.
+A [repository][repository_folder] uses different [data sources][data_source_folder] (for example a local cache or the Supabase SDK).
+These components are injected in the Cubits using [get_it][get_it].
 
-## Join the Xmartlabs Community!
-At Xmartlabs we love to share our knowledge through our open source work. Feel free to check out our [GitHub profile](https://github.com/xmartlabs) and contribute in any way you see fit. You can also explore our [blog](https://blog.xmartlabs.com/), where we regularly post new insights and discoveries. See you there!
+## Project Overview
+
+### Assets
+The [`/assets/`](./assets) folder contains the assets used by the application, such as images, fonts, and other files.
+
+### Environments
+
+The environment variables are defined in the `default.env` file located in [`/environments/`](./environments) folder.
+You can read more information about the environment variables in the [README.md](./environments/README.md) file.
+
+### Pre Push config
+
+In order to setup pre-push hook you need to go to the root of the project and run `git config core.hooksPath .github/hooks`
+
+[flavorizr]: https://pub.dev/packages/flutter_flavorizr
+[flutter_launcher_icons]: https://pub.dev/packages/flutter_launcher_icons
+[flutter_native_splash]: https://pub.dev/packages/flutter_native_splash
+[pubspec]: ./pubspec.yaml
+[app_router]: lib/ui/router/app_router.dart
+[bloc]: https://bloclibrary.dev
+[auto_route]: https://pub.dev/packages/auto_route
+[theme]: lib/ui/theme
+[flutter_screenutil]: https://pub.dev/packages/flutter_screenutil
+[models]: lib/core/model
+[repository_folder]: lib/core/repository
+[data_source_folder]: lib/core/source
+[get_it]: https://pub.dev/packages/get_it
