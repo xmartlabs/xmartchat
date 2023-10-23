@@ -1,61 +1,3 @@
-## Project Setup
-
-[DOCS](https://supabase.com/docs/reference/dart/installing)
-
-1. Add the dependency `flutter pub add supabase_flutter`
-
-2. Initialize Supabase in your app
-
-```dart
-late SupabaseClient supabaseClient;
-
-Future<void> _initSupabase() async {
-  await Supabase.initialize(
-    url: 'YOUR_SUPABASE_URL',
-    anonKey: 'YOUR_SUPABASE_ANON_KEY',
-  );
-  supabaseClient = Supabase.instance.client;
-}
-
-```
-
-## Authentication
-
-[Docs](https://supabase.com/docs/reference/dart/auth-signup)
-
-```dart
-class AuthRemoteSourceImpl implements AuthRemoteSource {
-  @override
-  Stream<String?> getUserId() => supabaseClient.auth.onAuthStateChange
-      .map((event) => event.session)
-      .startWith(supabaseClient.auth.currentSession)
-      .map((event) => event?.user.id)
-      .distinct();
-
-  @override
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) =>
-      supabaseClient.auth.signInWithPassword(email: email, password: password);
-
-  @override
-  Future<void> signUp({
-    required String alias,
-    required String email,
-    required String password,
-  }) =>
-      supabaseClient.auth.signUp(
-        email: email,
-        password: password,
-        data: {'alias': alias},
-      );
-
-  @override
-  Future<void> signOut() => supabaseClient.auth.signOut();
-}
-```
-
 ## Send messages
 
 ```dart
@@ -92,7 +34,14 @@ Future<List<UserMessage>> getMessages() async {
 
 #### Create users table and insert data
 
-Migrate data:
+The following script creates:
+- Create users table
+- Enable real time to listen the table changes
+- Insert current user profiles into users table
+- Create a trigger to insert user profile into users table
+
+
+
 ```sql
 -- Create User Table
 CREATE TABLE
@@ -159,6 +108,8 @@ Future<List<UserMessage>> getMessages() async {
 
 ### Read messages in real time
 
+Listen for messages changes: 
+
 ```dart
   @override
 Stream<List<Message>> getMessagesStream() =>
@@ -169,6 +120,7 @@ Stream<List<Message>> getMessagesStream() =>
         .map(Message.fromJsonList);
 ```
 
+Listen for messages updates: 
 ```dart
   @override
   Stream<List<UserResponse>> getUsersStream() => _supabaseClient
@@ -179,10 +131,6 @@ Stream<List<Message>> getMessagesStream() =>
 ## Uppercase messages
 
 ```ts
-// Follow this setup guide to integrate the Deno language server with your editor:
-// https://deno.land/manual/getting_started/setup_your_environment
-// This enables autocomplete, go to definition, etc.
-
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.22.0?target=deno";
 

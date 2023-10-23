@@ -53,8 +53,8 @@ class _SignInContentScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 16,
+                    SizedBox(
+                      height: 16.0.h,
                     ),
                     Row(
                       children: [
@@ -108,7 +108,7 @@ class _SignInFormState extends State<_SignInForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
             child: AppTextInputField(
               controller: _emailTextController,
               leadingIcon: Icon(
@@ -120,7 +120,7 @@ class _SignInFormState extends State<_SignInForm> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
             child: AppTextInputField(
               controller: _passwordTextController,
               leadingIcon: Icon(
@@ -132,6 +132,9 @@ class _SignInFormState extends State<_SignInForm> {
                   _signInCubit.changePassword(password),
               labelText: context.localizations.password,
             ),
+          ),
+          SizedBox(
+            height: 16.0.h,
           ),
         ],
       );
