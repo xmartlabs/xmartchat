@@ -23,7 +23,7 @@ Future<List<UserMessage>> getMessages() async {
       .select('*')
       .order('created_at', ascending: true);
   // Json to UserMessages
-  final messageResponse = SupabaseMessageResponse.fromJsonList(response);
+  final messageResponse = UserMessage.fromResponse(response);
   return messageResponse.toUserMessageList(
     userId: currentUserId,
   );

@@ -9,7 +9,10 @@ abstract interface class UsersRemoteSource {
 
 class UsersRemoteSourceImpl implements UsersRemoteSource {
   @override
-  Stream<List<SupabaseUserResponse>> getUsersStream() => supabaseClient
-      .from('users')
-      .stream(primaryKey: ['id']).map(SupabaseUserResponse.fromJsonList);
+  // TODO: implement getUsersStream
+  Stream<List<SupabaseUserResponse>> getUsersStream() => Stream.value([]);
+  // @override
+  // Stream<List<SupabaseUserResponse>> getUsersStream() => supabaseClient
+  //     .from('users')
+  //     .stream(primaryKey: ['id']).map(SupabaseUserResponse.fromJsonList);
 }
