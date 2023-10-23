@@ -1,20 +1,31 @@
 <img src="icons/splash_logo.png" width=50%/>
 
-# Workshop: Building a Flutter Application with Supabase
+# Workshop: Exploring the Serverless World, An Introduction with Supabase.
 
 ## Workshop Details:
 
-In this workshop, you will learn how to build a cross-platform mobile application using the Flutter framework and integrate it with Supabase, an open-source Firebase alternative.
+In this workshop, you will learn how to build a cross-platform mobile application using the Flutter framework and integrate it with Supabase.
 
 The workshop will explore:
-- Creating a real-time database
-- User authentication
+- Creation and Configuration of a Project in Supabase
+- Authentication
+- Implementing Messaging Functions
 
 ## Workshop requirements
 
 To participate on this workshop, the only two requirements you need are having basic knowledge of Flutter and Dart programming and a code editor (e.g., Visual Studio Code, Android Studio, or IntelliJ IDEA) installed in your machine. 
 
 ## Workshop 
+
+During the workshop, we will create an application like the one we see below.
+
+<table>
+    <th style="padding: 1px; border=1px;">
+        <img width="90%" margin="10px" src="assets/video_readme.gif">
+    </th>
+</table>
+
+Before diving into the Project setup, it's worth noting that if you begin from the 'demo' branch, you'll follow a specific solution we'll describe.
 
 ### Project Setup
 
