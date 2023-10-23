@@ -105,6 +105,10 @@ CREATE TABLE
   ) tablespace pg_default;
 
 
+-- Enable Realtime
+alter
+  publication supabase_realtime add table public.users;
+
 -- Insert alias into the new table
 INSERT INTO
   public.users (id, alias)
