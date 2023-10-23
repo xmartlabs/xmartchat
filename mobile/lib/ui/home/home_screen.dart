@@ -57,7 +57,8 @@ class _HomeContentScreenState extends State<_HomeContentScreen> {
                     ? const _EmptyStateSection()
                     : _MessagesSection(
                         messages: state.messages,
-                        scrollController: _scrollController),
+                        scrollController: _scrollController,
+                      ),
               ),
               _TextFieldSection(textController: _textController),
               SizedBox(height: 24.h),
@@ -123,7 +124,7 @@ class _MessagesSectionState extends State<_MessagesSection> {
   void _scrollDown() {
     widget.scrollController.animateTo(
       widget.scrollController.position.maxScrollExtent,
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.fastOutSlowIn,
     );
   }
@@ -141,9 +142,13 @@ class _MessagesSectionState extends State<_MessagesSection> {
   void didUpdateWidget(covariant _MessagesSection oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      _scrollDown();
-    });
+    if (oldWidget.messages.length < widget.messages.length &&
+        oldWidget.scrollController.offset >=
+            oldWidget.scrollController.position.maxScrollExtent) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _scrollDown();
+      });
+    }
   }
 
   @override

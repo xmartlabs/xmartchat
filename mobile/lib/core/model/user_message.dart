@@ -1,5 +1,4 @@
 import 'package:flutter_template/core/model/message.dart';
-import 'package:flutter_template/core/model/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_message.freezed.dart';
@@ -21,7 +20,7 @@ class UserMessage with _$UserMessage {
   static List<UserMessage> fromJsonList(List<dynamic> json) =>
       json.map((e) => UserMessage.fromJson(e)).toList();
 
-  static List<UserMessage> fromResponse({
+  static List<UserMessage> fromResponses({
     required List<dynamic> json,
     required String userId,
   }) {
