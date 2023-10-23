@@ -37,34 +37,6 @@ The [`/assets/`](./assets) folder contains the assets used by the application, s
 The environment variables are defined in the `default.env` file located in [`/environments/`](./environments) folder.
 You can read more information about the environment variables in the [README.md](./environments/README.md) file.
 
-<!-- ## Project Setup
-
-The project setup is based on some plugins which generate the required native code.
-
-You can use [project_setup.sh](scripts/project_setup.sh) to reload all project setups.
-
-### Flavor setup: Project name, properties BundleId & Application id
-This information is set using [flavorizr], a flutter utility to easily create flavors in your flutter application. 
-To change it go to `flavorizr` section in the [pubspec] file.
-
-For example, to add a new flavour, you can do something like:
-```yaml
-flavorizr:
-  flavors:
-    qa:
-      app:
-        name: 'Xmartchat - QA'
-      android:
-        applicationId: 'com.xmartlabs.xmartchat.qa'
-      ios:
-        bundleId: 'com.xmartlabs.xmartchat.qa'
-```
-
-After a change is made, you need to regenerate your native files.
-You can do that by executing `flutter pub run flutter_flavorizr`.
-
-More information in [flavorizr] page. -->
-
 ### Pre Push config
 
 In order to setup pre-push hook you need to go to the root of the project and run `git config core.hooksPath .github/hooks`
