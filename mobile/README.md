@@ -1,4 +1,4 @@
-<img src="assets/logo_and_name_large.png" width=100%/>
+<img src="icons/splash_logo.png" width=50%/>
 
 # Workshop: Building a Flutter Application with Supabase
 
@@ -109,11 +109,11 @@ Future<List<UserMessage>> getMessages() async {
 }
 ```
 
-#### Read messages with alias
+### Read messages with alias
 
 
 
-##### Create users table and insert data
+### Create users table and insert data
 
 Migrate data:
 ```sql
@@ -150,7 +150,7 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 ```
 
-##### Use users table
+### Use users table
 
 ```dart
  @override
@@ -166,7 +166,7 @@ Future<List<UserMessage>> getMessages() async {
 }
 ```
 
-#### Read messages in real time
+### Read messages in real time
 
 ```dart
   @override
