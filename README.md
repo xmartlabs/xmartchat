@@ -32,7 +32,8 @@ To effectively engage with the Xmartchat demo app and our Supabase workshop, ple
 
 ## Solution Structure
 
-In the 'Mobile' folder, you'll find all the code for the application developed in Flutter, while in the 'Backend' folder, you'll discover the edge functions using Supabase. Additionally, you can locate the 'SolutionCode' file, which provides a step-by-step guide for the workshop.
+In the 'Mobile' folder, you'll find all the code for the application developed in Flutter, while in the 'Backend' folder, you'll discover the edge functions using Supabase. 
+Within the 'Solution' folder, you'll discover three files that outline the step-by-step process of the workshop, each dedicated to a specific area: one for Supabase setup, another for authentication, and the last one related to messaging. You can also find more details about each of them in the [README file](../solution/README.md).
 
 ## Join the Xmartlabs Community!
 At Xmartlabs we love to share our knowledge through our open source work. Feel free to check out our [GitHub profile](https://github.com/xmartlabs) and contribute in any way you see fit. You can also explore our [blog](https://blog.xmartlabs.com/), where we regularly post new insights and discoveries. See you there!
