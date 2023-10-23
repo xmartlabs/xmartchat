@@ -5,6 +5,7 @@ import 'package:flutter_template/core/common/extension/date_time_extensions.dart
 import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
+import 'package:flutter_template/ui/extensions/screen_utils_extensions.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/theme/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,10 +39,10 @@ class MessageBox extends StatelessWidget {
                     _UserAliasSection(userMessage: userMessage),
                   Container(
                     padding: EdgeInsets.only(
-                      right: 12.h,
-                      left: 12.h,
-                      top: 8.h,
-                      bottom: 12.h,
+                      right: 12.rf,
+                      left: 12.rf,
+                      top: 8.rf,
+                      bottom: 12.rf,
                     ),
                     decoration: BoxDecoration(
                       color: userMessage.isFromCurrentUser
@@ -101,8 +102,8 @@ class _UppercaseButton extends StatelessWidget {
         onTap: () => onTap(message),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: 7.h,
-            horizontal: 5,
+            vertical: 7.rf,
+            horizontal: 5.rf,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
