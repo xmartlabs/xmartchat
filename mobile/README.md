@@ -19,9 +19,9 @@ To participate on this workshop, the only two requirements you need are having b
 
 During the workshop, we will create an application like the one we see below.
 
-<table>
-    <th style="padding: 1px; border=1px;">
-        <img width="90%" margin="10px" src="assets/video_readme.gif">
+<table align="center" style="width: 30%; text-align: center;";>
+    <th>
+        <img width="60%" margin="10px" src="assets/video_readme.gif">
     </th>
 </table>
 
