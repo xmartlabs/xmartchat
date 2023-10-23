@@ -7,18 +7,19 @@ import 'package:flutter_template/core/common/config.dart';
 import 'package:flutter_template/core/common/logger.dart';
 import 'package:flutter_template/core/di/di_provider.dart';
 import 'package:flutter_template/ui/main/main_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 // This should be initialized using GetIt but it's here just for
 // the example.
-late SupabaseClient supabaseClient;
+
+// TODO: SupabaseClient sdk initialization
+// late SupabaseClient supabaseClient;
 
 Future<void> _initSupabase() async {
-  await Supabase.initialize(
-    url: Config.supabaseUrl ?? 'YOUR_SUPABASE_URL',
-    anonKey: Config.supabaseAnnonKey ?? 'YOUR_SUPABASE_ANON_KEY',
-  );
-  supabaseClient = Supabase.instance.client;
+  // await Supabase.initialize(
+  //   url: Config.supabaseUrl ?? 'YOUR_SUPABASE_URL',
+  //   anonKey: Config.supabaseAnnonKey ?? 'YOUR_SUPABASE_ANON_KEY',
+  // );
+  // supabaseClient = Supabase.instance.client;
 }
 
 Future main() async {
