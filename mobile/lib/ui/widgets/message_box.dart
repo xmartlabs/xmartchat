@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/common/extension/date_time_extensions.dart';
 import 'package:flutter_template/core/model/message.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
+import 'package:flutter_template/ui/extensions/screen_utils_extensions.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
 import 'package:flutter_template/ui/theme/text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MessageBox extends StatelessWidget {
   final UserMessage userMessage;
@@ -36,10 +39,10 @@ class MessageBox extends StatelessWidget {
                     _UserAliasSection(userMessage: userMessage),
                   Container(
                     padding: EdgeInsets.only(
-                      right: 12.w,
-                      left: 12.w,
-                      top: 8.h,
-                      bottom: 12.h,
+                      right: 12.rf,
+                      left: 12.rf,
+                      top: 8.rf,
+                      bottom: 12.rf,
                     ),
                     decoration: BoxDecoration(
                       color: userMessage.isFromCurrentUser
@@ -59,11 +62,12 @@ class MessageBox extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SelectableText(
-                          userMessage.message.body,
+                        SelectableLinkify(
+                          text: userMessage.message.body,
                           style: context.theme.textStyles.bodyMedium?.copyWith(
                             color: context.theme.colors.textColor.shade100,
                           ),
+                          onOpen: (link) => launchUrl(Uri.parse(link.url)),
                         ),
                         SizedBox(height: 2.h),
                         Text(
@@ -96,9 +100,11 @@ class _UppercaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: () => onTap(message),
-        child: SizedBox(
-          height: 20.h,
-          width: 60.w,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 7.rf,
+            horizontal: 5.rf,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

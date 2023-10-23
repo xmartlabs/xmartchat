@@ -45,9 +45,15 @@ class MessagesRemoteSourceImpl implements MessagesRemoteSource {
   }
 
   @override
-  Future<void> uppercaseMessage({required String id}) =>
-      supabaseClient.functions.invoke(
-        'uppercase_message',
-        body: {'id': id},
+  Future<void> uppercaseMessage({required String id}) async {
+    final response = await supabaseClient.functions.invoke(
+      'uppercase_message',
+      body: {'id': id},
+    );
+    if (response.status! > 299) {
+      throw Exception(
+        'Error calling function: code ${response.status} body ${response.data}',
       );
+    }
+  }
 }
