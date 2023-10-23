@@ -1,0 +1,3 @@
+supabase:
+    functions:
+      toggle_message: 'lib/toggle_message.dart'
