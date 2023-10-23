@@ -20,7 +20,7 @@ class UserMessage with _$UserMessage {
   static List<UserMessage> fromJsonList(List<dynamic> json) =>
       json.map((e) => UserMessage.fromJson(e)).toList();
 
-  static List<UserMessage> fromResponses({
+  static List<UserMessage> fromResponse({
     required List<dynamic> json,
     required String userId,
   }) {
