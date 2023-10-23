@@ -29,28 +29,17 @@ class _SignUpContentScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: context.theme.colors.background.shade500,
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
-                    child: Assets.logoAndNameLarge.image(height: 52.h),
-                  ),
-                  _SignUpForm(),
-                  if (context.read<SignUpCubit>().state.error?.isNotEmpty ??
-                      false)
-                    Text(
-                      context.localizations.error(
-                        context.read<SignUpCubit>().state.error ?? '',
-                      ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 104.h, bottom: 68.h),
+                      child: Assets.logoAndNameLarge.image(height: 52.h),
                     ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 32.h,
-                      bottom: 4.h,
-                      right: 16.w,
-                      left: 16.w,
-                    ),
-                    child: Row(
+                    _SignUpForm(),
+                    Row(
                       children: [
                         Expanded(
                           child: AppPrimaryButton.filled(
@@ -62,18 +51,24 @@ class _SignUpContentScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30.h),
-                    child: AppPrimaryButton.ghost(
-                      text:
-                          context.localizations.sign_up_already_have_an_account,
-                      onPressed: () => context
-                          .read<SignUpCubit>()
-                          .onAlreadyHaveAnAccountPressed(),
+                    SizedBox(
+                      height: 16.0.h,
                     ),
-                  ),
-                ],
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppPrimaryButton.ghost(
+                            text: context
+                                .localizations.sign_up_already_have_an_account,
+                            onPressed: () => context
+                                .read<SignUpCubit>()
+                                .onAlreadyHaveAnAccountPressed(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -114,7 +109,7 @@ class _SignUpFormState extends State<_SignUpForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
             child: AppTextInputField(
               controller: _emailTextController,
               leadingIcon: Icon(
@@ -126,7 +121,7 @@ class _SignUpFormState extends State<_SignUpForm> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
             child: AppTextInputField(
               obscureText: true,
               leadingIcon: Icon(
@@ -140,7 +135,7 @@ class _SignUpFormState extends State<_SignUpForm> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
             child: AppTextInputField(
               controller: _usernameTextController,
               leadingIcon: Icon(
@@ -151,6 +146,9 @@ class _SignUpFormState extends State<_SignUpForm> {
                   _signUpCubit.changeUsername(username),
               labelText: context.localizations.sign_up_username_label,
             ),
+          ),
+          SizedBox(
+            height: 16.0.h,
           ),
         ],
       );

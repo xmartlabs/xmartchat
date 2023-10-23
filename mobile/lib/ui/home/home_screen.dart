@@ -204,7 +204,7 @@ class _TextFieldSection extends StatelessWidget {
                     )
                   : null,
               onChanged: context.read<HomeCubit>().onCurrentTextChanged,
-              labelText: context.localizations.home_text_field,
+              hintText: context.localizations.home_text_field,
             ),
             SizedBox(height: 20.h),
             Assets.xlLogoSmall.image(height: 16.h),
