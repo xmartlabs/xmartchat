@@ -10,7 +10,7 @@ This app serves as an exemplar of the potential of serverless architecture, show
 
 <table align="center" style="width: 40%; text-align: center;"> 
     <th>
-        <img width="60%" margin="10px" src="assets/video_readme.gif">
+        <img width="50%" margin="10px" src="assets/video_readme.gif">
     </th>
 </table>
 
