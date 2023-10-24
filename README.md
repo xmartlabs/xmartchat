@@ -8,11 +8,9 @@
 Welcome to Xmartchat, a dynamic messaging application developed with [Flutter](https://flutter.dev/) and powered by [Supabase](https://supabase.com), designed specifically as a demonstration for our Supabase workshop.
 This app serves as an exemplar of the potential of serverless architecture, showcasing how serverless technologies, particularly Supabase, can revolutionize the way we build real-time communication applications.
 
-<table align="center" style="width: 40%; text-align: center;"> 
-    <th>
-        <img width="50%" margin="10px" src="assets/video_readme.gif">
-    </th>
-</table>
+<p align="center">
+  <img src="assets/video_readme.gif" width="20%" />
+</p>
 
 ## Purpose
 Xmartchat acts as a hands-on, interactive showcase during our workshop, highlighting the power and flexibility of serverless computing.
