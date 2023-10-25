@@ -14,8 +14,10 @@ class AppTextInputField extends StatelessWidget {
   final void Function()? actionSecondIcon;
   final Color? backgroundColor;
   final String? error;
-  final Function(String)? onChanged;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final bool? obscureText;
+  final TextInputAction? textInputAction;
 
   const AppTextInputField({
     Key? key,
@@ -31,6 +33,8 @@ class AppTextInputField extends StatelessWidget {
     this.error,
     this.onChanged,
     this.obscureText,
+    this.onSubmitted,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -39,6 +43,8 @@ class AppTextInputField extends StatelessWidget {
         controller: controller,
         maxLines: maxLines ?? 1,
         minLines: minLines,
+        textInputAction: textInputAction,
+        onSubmitted: onSubmitted,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: error == null
