@@ -3,6 +3,12 @@
 **Serverless Messaging App Demo for Supabase Workshop.**
 *Exploring the Serverless World: An Introduction with Supabase.*
 
+#### ⚠️⚠️⚠️ **Warning: demo branch** ⚠️⚠️⚠️ 
+
+This branch, labeled as `"demo"` is specifically used for workshop purposes and serves as a demonstration of the project. It may contain incomplete features and work-in-progress code. 
+For the finalized and completed solution, please switch to the [`main`](https://github.com/xmartlabs/xmartchat/tree/main) branch. The [`main`](https://github.com/xmartlabs/xmartchat/tree/main) branch contains the stable and fully functional version of the project with all features implemented and tested.
+
+
 ## Workshop Details:
 
 Welcome to Xmartchat, a dynamic messaging application developed with [Flutter](https://flutter.dev/) and powered by [Supabase](https://supabase.com), designed specifically as a demonstration for our Supabase workshop.
