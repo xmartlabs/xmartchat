@@ -211,6 +211,8 @@ class _TextFieldSection extends StatelessWidget {
           children: [
             AppTextInputField(
               controller: textController,
+              textInputAction: TextInputAction.search,
+              onSubmitted: (_) => _submitValue(context),
               maxLines: 3,
               minLines: 1,
               trailingIcon: (textController.text.isNotEmpty)
@@ -221,11 +223,7 @@ class _TextFieldSection extends StatelessWidget {
                         color: context.theme.colors.textColor.shade100,
                       ),
                       color: context.theme.colors.primary.shade300,
-                      onPressed: () {
-                        context.read<HomeCubit>().sendMessage();
-                        textController.clear();
-                        context.read<HomeCubit>().onCurrentTextChanged("");
-                      },
+                      onPressed: () => _submitValue(context),
                     )
                   : null,
               onChanged: context.read<HomeCubit>().onCurrentTextChanged,
@@ -236,4 +234,10 @@ class _TextFieldSection extends StatelessWidget {
           ],
         ),
       );
+
+  void _submitValue(BuildContext context) {
+    context.read<HomeCubit>().sendMessage();
+    textController.clear();
+    context.read<HomeCubit>().onCurrentTextChanged("");
+  }
 }
