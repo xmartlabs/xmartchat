@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/model/user_message.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
+import 'package:flutter_template/ui/home/home_cubit.dart';
 import 'package:flutter_template/ui/home/home_options_menu.dart';
 import 'package:flutter_template/ui/section/error_handler/global_event_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
-import 'package:flutter_template/ui/home/home_cubit.dart';
 import 'package:flutter_template/ui/widgets/design_system/text_fields/input_text.dart';
 import 'package:flutter_template/ui/widgets/message_box.dart';
 
@@ -121,6 +121,8 @@ class _MessagesSection extends StatefulWidget {
 }
 
 class _MessagesSectionState extends State<_MessagesSection> {
+  double _messagesHeight = 0;
+
   void _scrollDown() {
     widget.scrollController.animateTo(
       widget.scrollController.position.maxScrollExtent,
@@ -142,36 +144,59 @@ class _MessagesSectionState extends State<_MessagesSection> {
   void didUpdateWidget(covariant _MessagesSection oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.messages.length < widget.messages.length &&
-        oldWidget.scrollController.offset >=
-            oldWidget.scrollController.position.maxScrollExtent) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        _scrollDown();
-      });
-    }
+    _scrollWhenMessagesAreAdded(oldWidget);
   }
 
   @override
-  Widget build(BuildContext context) => RefreshIndicator(
-        onRefresh: () => context.read<HomeCubit>().refreshMessages(),
-        child: Container(
-          decoration: BoxDecoration(
-            color: context.theme.colors.background.shade400,
-          ),
-          child: ListView.builder(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: widget.scrollController,
-            itemCount: widget.messages.length,
-            itemBuilder: (context, index) {
-              final userMessage = widget.messages[index];
-              return MessageBox(
-                userMessage: userMessage,
-                uppercaseMessage: context.read<HomeCubit>().uppercaseMessage,
-              );
-            },
-          ),
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constrains) {
+          _scrollOnReduceSize(constrains);
+          return RefreshIndicator(
+            onRefresh: () => context.read<HomeCubit>().refreshMessages(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.theme.colors.background.shade400,
+              ),
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                controller: widget.scrollController,
+                itemCount: widget.messages.length,
+                itemBuilder: (context, index) {
+                  final userMessage = widget.messages[index];
+                  return MessageBox(
+                    userMessage: userMessage,
+                    uppercaseMessage:
+                        context.read<HomeCubit>().uppercaseMessage,
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      );
+
+  void _scrollWhenMessagesAreAdded(_MessagesSection oldWidget) {
+    if (oldWidget.messages.length < widget.messages.length &&
+        (oldWidget.scrollController.offset >=
+                oldWidget.scrollController.position.maxScrollExtent ||
+            widget.messages.last.isFromCurrentUser)) {
+      SchedulerBinding.instance.addPostFrameCallback((_) => _scrollDown());
+    }
+  }
+
+  void _scrollOnReduceSize(BoxConstraints constrains) {
+    final newOffset = _messagesHeight - constrains.maxHeight;
+    if (_messagesHeight != 0 &&
+        constrains.maxHeight != _messagesHeight &&
+        newOffset > 0) {
+      SchedulerBinding.instance.addPostFrameCallback(
+        (_) => widget.scrollController.jumpTo(
+          widget.scrollController.offset + newOffset,
         ),
       );
+    }
+    _messagesHeight = constrains.maxHeight;
+  }
 }
 
 class _TextFieldSection extends StatelessWidget {
